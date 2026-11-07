@@ -18,7 +18,7 @@ Only James may merge pull requests or enable auto-merge.
 
 The backend repository owns trusted docs validation. Its `Shared documentation`
 workflow uses the existing `backend-local-ci` queue and `fhc-backend` runner.
-After its rollout, it checks develop and owner-authored, same-repository open PRs
+After its rollout, it checks develop and trusted-collaborator-authored, same-repository open PRs
 every 10 minutes, and can also be dispatched manually. Results and exact checked
 commit hashes appear in backend Actions summaries, not as docs PR check badges.
 Fork contributions must be reviewed and imported by James before local execution.
