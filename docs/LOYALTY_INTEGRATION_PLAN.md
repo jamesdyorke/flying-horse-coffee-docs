@@ -1,7 +1,6 @@
 # Flying Horse Rewards: integration and migration plan
 
-Date: 7 November 2026. Status: agreed product direction; provider selection and
-implementation pending. Discovery: [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
+Date: 7 November 2026. Status: custom Firebase selected; backend foundation in progress, deployment pending. Discovery: [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
 
 This document records James's requested experience, public provider research and
 delivery gates. It does not claim that a vendor integration, migration, feature
@@ -13,13 +12,20 @@ this documentation work. Prices are dated advertised findings, not contract quot
 
 Build a **Rewards** tab inside Flying Horse, with **Your stamp card** and **Your
 rewards**. Offer a mobile customer website for people without an iPhone, using the
-same account and balance. Evaluate Magic Stamp first, another provider second
-(starting with Loopy Loyalty), and a focused custom service last. A supported
-server API can power native screens without a vendor iOS SDK.
+same account and balance. **James selected a focused custom Firebase backend on
+7 November 2026**, starting with free coffee. Magic Stamp is now an export/migration
+dependency, not an SDK prerequisite. Loopy is not the selected backend. The earlier
+provider comparison below is retained as dated research, not the delivery order.
+
+Use the existing Shopify customer-account sign-in for customers and staff. Firebase
+stores private staff roles and café permissions keyed to verified Shopify identity;
+there is no second Firebase login. Staff access can be revoked without removing the
+shopping account. Initial implementation is [FLY-149](https://linear.app/flyinghorsecoffee/issue/FLY-149).
 
 - One programme shared across participating cafés; café purchases only at launch.
 - Staff use named accounts and a camera-scanning website on a phone or tablet.
-- Managers configure free-item and fixed GBP money-off rewards.
+- Initially issue free-coffee rewards and allow audited manager adjustments/grants.
+  Keep versioned benefits extensible; configurable other items and money off are later work.
 - Approved migrations preserve existing progress and outstanding rewards, with
   an optional additional, configurable switch-over reward.
 - Target recurring provider cost broadly comparable to Magic Stamp's total bill.
@@ -28,7 +34,7 @@ server API can power native screens without a vendor iOS SDK.
 - Shopify purchases, subscriptions, referrals, birthdays, broad targeting and
   automatic till integration are outside the first release.
 
-## Provider comparison and decision gates
+## Historical provider comparison and decision gates
 
 | Option | Evidence as of 7 November 2026 | Blockers or conditions |
 | --- | --- | --- |
@@ -52,13 +58,12 @@ is impossible. A link to its app or a separate white-label app does not satisfy
 the embedded requirement. Do not use undocumented endpoints or reverse-engineer
 the physical stamping protocol.
 
-Choose one provider only after the proof checklist passes: securely link a test
-member, read a balance, award a stamp, issue a non-coffee reward, redeem it once,
-recover an uncertain request without duplicate value, and export/migrate data.
-Unknown results remain pending; do not treat lack of a reply as a technical failure.
-If a candidate fails, record the concrete reason before considering the next.
-Any custom decision must explicitly compare implementation and ongoing ownership
-costs with the viable provider quote. Build one adapter, not all alternatives.
+The original plan proposed vendor proofs before selecting a service. James later
+chose custom because the first release needs a narrow ledger, staff confirmation
+and manual management, rather than an external loyalty platform. Those vendor
+proof gates no longer block engineering. Export availability and old-card
+retirement remain relevant to migration. Preserve vendor costs as historical
+benchmarks; no paid vendor commitment has been made.
 
 ## Customer and staff journeys
 
@@ -96,7 +101,10 @@ the sale has been discounted automatically. If recording redemption succeeds but
 the till adjustment fails, a manager resolves it through an audited reversal;
 do not ask staff to retry redemption blindly.
 
-### Configurable offers
+### Later extension: configurable offers
+
+This is the planned extension, not the initial free-coffee backend acceptance.
+[FLY-159](https://linear.app/flyinghorsecoffee/issue/FLY-159) owns additional benefits.
 
 Managers can create, preview, schedule and retire versioned offers with:
 
@@ -124,8 +132,9 @@ Switch-over bonuses are additional to imported balances, not an exchange for the
 
 Cashiers can award/redeem at authorised locations. Managers handle migration,
 corrections and campaigns. Administrators invite/revoke staff and assign locations.
-Use named accounts, not a shared cashier password; support session expiry and
-prompt revocation. Choose and verify the staff identity provider before deployment.
+Use named Shopify accounts, not a shared cashier password; support session expiry
+and prompt revocation through server-owned roles. Verify the staff website
+Shopify OAuth callback/session handling before deployment.
 
 Start with a responsive staff website, not a second native app. Test camera
 permission, lighting and connectivity on the actual café hardware. Typed fallback
@@ -225,11 +234,9 @@ challenge creation, staff preview/award/redemption, operation-status lookup and
 manager migration/correction/campaign management. Return stable operation IDs,
 confirmed or pending state and safe errors; do not expose provider secrets.
 
-Keep provider credentials on the server. Choose one authoritative balance: the
-provider for an integration, Firestore for custom. A provider cache is a read
-model, not another independently writable ledger. Signed provider events and
-scheduled reconciliation refresh it; tolerate duplicate and out-of-order events.
-Do not infer event-signing or reconciliation support until proven.
+Firestore is the authoritative balance and reward ledger. All mutations pass
+through the authenticated backend; there is no second vendor ledger to synchronise.
+Keep any legacy Magic Stamp import evidence private and reconcile cutover changes.
 
 Every mutation needs an idempotency key bound to actor, member and request content,
 plus an audit entry. Reusing a key with different content is rejected. An uncertain
@@ -299,29 +306,37 @@ do not assume existing marketing consent transfers to a new channel.
 | Stage | Deliverable | Exit evidence |
 | --- | --- | --- |
 | Discovery | Actual contract/cost, café count, active members, programme rules, outstanding rewards, till/hardware inventory | Named operational owner confirms missing inputs; no invented stamp target or release version |
-| Provider proof | Magic Stamp first, then next candidate if necessary | Written capability/price evidence and repeatable sandbox proof; selection recorded |
+| Custom backend proof | Single Shopify identity, private staff roles, transactional Firestore ledger | Permission, concurrency, retry, reward and default-off evidence |
 | Feature foundation | Typed flags, dynamic tabs, backend gate, verified identity and provider interface | Flag/version tests and no exposed unfinished Rewards tab |
 | Customer/staff delivery | iOS Rewards, mobile web card, staff scanning, manager offers and corrections | End-to-end staging tests on intended devices |
 | Migration rehearsal | Dry-run import, manual fallback and switch-over bonus | Totals reconcile; duplicate and partial failure tests pass |
 | Pilot | Staff accounts then invited customers at one café | James's hands-on QA, no unexplained balance discrepancies, counter workflow accepted |
 | Rollout | Staff training, customer communication, version/cohort rollout and cutover | Operational sign-off, monitoring/support ready; staged expansion |
 
-Planning estimates, not commitments: allow 2–5 engineering days for a documented
-provider proof after access arrives; vendor response time is additional. A complete
-provider-backed iOS/web/staff/migration implementation may take 4–8 engineer-weeks;
-custom may take 6–12, plus pilot time. Re-estimate after identity, provider and
-hardware proof. Account for devices, staff seats, API limits/overages, VAT/currency,
-support time and parallel-service transition costs in the comparison.
+## Linear delivery project
 
-Implementation follow-ups should cover independently deliverable backend/identity,
-iOS feature/flagged navigation, customer/staff web, and migration/operations work.
-FLY-118 remains discovery-only; do not claim code delivery under its completion.
-Create linked implementation tickets when the selected path is ready to build.
+[Flying Horse Rewards](https://linear.app/flyinghorsecoffee/project/flying-horse-rewards-78da0101d925)
+is separate from core app launch and subscription delivery. It can launch later.
+
+| Milestone | Tickets |
+| --- | --- |
+| Programme and backend foundation | [FLY-118 research](https://linear.app/flyinghorsecoffee/issue/FLY-118), [FLY-149 backend](https://linear.app/flyinghorsecoffee/issue/FLY-149), [FLY-150 rules/operating policy](https://linear.app/flyinghorsecoffee/issue/FLY-150) |
+| Customer and café interfaces | [FLY-151 staff scanner](https://linear.app/flyinghorsecoffee/issue/FLY-151), [FLY-152 native Rewards](https://linear.app/flyinghorsecoffee/issue/FLY-152), [FLY-153 flags/tabs](https://linear.app/flyinghorsecoffee/issue/FLY-153), [FLY-154 mobile web](https://linear.app/flyinghorsecoffee/issue/FLY-154) |
+| Migration and staging assurance | [FLY-155 transfers](https://linear.app/flyinghorsecoffee/issue/FLY-155), [FLY-156 staging/monitoring](https://linear.app/flyinghorsecoffee/issue/FLY-156), [FLY-157 end-to-end QA](https://linear.app/flyinghorsecoffee/issue/FLY-157) |
+| Café pilot and release | [FLY-161 production configuration](https://linear.app/flyinghorsecoffee/issue/FLY-161), [FLY-158 rollout](https://linear.app/flyinghorsecoffee/issue/FLY-158) |
+| Later additional rewards | [FLY-159 benefit types](https://linear.app/flyinghorsecoffee/issue/FLY-159); not a free-coffee launch blocker |
+
+Backend work proceeds before migration access is resolved. The interfaces depend
+on its contract; native Rewards also depends on flagged tab composition. QA depends
+on the customer/staff journeys, migration rehearsal and staging proof. Pilot depends
+on approved programme rules and James's end-to-end QA. No launch date is committed.
+Backend implementation/setup guidance lives in its owning repository, not here.
 
 ### Acceptance matrix
 
 - Card completion and multiple-item purchases issue the promised reward exactly once.
-- Free-item and money-off rewards show correct terms, currency and restrictions.
+- Free-coffee rewards show correct terms and expiry; later additional benefits
+  require their own currency/restriction/compatibility acceptance.
 - Opening, abandoning or expiring QR codes preserves valid underlying rewards.
 - Repeated scans, double taps and concurrent café redemption cannot duplicate value.
 - Connection loss after commit resolves to the original result without another award.
