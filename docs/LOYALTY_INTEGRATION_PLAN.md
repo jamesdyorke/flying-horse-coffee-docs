@@ -1,6 +1,6 @@
 # Flying Horse Rewards: integration and migration plan
 
-Date: 7 November 2026. Status: custom Firebase selected; backend foundation in progress, deployment pending. Discovery: [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
+Date: 7 November 2026. Status: custom Firebase selected; backend foundation merged; staff Scan tab implementation in progress, live café readiness pending. Discovery: [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
 
 This document records James's requested experience, public provider research and
 delivery gates. It does not claim that a vendor integration, migration, feature
@@ -23,7 +23,7 @@ there is no second Firebase login. Staff access can be revoked without removing 
 shopping account. Initial implementation is [FLY-149](https://linear.app/flyinghorsecoffee/issue/FLY-149).
 
 - One programme shared across participating cafés; café purchases only at launch.
-- Staff use named accounts and a camera-scanning website on a phone or tablet.
+- Staff use named accounts and a staff-only **Scan** tab inside the existing Flying Horse iOS app.
 - Initially issue free-coffee rewards and allow audited manager adjustments/grants.
   Keep versioned benefits extensible; configurable other items and money off are later work.
 - Approved migrations preserve existing progress and outstanding rewards, with
@@ -72,7 +72,7 @@ benchmarks; no paid vendor commitment has been made.
 1. The customer signs into Flying Horse and opens Rewards.
 2. The card shows progress, the promised completion reward, earning rules and locations.
 3. **Collect stamps** opens a short-lived QR code or typed fallback code.
-4. Authenticated staff scan it, verify the purchase and confirm eligible quantity.
+4. Authenticated staff open Scan in their Flying Horse app, scan it, verify the purchase and confirm eligible quantity.
 5. The server records the award and returns the confirmed outcome; the card refreshes.
 
 The challenge does not contain an editable balance or grant permission to award
@@ -133,12 +133,27 @@ Switch-over bonuses are additional to imported balances, not an exchange for the
 Cashiers can award/redeem at authorised locations. Managers handle migration,
 corrections and campaigns. Administrators invite/revoke staff and assign locations.
 Use named Shopify accounts, not a shared cashier password; support session expiry
-and prompt revocation through server-owned roles. Verify the staff website
-Shopify OAuth callback/session handling before deployment.
+and prompt revocation through server-owned roles.
 
-Start with a responsive staff website, not a second native app. Test camera
-permission, lighting and connectivity on the actual café hardware. Typed fallback
-codes must be short-lived, rate-limited and subject to the same authorisation.
+James changed the staff interface decision on 7 November: use a **Scan** tab in
+the existing Flying Horse app. The earlier staff website proposal is superseded.
+Staff sign in through the app's existing Shopify flow. An authorised administrator
+grants staff roles and café permissions against verified Shopify customer IDs in
+the private backend. Customers cannot assign their own roles. This is app staff
+access, not access to Shopify Admin.
+
+Only show Scan after the backend confirms staff access for the current session
+and the rollout gate allows it. Clear staff state on sign-out/account switch;
+refresh on foreground and permission changes. Every stamp/redemption independently
+checks server-side permission. Hiding the tab is not the security boundary.
+
+Scan supports camera capture and typed fallback, purchase quantity confirmation,
+free-coffee redemption, and role-appropriate corrections/manual grants. Staff
+still apply free items through the till. Test camera permission, lighting and weak
+connectivity on actual café iPhones; Android staff devices are not supported by
+this iOS first release. Confirm suitable café hardware before pilot. A dedicated
+hardware scanner is a possible later option requiring a separate compatibility
+check, not a launch dependency. Codes remain short-lived and rate-limited.
 
 The customer website uses the same verified member identity as iOS. Its sign-in
 must be supported by the Shopify customer-account configuration; validate web
@@ -195,12 +210,22 @@ cannot add code to an old binary. Only builds containing Rewards can expose it.
   and before creating a challenge. Network failure must not silently grant new
   access. Document that a remote toggle is not instantaneous on offline devices.
 
+### Staff Scan rollout
+
+The staff Scan tab has a default-off rollout gate as well as server-verified staff
+membership. It can be delivered independently of customer Rewards screens, but
+real end-to-end café use needs both. Apply the same environment, current-device
+version and freshness requirements. When staff access or the flag disappears,
+remove Scan, dismiss capture, clear customer preview data and preserve unresolved
+operation recovery privately for the original account. Never retry an old staff
+operation under a new account. Preserve unrelated navigation stacks.
+
 ### Backend protection and emergency pause
 
 The client flag controls presentation, not authorisation. The backend verifies
 identity, role, location and reward state independently. Gate new challenges and
 transactions server-side with the selected rollout policy and a server-controlled
-`rewards_operations_enabled` emergency switch, default off until rollout.
+programme emergency switch (`rewardsConfig/current.enabled` in the backend foundation), default off until rollout.
 Staff must not become eligible merely by passing a customer flag.
 
 Check the operation gate when committing, including previously issued challenges.
@@ -308,7 +333,7 @@ do not assume existing marketing consent transfers to a new channel.
 | Discovery | Actual contract/cost, café count, active members, programme rules, outstanding rewards, till/hardware inventory | Named operational owner confirms missing inputs; no invented stamp target or release version |
 | Custom backend proof | Single Shopify identity, private staff roles, transactional Firestore ledger | Permission, concurrency, retry, reward and default-off evidence |
 | Feature foundation | Typed flags, dynamic tabs, backend gate, verified identity and provider interface | Flag/version tests and no exposed unfinished Rewards tab |
-| Customer/staff delivery | iOS Rewards, mobile web card, staff scanning, manager offers and corrections | End-to-end staging tests on intended devices |
+| Customer/staff delivery | iOS Rewards and staff Scan tab, customer mobile web card, manager corrections | End-to-end staging tests on intended devices |
 | Migration rehearsal | Dry-run import, manual fallback and switch-over bonus | Totals reconcile; duplicate and partial failure tests pass |
 | Pilot | Staff accounts then invited customers at one café | James's hands-on QA, no unexplained balance discrepancies, counter workflow accepted |
 | Rollout | Staff training, customer communication, version/cohort rollout and cutover | Operational sign-off, monitoring/support ready; staged expansion |
@@ -321,7 +346,7 @@ is separate from core app launch and subscription delivery. It can launch later.
 | Milestone | Tickets |
 | --- | --- |
 | Programme and backend foundation | [FLY-118 research](https://linear.app/flyinghorsecoffee/issue/FLY-118), [FLY-149 backend](https://linear.app/flyinghorsecoffee/issue/FLY-149), [FLY-150 rules/operating policy](https://linear.app/flyinghorsecoffee/issue/FLY-150) |
-| Customer and café interfaces | [FLY-151 staff scanner](https://linear.app/flyinghorsecoffee/issue/FLY-151), [FLY-152 native Rewards](https://linear.app/flyinghorsecoffee/issue/FLY-152), [FLY-153 flags/tabs](https://linear.app/flyinghorsecoffee/issue/FLY-153), [FLY-154 mobile web](https://linear.app/flyinghorsecoffee/issue/FLY-154) |
+| Customer and café interfaces | [FLY-151 native staff Scan tab](https://linear.app/flyinghorsecoffee/issue/FLY-151), [FLY-152 native Rewards](https://linear.app/flyinghorsecoffee/issue/FLY-152), [FLY-153 flags/tabs](https://linear.app/flyinghorsecoffee/issue/FLY-153), [FLY-154 mobile web](https://linear.app/flyinghorsecoffee/issue/FLY-154) |
 | Migration and staging assurance | [FLY-155 transfers](https://linear.app/flyinghorsecoffee/issue/FLY-155), [FLY-156 staging/monitoring](https://linear.app/flyinghorsecoffee/issue/FLY-156), [FLY-157 end-to-end QA](https://linear.app/flyinghorsecoffee/issue/FLY-157) |
 | Café pilot and release | [FLY-161 production configuration](https://linear.app/flyinghorsecoffee/issue/FLY-161), [FLY-158 rollout](https://linear.app/flyinghorsecoffee/issue/FLY-158) |
 | Later additional rewards | [FLY-159 benefit types](https://linear.app/flyinghorsecoffee/issue/FLY-159); not a free-coffee launch blocker |
