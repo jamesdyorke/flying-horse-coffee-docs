@@ -14,6 +14,11 @@ Only James may merge pull requests or enable auto-merge.
 - [SUBSCRIPTION_IMPLEMENTATION.md](docs/SUBSCRIPTION_IMPLEMENTATION.md)
 - [SHOPIFY_SUBSCRIPTION_STORE_FINDINGS.md](docs/SHOPIFY_SUBSCRIPTION_STORE_FINDINGS.md)
 
+## Loyalty and rewards
+
+- [Flying Horse Rewards integration and migration plan](docs/LOYALTY_INTEGRATION_PLAN.md)
+- [Vendor enquiries and provider proof checklist](docs/LOYALTY_PROVIDER_DISCOVERY.md)
+
 ## Validation
 
 The backend repository owns trusted docs validation. Its `Shared documentation`
