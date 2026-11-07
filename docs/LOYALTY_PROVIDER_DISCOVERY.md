@@ -2,11 +2,28 @@
 
 Prepared 7 November 2026 for [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
 Companion to the [Rewards plan](LOYALTY_INTEGRATION_PLAN.md).
-Status: drafts only; no enquiry sent, sandbox created or provider selected.
+Status: custom Firebase selected on 7 November 2026. No enquiry sent or sandbox
+created. The embedding enquiry drafts and provider proof below are historical
+research, not prerequisites to custom implementation.
 Do not append private vendor correspondence, account details or customer exports
 to this public file. Record a sanitised conclusion and keep raw evidence private.
 
-## Magic Stamp enquiry draft
+## Current Magic Stamp migration enquiry draft
+
+Subject: Export and transfer of Flying Horse Coffee loyalty balances
+
+We are building a Flying Horse customer app and would like to understand how we
+can preserve customers' existing Magic Stamp progress and outstanding rewards.
+Can you provide a supported export containing stable member/card identifiers,
+current stamps, unredeemed rewards, terms and expiry dates? How can we securely
+verify ownership when linking a customer to their exported card?
+
+Please explain whether cards can be marked transferred or retired individually,
+and how to reconcile changes between an export and cutover. Please also confirm
+export/termination terms and support arrangements. This is an information request,
+not authorisation to change our live programme or cancel our account.
+
+## Historical Magic Stamp embedding enquiry draft
 
 Subject: Embedding our existing Flying Horse Coffee loyalty programme
 
@@ -38,7 +55,7 @@ Please confirm:
 Could you provide access to a supported test environment for an end-to-end proof?
 We are evaluating options, not requesting changes to our live programme.
 
-## Loopy Loyalty enquiry draft
+## Historical Loopy Loyalty enquiry draft
 
 Subject: Native Flying Horse app integration and stamp-programme migration
 
@@ -74,9 +91,9 @@ committing to any paid service.
 | Members, balances, outstanding rewards, source identifiers | Authorised Magic Stamp export/inspection | Not obtained |
 | Migration window, goodwill limit and exception owner | James / operations | Required before cutover |
 | First eligible app version and pilot identities | Release owner | Not chosen; keep flag off |
-| Staff identity provider and production support owner | Engineering / operations | Required before deployment |
+| Shopify web sign-in/session setup and production support owner | Engineering / operations | Required before deployment; Shopify is the sole identity provider |
 
-## Provider proof: use synthetic members only
+## Historical provider proof: use synthetic members only
 
 | Test | Pass evidence |
 | --- | --- |
@@ -98,7 +115,7 @@ version, safe evidence reference and limitation. All rows are currently not test
 No provider has passed these gates. Use private synthetic evidence for payloads;
 publish only sanitised conclusions here.
 
-## Decision record to complete after proof
+## Historical decision record template
 
 Record the chosen provider, supported integration surface, plan/quote, failed or
 pending gates, mitigations, exit strategy and owner sign-off. Reconcile the actual

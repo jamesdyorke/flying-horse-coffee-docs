@@ -19,6 +19,10 @@ Only James may merge pull requests or enable auto-merge.
 - [Flying Horse Rewards integration and migration plan](docs/LOYALTY_INTEGRATION_PLAN.md)
 - [Vendor enquiries and provider proof checklist](docs/LOYALTY_PROVIDER_DISCOVERY.md)
 
+These are the canonical shared Rewards documents. The backend repository keeps
+its [API and operational contract](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/blob/develop/docs/REWARDS_BACKEND.md)
+with the implementation; it does not own a separate product plan.
+
 ## Validation
 
 The backend repository owns trusted docs validation. Its `Shared documentation`
