@@ -1,10 +1,10 @@
 # Flying Horse Rewards: integration and migration plan
 
-Date: 7 November 2026. Status: custom Firebase selected; backend foundation merged; staff Scan tab implementation in progress, live café readiness pending. Discovery: [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
+Updated: 8 November 2026. Status: custom Firebase backend and native staff scanner merged; customer Rewards and staging override PRs verified and awaiting owner review; live café readiness pending. Discovery: [FLY-118](https://linear.app/flyinghorsecoffee/issue/FLY-118).
 
 This document records James's requested experience, public provider research and
-delivery gates. It does not claim that a vendor integration, migration, feature
-flag, app screen or deployment already exists. Vendor enquiries are prepared in
+delivery gates. The delivery checkpoint below distinguishes implemented work from
+remaining release gates; it does not claim a live café rollout or completed migration. Vendor enquiries are prepared in
 [the discovery checklist](LOYALTY_PROVIDER_DISCOVERY.md); none has been sent by
 this documentation work. Prices are dated advertised findings, not contract quotes.
 
@@ -33,6 +33,42 @@ shopping account. Initial implementation is [FLY-149](https://linear.app/flyingh
   targeting. It need not be available in the first app release.
 - Shopify purchases, subscriptions, referrals, birthdays, broad targeting and
   automatic till integration are outside the first release.
+
+## Confirmed V1 and delivery checkpoint — 8 November 2026
+
+James confirmed the first usable version: a customer presents their code, the
+barista scans and confirms a stamp, and **ten stamps** earn a **free-coffee reward**.
+The initial card uses **two rows of five**. Stamps measure progress independently
+of the benefit, which remains a versioned backend configuration. The customer
+presents the earned reward's code; staff confirmation consumes it once. Payment
+and till adjustments are handled by the barista outside this system.
+
+Completion issues the reward separately and starts the next card. Unredeemed
+rewards remain available while the customer collects further stamps. Closing or
+expiring a code does not consume its reward. Staff cannot award or redeem their
+own card, so end-to-end verification requires separate customer and staff accounts.
+
+- Backend foundation and atomic recovery are merged and deployed to staging
+  ([backend PR70](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/70),
+  [PR72](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/72)).
+- Native staff Scan is merged
+  ([iOS PR201](https://github.com/jamesdyorke/flying-horse-coffee-ios/pull/201)).
+- The staging staff override and customer Rewards journeys are open for owner
+  review ([PR203](https://github.com/jamesdyorke/flying-horse-coffee-ios/pull/203),
+  [PR207](https://github.com/jamesdyorke/flying-horse-coffee-ios/pull/207)). Their
+  full staging checks passed; customer stamp-card CI images were reviewed at normal
+  and accessible text sizes in light, dark and system appearances.
+- A staging-only ten-stamp/free-coffee programme and narrowly targeted private
+  customer/staff flags are configured. Its explicitly labelled 30-day test expiry
+  does not establish production terms. Production remains off. Version-targeting
+  support is implemented; a release minimum has not yet been selected.
+- Real camera, VoiceOver, separate-account collect/redeem and café-device QA remain
+  required. Passing automation does not replace James's hands-on verification.
+
+The immediate V1 delivery is the native customer/staff loop and staging proof.
+Customer mobile web, Magic Stamp transfers and broader benefit types remain
+tracked project work; they are not claimed delivered by these native PRs. A real
+Magic Stamp cutover still requires its migration gates before customers move.
 
 ## Historical provider comparison and decision gates
 
@@ -330,10 +366,11 @@ do not assume existing marketing consent transfers to a new channel.
 
 | Stage | Deliverable | Exit evidence |
 | --- | --- | --- |
-| Discovery | Actual contract/cost, café count, active members, programme rules, outstanding rewards, till/hardware inventory | Named operational owner confirms missing inputs; no invented stamp target or release version |
+| Discovery | Actual contract/cost, café count, active members, production terms, outstanding rewards, till/hardware inventory | Ten-stamp V1 target confirmed; operational owner confirms remaining inputs and release version |
 | Custom backend proof | Single Shopify identity, private staff roles, transactional Firestore ledger | Permission, concurrency, retry, reward and default-off evidence |
 | Feature foundation | Typed flags, dynamic tabs, backend gate, verified identity and provider interface | Flag/version tests and no exposed unfinished Rewards tab |
-| Customer/staff delivery | iOS Rewards and staff Scan tab, customer mobile web card, manager corrections | End-to-end staging tests on intended devices |
+| Native V1 delivery | iOS Rewards and staff Scan tab, manager corrections | Separate-account end-to-end staging tests on intended devices |
+| Customer mobile web | Same-account browser card and reward codes | Separate browser/accessibility acceptance; tracked beyond native V1 |
 | Migration rehearsal | Dry-run import, manual fallback and switch-over bonus | Totals reconcile; duplicate and partial failure tests pass |
 | Pilot | Staff accounts then invited customers at one café | James's hands-on QA, no unexplained balance discrepancies, counter workflow accepted |
 | Rollout | Staff training, customer communication, version/cohort rollout and cutover | Operational sign-off, monitoring/support ready; staged expansion |
@@ -352,8 +389,9 @@ is separate from core app launch and subscription delivery. It can launch later.
 | Later additional rewards | [FLY-159 benefit types](https://linear.app/flyinghorsecoffee/issue/FLY-159); not a free-coffee launch blocker |
 
 Backend work proceeds before migration access is resolved. The interfaces depend
-on its contract; native Rewards also depends on flagged tab composition. QA depends
-on the customer/staff journeys, migration rehearsal and staging proof. Pilot depends
+on its contract; native Rewards also depends on flagged tab composition. Native V1 QA depends
+on the customer/staff journeys and staging proof. Migration rehearsal remains a
+separate prerequisite for the old-programme cutover. Pilot depends
 on approved programme rules and James's end-to-end QA. No launch date is committed.
 Backend implementation/setup guidance lives in its owning repository, not here.
 
