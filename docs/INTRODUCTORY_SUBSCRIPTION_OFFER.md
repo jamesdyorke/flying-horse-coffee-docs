@@ -82,7 +82,10 @@ existing monthly plans and subscriber contracts in place.
   The paid fixture’s original schedule is now retained in staging, and the
   guarded manual worker has passed CI and deployed. The Shopify connector
   verified read access for an operator, including the test checkout order.
-  The worker still needs its own staging Shopify Admin access.
+  A dedicated staging Shopify app now grants read-only product and order
+  access, including older orders. Its credential is in staging Secret
+  Manager. A manual read-only worker preflight used that credential and
+  held for outstanding deliveries.
 - Recharge confirmed that the final prepaid shipment was delayed by seven
   days and that the earlier shipment kept its original date. The source had
   no renewal scheduled and no monthly continuation existed. Shopify had
@@ -127,10 +130,13 @@ pilot product Draft with no sales channels while this work is in progress.
 - [x] Connect the manual staging worker to the guarded Recharge writer.
   Backend CI and the protected staging deployment passed. Actual provider
   creation is still pending.
-- [ ] Provision scoped staging Shopify delivery and catalogue access for the
-  worker. Run against the paid enrollment. Use the exact prepaid orders, confirmed
-  Shopify deliveries, current cancellation and refund state, and a revised
-  coverage schedule that preserves the original paid period.
+- [x] Provision scoped staging Shopify delivery and catalogue access. The
+  manual preflight read the paid enrollment and returned a hold for
+  outstanding deliveries using the retained schedule and fresh provider
+  reads.
+- [ ] Wire the staging execution entry point to obtain and refresh its Shopify
+  token. Verify that it can read the exact prepaid orders, confirmed
+  deliveries, cancellation and refund state, and current catalogue price.
 - [ ] Set up a repeatable staging-only time control for the worker so the
   timing test can run without waiting months. Keep real provider evidence
   requirements in place. Use only verified test fulfillment records for this
