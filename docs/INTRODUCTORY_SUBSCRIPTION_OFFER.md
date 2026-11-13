@@ -55,7 +55,10 @@ existing monthly plans and subscriber contracts in place.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
-  cadence and charge date. Runtime wiring and a provider test still remain.
+  cadence and charge date. The adapter has merged. A follow-up staging
+  component matches each prepaid Recharge order to Shopify fulfillment and
+  refund evidence against a supplied coverage schedule. The coverage source,
+  runtime wiring and a provider test still remain.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
