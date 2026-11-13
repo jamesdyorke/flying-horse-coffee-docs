@@ -56,9 +56,11 @@ existing monthly plans and subscriber contracts in place.
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
   cadence and charge date. The adapter has merged. A follow-up staging
-  component matches each prepaid Recharge order to Shopify fulfillment and
-  refund evidence against a supplied coverage schedule. The coverage source,
-  runtime wiring and a provider test still remain.
+  component now matches each prepaid Recharge order to Shopify fulfillment
+  and refund evidence. A read-only preflight combines that evidence with
+  verified payment, a supplied coverage schedule and current pricing. Local
+  tests held for an outstanding third delivery and quoted £9 at the boundary.
+  The live coverage source, runtime wiring and provider test still remain.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
