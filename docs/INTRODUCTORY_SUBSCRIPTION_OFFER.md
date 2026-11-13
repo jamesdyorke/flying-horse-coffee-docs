@@ -148,10 +148,14 @@ offer disabled and the pilot product Draft with no sales channels.
 - [x] Confirm the worker holds at both the original and revised coverage ends
   while deliveries are outstanding. Both live staging runs left the
   continuation operation and success milestone absent.
-- [ ] Verify all three linked orders show delivered in Shopify staging. The
-  two later £0 prepaid shipments are still queued in Recharge. Once all three
-  deliveries are recorded, run just before revised coverage ends and verify
-  the worker still holds.
+- [x] Process the two remaining £0 prepaid staging shipments in Recharge.
+  Both generated linked Shopify staging orders. The worker still held at the
+  original and revised coverage ends, with zero continuation operations and
+  zero success milestones.
+- [ ] Record and verify delivery of all three linked orders in Shopify staging.
+  Shopify admin access was blocked by the browser's automated approval review.
+  Once all three deliveries are recorded, run just before revised coverage
+  ends and verify the worker still holds.
 - [ ] At the revised boundary, verify one £9 monthly subscription in Recharge
   with the exact mapped plan, monthly cadence and first charge after coverage.
   Retry the same source and verify the same subscription and one Firebase
