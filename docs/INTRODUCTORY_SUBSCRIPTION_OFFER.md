@@ -31,9 +31,13 @@ existing monthly plans and subscriber contracts in place.
 - Backend PR #83 is merged. It validates mapped public 10% monthly plans and
   fresh GBP pricing. Verify Recharge creation and readback on a matching
   staging plan.
-- The normal worker now has a proposed check for verified delivery evidence
-  and revised prepaid coverage. Local tests passed. Live evidence sources and
-  scheduling still need to be connected and tested in staging.
+- The normal worker requires verified delivery evidence and revised prepaid
+  coverage. A staging read confirmed that Recharge can show all three orders
+  processed while Shopify still has no fulfillment records. Those deliveries
+  stay pending under the normal policy.
+- The current staging offer product uses a private monthly plan. A separate
+  staging fixture is needed to prove creation on a public 10% monthly plan.
+  The normal worker still needs its evidence sources and scheduling connected.
 
 ## Before a paid pilot
 
