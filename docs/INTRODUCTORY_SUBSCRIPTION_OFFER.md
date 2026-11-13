@@ -118,8 +118,13 @@ pilot product Draft with no sales channels while this work is in progress.
 - [x] Retain the original schedule for the paid staging fixture. Two
   read-only runs used that baseline and fresh provider reads and held
   continuation while deliveries were outstanding.
-- [ ] Connect the deployed normal worker to scoped staging Shopify and Recharge
-  readers and the paid enrollment. Use the exact prepaid orders, confirmed
+- [x] Connect the stored payment and schedule to the normal worker in quote
+  mode. A read-only staging run held for outstanding deliveries even when
+  Recharge charge lookups were disabled.
+- [x] Connect the manual staging worker to the guarded Recharge writer.
+  Backend CI passed. Actual provider creation is still pending.
+- [ ] Provision scoped staging Shopify delivery and catalogue access for the
+  worker. Run against the paid enrollment. Use the exact prepaid orders, confirmed
   Shopify deliveries, current cancellation and refund state, and a revised
   coverage schedule that preserves the original paid period.
 - [ ] Set up a repeatable staging-only time control for the worker so the
