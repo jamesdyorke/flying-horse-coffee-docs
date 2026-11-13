@@ -84,7 +84,11 @@ existing monthly plans and subscriber contracts in place.
 - Recharge confirmed that the final prepaid shipment was delayed by seven
   days and that the earlier shipment kept its original date. The source had
   no renewal scheduled and no monthly continuation existed. Shopify had
-  yet to record fulfillment for the first shipment. Wire the normal worker
+  yet to record fulfillment for the first shipment. A read-only check using
+  the original schedule and fresh provider reads projected the coverage end
+  one week later and held while deliveries were outstanding. The deployed
+  worker still needs the original schedule and authenticated delivery access.
+  Wire the normal worker
   to verified deliveries and revised coverage, then verify zero creates
   before that boundary and one £9 monthly subscription after it, including
   on retries. The earlier accelerated fixture proved checkout and renewal.
