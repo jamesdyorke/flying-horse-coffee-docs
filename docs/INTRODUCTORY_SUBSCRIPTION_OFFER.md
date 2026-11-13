@@ -108,10 +108,9 @@ production continuation have been verified and the paid pilot is approved.
 
 ## Production launch checklist
 
-Next, give the guarded staging worker a private execution entry point and a
-staging-only clock for the existing delayed test purchase. Prove the hold and
-switch in section 1 before using the normal worker for a paid pilot. The
-website checkout in section 2 can proceed in parallel. Keep the production
+Next, finish the existing delayed staging purchase's prepaid delivery records
+and use the private rehearsal command to verify the switch in section 1.
+The website checkout in section 2 can proceed in parallel. Keep the production
 offer disabled and the pilot product Draft with no sales channels.
 
 ### 1. Prove the normal switch in staging
@@ -143,17 +142,16 @@ offer disabled and the pilot product Draft with no sales channels.
   emulator. The simulated provider received one £9 create request after
   revised coverage ended, and concurrent execution and a lost response
   produced one confirmation.
-- [ ] Wire the staging execution entry point to obtain and refresh its Shopify
-  token. Verify that it can read the exact prepaid orders, confirmed
-  deliveries, cancellation and refund state, and current catalogue price.
-- [ ] Set up a repeatable staging-only time control for the worker so the
-  timing test can run without waiting months. Keep real provider evidence
-  requirements in place. Use only verified test fulfillment records for this
-  fixture and leave production on its normal clock.
-- [ ] On the delayed fixture, verify zero monthly subscriptions at the
-  original coverage end with the last delivery outstanding. Then record
-  verified staging fulfillment and verify zero after delivery while
-  revised coverage remains.
+- [x] Run the private staging operator command with scoped Shopify token
+  exchange and a fixed clock for the delayed fixture. This uses real staging
+  Firestore, Recharge and Shopify reads. Backend PR #100 contains the command.
+- [x] Confirm the worker holds at both the original and revised coverage ends
+  while deliveries are outstanding. Both live staging runs left the
+  continuation operation and success milestone absent.
+- [ ] Verify all three linked orders show delivered in Shopify staging. The
+  two later £0 prepaid shipments are still queued in Recharge. Once all three
+  deliveries are recorded, run just before revised coverage ends and verify
+  the worker still holds.
 - [ ] At the revised boundary, verify one £9 monthly subscription in Recharge
   with the exact mapped plan, monthly cadence and first charge after coverage.
   Retry the same source and verify the same subscription and one Firebase
