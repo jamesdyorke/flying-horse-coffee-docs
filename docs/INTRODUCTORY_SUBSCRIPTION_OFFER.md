@@ -48,11 +48,10 @@ existing monthly plans and subscriber contracts in place.
   for app checkout testing. Shopify's Storefront API returned the £9 monthly
   price and accepted the exact prepaid selling plan in an unpaid cart with a
   £30 subtotal.
-- Backend PR #87 adds the second fixture to Firebase eligibility, checkout
-  preparation and paid enrollment while preserving the original fixture and
-  the shared redemption limit. Local tests passed. Protected staging deployment
-  and the customer-bound discount configuration are still needed before a
-  discounted checkout preview.
+- Backend PR #87 merged and deployed the second fixture to Firebase staging.
+  Live checks rejected an unauthenticated request and a mismatched selling
+  plan. Shopify rejected an invalid discount in the unpaid development cart.
+  A valid customer-bound discount is still needed for the £22.50 preview.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
