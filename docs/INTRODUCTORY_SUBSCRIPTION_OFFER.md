@@ -54,7 +54,10 @@ existing monthly plans and subscriber contracts in place.
   The unpaid staging cart returned £22.50 before shipping for the exact
   prepaid plan. Signed-in hosted checkout confirmed £22.50 plus £4.99 shipping
   after manual discount entry. It rejected the same discount for a different
-  account. The automatic checkout handoff and a new paid test remain pending.
+  account. The iOS checkout and Firebase offer-details updates for the second
+  fixture are in review. After both are available in staging, verify that the
+  app carries the discount into checkout automatically. A new paid test is a
+  separate step.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
