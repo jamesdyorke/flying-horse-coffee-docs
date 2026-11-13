@@ -152,14 +152,17 @@ offer disabled and the pilot product Draft with no sales channels.
   Both generated linked Shopify staging orders. The worker still held at the
   original and revised coverage ends, with zero continuation operations and
   zero success milestones.
-- [ ] Record and verify delivery of all three linked orders in Shopify staging.
-  Shopify admin access was blocked by the browser's automated approval review.
-  Once all three deliveries are recorded, run just before revised coverage
-  ends and verify the worker still holds.
-- [ ] At the revised boundary, verify one £9 monthly subscription in Recharge
-  with the exact mapped plan, monthly cadence and first charge after coverage.
-  Retry the same source and verify the same subscription and one Firebase
-  confirmation. Check that the prepaid source has no renewal scheduled.
+- [x] Verify all three linked orders are Fulfilled in Shopify staging.
+  Successful fulfillment of the exact paid line is sufficient. The worker
+  does not depend on carrier delivery status or a manual Delivered update.
+- [x] With all three orders fulfilled, run the staging test clock just before
+  the revised coverage end on 20 February 2027 at 05:00 UTC. The worker
+  held for prepaid coverage and recorded no continuation or success milestone.
+- [x] At the revised cutoff, verify one £9 monthly Recharge subscription
+  with the mapped terms and its first charge scheduled for 21 February.
+  Two retries verified the same subscription and one durable Firebase
+  confirmation. The worker verified the prepaid source had no renewal
+  scheduled before creation. No charge was processed.
 - [ ] Verify the worker stops on cancellation, refund, missing evidence or
   an ambiguous create response. Confirm the logs provide enough information
   to investigate and retries reuse the original incident. The existing
