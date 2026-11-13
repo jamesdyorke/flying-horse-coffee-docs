@@ -197,6 +197,9 @@ through preparation.
   Two retries verified the same subscription and one durable Firebase
   confirmation. The worker verified the prepaid source had no renewal
   scheduled before creation. No charge was processed.
+- [x] Verify with simulated provider evidence that cancellation or refund
+  after the initial quote stops the create request. Backend PR #108 passed
+  CI and merged. Retries retain the same claim and incident correlation.
 - [ ] Verify the worker stops on cancellation, refund, missing evidence or
   an ambiguous create response. Confirm the logs provide enough information
   to investigate and retries reuse the original incident. The existing
@@ -235,6 +238,9 @@ through preparation.
   the same cart query verified the exact prepaid plan and a £30 subtotal
   against the real staging Storefront API. The signed-in browser preview
   at £22.50 remains pending.
+- [x] Wire the staging checkout button to Shopify sign-in and cart preparation.
+  Backend PR #107 passed CI, merged and deployed to staging. The staging
+  theme asset was bundled and syntax-checked.
 - [ ] Add an offer checkout entry to the existing staging product fixture.
   The current page renders standard £10 purchase controls. Stop before
   order submission and verify the Shopify checkout subtotal is £22.50
