@@ -222,7 +222,10 @@ through preparation.
 - [x] Implement and test the browser cart handoff against fixtures. Backend
   PR #105 applies the discount automatically and returns a checkout link
   only for the exact staging prepaid plan at a £22.50 GBP subtotal.
-  A signed-in browser preview remains pending.
+  CI and the staging deployment passed. A separate unpaid request using
+  the same cart query verified the exact prepaid plan and a £30 subtotal
+  against the real staging Storefront API. The signed-in browser preview
+  at £22.50 remains pending.
 - [ ] Add an offer checkout entry to the existing staging product fixture.
   The current page renders standard £10 purchase controls. Stop before
   order submission and verify the Shopify checkout subtotal is £22.50
