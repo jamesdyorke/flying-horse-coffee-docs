@@ -135,7 +135,8 @@ through preparation.
    Verify current pricing, fulfillment and revised coverage, durable payment
    evidence, cancellation and refund holds, and one continuation on retries.
 6. Prepare production deployment and monitoring. Verify project, store,
-   credential scopes, webhooks and permissions. Exercise the ability to
+   credential scopes, webhooks and permissions. Register and verify the
+   production Shopify web sign-in client before enabling checkout. Exercise the ability to
    pause new checkouts while servicing existing subscriptions. Check
    failure/recovery correlation and live purchase telemetry.
 7. Review the unpublished pilot and prove the tester restriction before
@@ -226,8 +227,8 @@ through preparation.
   - HTTPS callback: `https://development-flying-horse-coffee.myshopify.com/products/staging-public-continuation-test`
 
   Backend PR #106 merged and deployed successfully to staging. It supplies
-  the sign-in helper. Shopify client registration and the browser callback
-  remain to be verified.
+  the sign-in helper. James reported completing the Shopify client setup.
+  Confirm the public client ID and verify the browser callback.
 - [ ] Prepare a fresh eligible staging buyer and a verified, single-use
   discount bound to that buyer and the fixture. The previous fixture buyer
   has redeemed, and the previous discount verification window has elapsed.
@@ -288,6 +289,12 @@ through preparation.
   through the unregistered worker adapter. Backend PR #104 merged after
   both required checks and its staging deployment passed. Runtime secret
   binding remains part of production deployment.
+- [ ] Set up production website sign-in in the live Shopify store’s Headless
+  channel. James registers a separate Public (web app) Customer Account API
+  client with the final production storefront origin and exact HTTPS callback.
+  Keep the existing mobile client intact. Verify sign-in and Firebase
+  customer identity through the approved preview before enabling offer
+  checkout. [Website identity](https://linear.app/flyinghorsecoffee/issue/FLY-172)
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. Confirm it can still obtain verified delivery,
