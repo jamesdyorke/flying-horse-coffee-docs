@@ -60,7 +60,10 @@ existing monthly plans and subscriber contracts in place.
   and refund evidence. A read-only preflight combines that evidence with
   verified payment, a supplied coverage schedule and current pricing. Local
   tests held for an outstanding third delivery and quoted £9 at the boundary.
-  The live coverage source, runtime wiring and provider test still remain.
+  A read-only staging check verified the actual £10 Shopify variant price and
+  matching Recharge plan, yielding a £9 quote with a synthetic coverage
+  schedule. The Shopify read transport is in review. The authoritative
+  coverage source, staging credential wiring and provider test still remain.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
