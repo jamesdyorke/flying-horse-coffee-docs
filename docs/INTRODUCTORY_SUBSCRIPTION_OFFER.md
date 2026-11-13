@@ -64,6 +64,10 @@ existing monthly plans and subscriber contracts in place.
   A separate hosted staging checkout then confirmed a simulated payment at
   £22.50 plus £4.99 shipping. Firebase confirmed the paid enrollment and
   redemption.
+- The staging observer processed four signed test webhook receipts for the
+  existing paid order after the rate-limit fix deployed. Four duplicate
+  deliveries were recognized at ingress. All originals completed and no
+  failure or recovery alerts were generated for the burst.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
