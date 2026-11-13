@@ -204,10 +204,13 @@ through preparation.
 
 ### 2. Finish the website purchase flow in staging
 
-- [ ] Verify the development storefront can call Firebase from a browser.
-  Backend PR #103 allows the exact staging storefront origin. After
-  deployment, verify that origin is allowed, foreign origins are excluded
-  and anonymous checkout preparation is rejected.
+- [x] Verify the staging browser transport after backend PR #103 deployed.
+  Preflight allows the exact development storefront with Authorization and
+  Content-Type. A foreign origin gets a mismatched origin and cannot read
+  the response. Anonymous checkout preparation returns HTTP 401.
+- [ ] Verify browser sign-in via the Shopify Customer Account API and the
+  authenticated Firebase checkout handoff. Browser identity is tracked in
+  [FLY-172](https://linear.app/flyinghorsecoffee/issue/FLY-172).
 
 - [ ] Connect the website offer entry to signed-in eligibility and checkout
   preparation in Firebase. Preserve one redemption per customer across
