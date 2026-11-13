@@ -55,10 +55,11 @@ existing monthly plans and subscriber contracts in place.
   prepaid plan. Signed-in hosted checkout confirmed £22.50 plus £4.99 shipping
   after manual discount entry. It rejected the same discount for a different
   account. The iOS checkout and Firebase offer-details updates are available
-  in staging. The app withheld checkout for an ineligible account. Verify
-  automatic discount handoff with the eligible account before a new paid test.
-  The staging build with the sign-out fix reached a fresh Shopify sign-in
-  when switching accounts. The eligible account's verification is pending.
+  in staging. The app withheld checkout for an ineligible account. After
+  switching to the eligible account, the app opened Shopify checkout with
+  the exact prepaid plan and the £7.50 discount already applied. The
+  merchandise subtotal was £22.50 before shipping. No order was submitted.
+  A fresh paid staging test and normal-schedule continuation proof remain.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
