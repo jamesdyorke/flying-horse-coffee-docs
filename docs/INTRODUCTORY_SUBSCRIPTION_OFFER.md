@@ -212,6 +212,17 @@ through preparation.
   authenticated Firebase checkout handoff. Browser identity is tracked in
   [FLY-172](https://linear.app/flyinghorsecoffee/issue/FLY-172).
 
+- [ ] Configure a dedicated staging Customer Account API web client with
+  the exact HTTPS storefront origin and callback. The normal storefront
+  account session is available, and the offer still needs a customer token
+  Firebase can verify. Leave the mobile client configuration in place.
+- [ ] Prepare a fresh eligible staging buyer and a verified, single-use
+  discount bound to that buyer and the fixture. The previous fixture buyer
+  has redeemed, and the previous discount verification window has elapsed.
+- [ ] Add an offer checkout entry to the existing staging product fixture.
+  The current page renders standard £10 purchase controls. Stop before
+  order submission and verify the Shopify checkout subtotal is £22.50
+  with the discount already applied.
 - [ ] Connect the website offer entry to signed-in eligibility and checkout
   preparation in Firebase. Preserve one redemption per customer across
   website, app and eligible products.
