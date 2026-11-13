@@ -52,6 +52,10 @@ existing monthly plans and subscriber contracts in place.
   Live checks rejected an unauthenticated request and a mismatched selling
   plan. Shopify rejected an invalid discount in the unpaid development cart.
   A valid customer-bound discount is still needed for the £22.50 preview.
+- The staging Recharge adapter for the public monthly plan passed local
+  request and readback tests. It sends the quoted amount and checks that the
+  provider returns exactly one matching subscription with the expected
+  cadence and charge date. Runtime wiring and a provider test still remain.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
