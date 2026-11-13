@@ -29,9 +29,9 @@ existing monthly plans and subscriber contracts in place.
 - The five production prepaid plans are merchant-only and the offer is disabled.
   Shopify checkout and the production continuation are still pending verification.
 - Backend PR #83 is merged. It validates mapped public 10% monthly plans and
-  fresh GBP pricing. Verify Recharge creation and readback on a matching
-  staging plan.
-- The normal worker requires verified delivery evidence and revised prepaid
+  fresh GBP pricing. The delayed staging fixture verified Recharge creation
+  and retry readback on the matching plan.
+- The normal worker requires verified Shopify fulfillment and revised prepaid
   coverage. A staging read confirmed that Recharge can show all three orders
   processed while Shopify still has no fulfillment records. Those deliveries
   stay pending under the normal policy.
@@ -40,8 +40,7 @@ existing monthly plans and subscriber contracts in place.
   coverage end, the worker sent zero create requests until revised coverage
   ended. Concurrent workers, a lost response and retries then produced one
   £9 monthly subscription request, one simulated subscription and one
-  milestone. The provider test now has a paid staging source and still needs
-  verified delivery and coverage records.
+  milestone. The staging provider result is recorded in section 1.
 - A separate £10 product is now configured in the development store with an
   development product page, a public 10% monthly plan, and a three-delivery prepaid
   plan that expires after one charge. Both Recharge plans have linked Shopify
@@ -93,7 +92,8 @@ existing monthly plans and subscriber contracts in place.
   prepaid orders were still queued. The seven-day delay moved the coverage
   end from 13 to 20 February 2027 (UTC). The deployed manual worker uses the
   real clock. The earlier accelerated fixture proved checkout and renewal.
-  The delayed fixture’s normal provider creation and retry proof is pending.
+  The delayed fixture later passed provider creation and retry readback
+  using the private staging test clock.
 
 ## Separate production pilot draft
 
@@ -108,9 +108,9 @@ production continuation have been verified and the paid pilot is approved.
 
 ## Production launch checklist
 
-Next, finish the existing delayed staging purchase's prepaid delivery records
-and use the private rehearsal command to verify the switch in section 1.
-The website checkout in section 2 can proceed in parallel. Keep the production
+The delayed staging purchase passed the normal worker switch in section 1.
+Next, finish the staging website checkout and prepare production runtime
+and catalogue mappings in parallel. Keep the production
 offer disabled and the pilot product Draft with no sales channels.
 
 ### 1. Prove the normal switch in staging
@@ -131,8 +131,8 @@ offer disabled and the pilot product Draft with no sales channels.
   mode. A read-only staging run held for outstanding deliveries even when
   Recharge charge lookups were disabled.
 - [x] Connect the manual staging worker to the guarded Recharge writer.
-  Backend CI and the protected staging deployment passed. Actual provider
-  creation is still pending.
+  Backend CI and the protected staging deployment passed. The later
+  fulfillment-based provider test is recorded below.
 - [x] Provision scoped staging Shopify delivery and catalogue access. The
   credential is stored in staging Secret Manager.
 - [x] Use that credential in a read-only preflight. It read the paid
