@@ -113,6 +113,40 @@ Next, finish the staging website checkout and prepare production runtime
 and catalogue mappings in parallel. Keep the production
 offer disabled and the pilot product Draft with no sales channels.
 
+### Execution order
+
+Use the checkboxes below to record verified results. If a step depends on
+access, CI, or owner input, record that dependency and take the next available
+step. The production offer stays disabled and the pilot stays unpublished
+through preparation.
+
+1. Confirm the fulfillment fix reached staging. The protected deployment
+   passed. Preserve the existing £9 subscription and its retry evidence.
+2. Audit the live Shopify catalogue read-only. Match the eligible blends and
+   capsules to exact variant IDs, current UK prices, stock and shipping.
+3. Verify Recharge mappings for those variants using dedicated production
+   read access. Confirm three monthly deliveries under one prepaid payment,
+   plus a monthly plan with 10% off. The dedicated Recharge credential is
+   currently outstanding. Continue with steps 4 and 5 while that is resolved.
+4. Wire the staging website offer to Firebase eligibility and checkout
+   preparation. Verify the signed-in mobile and desktop journeys, discount
+   rejection, repeat eligibility and existing purchase paths.
+5. Prepare the production continuation worker behind disabled offer controls.
+   Verify current pricing, fulfillment and revised coverage, durable payment
+   evidence, cancellation and refund holds, and one continuation on retries.
+6. Prepare production deployment and monitoring. Verify project, store,
+   credential scopes, webhooks and permissions. Exercise the ability to
+   pause new checkouts while servicing existing subscriptions. Check
+   failure/recovery correlation and live purchase telemetry.
+7. Review the unpublished pilot and prove the tester restriction before
+   opening access. Keep the pilot read-only if the restriction cannot be
+   enforced. Prepare the owner QA and rollout handoff.
+8. After owner approval, run the controlled paid pilot. Verify one payment,
+   redemption and correct prepaid schedule. Record who will check the
+   normal continuation and renewal when due.
+9. After launch approval, open the offer to customers, verify normal purchases
+   and monitoring, and use the checkout pause if the launch needs to stop.
+
 ### 1. Prove the normal switch in staging
 
 - [x] Verify the app opens Shopify with the exact prepaid plan and automatic
