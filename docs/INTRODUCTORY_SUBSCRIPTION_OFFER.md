@@ -108,17 +108,21 @@ production continuation have been verified and the paid pilot is approved.
 
 ## Production launch checklist
 
-Start with the normal continuation test and the staging website checkout.
-Those can proceed in parallel. Keep the production offer disabled and the
-pilot product Draft with no sales channels while this work is in progress.
+Next, give the guarded staging worker a private execution entry point and a
+staging-only clock for the existing delayed test purchase. Prove the hold and
+switch in section 1 before using the normal worker for a paid pilot. The
+website checkout in section 2 can proceed in parallel. Keep the production
+offer disabled and the pilot product Draft with no sales channels.
 
 ### 1. Prove the normal switch in staging
 
 - [x] Verify the app opens Shopify with the exact prepaid plan and automatic
   £22.50 subtotal. Verify that a different signed-in buyer cannot use the
   discount.
-- [x] Confirm the simulated payment, one Firebase redemption, and the final
-  prepaid shipment's one-week delay in Recharge.
+- [x] Confirm the simulated £27.49 Shopify payment (£22.50 plus £4.99
+  shipping) and one Firebase redemption.
+- [x] Confirm the final prepaid shipment's one-week delay in Recharge moves
+  the retained coverage end from 13 to 20 February 2027 (UTC).
 - [x] Verify the deployed observer handles a controlled webhook burst and
   duplicates for the existing paid order without opening incidents.
 - [x] Retain the original schedule for the paid staging fixture. Two
@@ -131,9 +135,14 @@ pilot product Draft with no sales channels while this work is in progress.
   Backend CI and the protected staging deployment passed. Actual provider
   creation is still pending.
 - [x] Provision scoped staging Shopify delivery and catalogue access. The
-  manual preflight read the paid enrollment and returned a hold for
-  outstanding deliveries using the retained schedule and fresh provider
-  reads.
+  credential is stored in staging Secret Manager.
+- [x] Use that credential in a read-only preflight. It read the paid
+  enrollment and current £10 catalogue price, then held continuation for
+  outstanding deliveries using the retained schedule and fresh provider reads.
+- [x] Verify the normal worker's delay and retry logic in the Firestore
+  emulator. The simulated provider received one £9 create request after
+  revised coverage ended, and concurrent execution and a lost response
+  produced one confirmation.
 - [ ] Wire the staging execution entry point to obtain and refresh its Shopify
   token. Verify that it can read the exact prepaid orders, confirmed
   deliveries, cancellation and refund state, and current catalogue price.
@@ -141,9 +150,10 @@ pilot product Draft with no sales channels while this work is in progress.
   timing test can run without waiting months. Keep real provider evidence
   requirements in place. Use only verified test fulfillment records for this
   fixture and leave production on its normal clock.
-- [ ] On the delayed fixture, verify zero monthly subscriptions while the
-  last delivery is outstanding, zero at the original coverage end, and zero
-  after delivery while revised coverage remains.
+- [ ] On the delayed fixture, verify zero monthly subscriptions at the
+  original coverage end with the last delivery outstanding. Then record
+  verified staging fulfillment and verify zero after delivery while
+  revised coverage remains.
 - [ ] At the revised boundary, verify one £9 monthly subscription in Recharge
   with the exact mapped plan, monthly cadence and first charge after coverage.
   Retry the same source and verify the same subscription and one Firebase
@@ -173,8 +183,10 @@ pilot product Draft with no sales channels while this work is in progress.
 
 - [x] Provision a separate read-only Shopify app for production. Verified the
   production credential can read products and orders older than 60 days.
-  The pilot variant still reports Draft at £1. Worker integration remains
-  part of the protected deployment check below.
+  Worker integration remains part of the protected deployment check below.
+- [x] Verify that a signed production Shopify sample reaches Firebase purchase
+  telemetry. A naturally occurring eligible purchase still needs PostHog
+  verification.
 - [ ] Verify the live Shopify variant and Recharge plan mappings for each
   in-scope 350g and 1kg blend and capsule. Confirm the prepaid plan bills
   once for three monthly deliveries, and the mapped monthly plan uses the
@@ -185,8 +197,8 @@ pilot product Draft with no sales channels while this work is in progress.
   and separate offer controls. Confirm it can still obtain verified delivery,
   refund and cancellation evidence when the original order or charge is
   outside a provider's ordinary read window.
-- [ ] Verify the live read-only checks for the signed webhook, enrollment
-  correlation, current price and plan. Confirm production monitoring can
+- [ ] Verify live enrollment correlation, current price and plan.
+  Confirm production monitoring can
   identify a real failure, correlate retries and report recovery. Verify one
   eligible live purchase event reaches PostHog.
 - [ ] Test the rollout controls. New offer checkout must be pausable while
@@ -195,6 +207,8 @@ pilot product Draft with no sales channels while this work is in progress.
 
 ### 4. Run a controlled live website pilot
 
+- [x] Create the £1 pilot product as a Draft with no sales channels. Confirm
+  the production product URL returns page not found.
 - [ ] Review the pilot product, exact plans and price before changing
   visibility. The £1 draft stays unpublished until the owner approves the
   pilot visibility and purchase steps.
