@@ -171,6 +171,10 @@ pilot product Draft with no sales channels while this work is in progress.
 
 ### 3. Prepare production with the offer disabled
 
+- [x] Provision a separate read-only Shopify app for production. Verified the
+  production credential can read products and orders older than 60 days.
+  The pilot variant still reports Draft at £1. Worker integration remains
+  part of the protected deployment check below.
 - [ ] Verify the live Shopify variant and Recharge plan mappings for each
   in-scope 350g and 1kg blend and capsule. Confirm the prepaid plan bills
   once for three monthly deliveries, and the mapped monthly plan uses the
