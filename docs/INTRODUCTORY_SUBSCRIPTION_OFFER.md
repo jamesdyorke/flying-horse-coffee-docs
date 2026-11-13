@@ -79,15 +79,18 @@ existing monthly plans and subscriber contracts in place.
   A read-only staging check verified the actual £10 Shopify variant price and
   matching Recharge plan, yielding a £9 quote with a synthetic coverage
   schedule. The Shopify read transport passed CI and deployed to staging.
-  The worker still needs Shopify Admin access and an authoritative coverage
-  source before the provider test can run.
+  The paid fixture’s original schedule is now retained in staging, and the
+  guarded manual worker has passed CI and deployed. The Shopify connector
+  verified read access for an operator, including the test checkout order.
+  The worker still needs its own staging Shopify Admin access.
 - Recharge confirmed that the final prepaid shipment was delayed by seven
   days and that the earlier shipment kept its original date. The source had
   no renewal scheduled and no monthly continuation existed. Shopify had
-  yet to record fulfillment for the first shipment. Wire the normal worker
-  to verified deliveries and revised coverage, then verify zero creates
-  before that boundary and one £9 monthly subscription after it, including
-  on retries. The earlier accelerated fixture proved checkout and renewal.
+  yet to record fulfillment for the first shipment, and the two later
+  prepaid orders were still queued. The seven-day delay moved the coverage
+  end from 13 to 20 February 2027 (UTC). The deployed manual worker uses the
+  real clock. The earlier accelerated fixture proved checkout and renewal.
+  The delayed fixture’s normal provider creation and retry proof is pending.
 
 ## Separate production pilot draft
 
@@ -122,7 +125,8 @@ pilot product Draft with no sales channels while this work is in progress.
   mode. A read-only staging run held for outstanding deliveries even when
   Recharge charge lookups were disabled.
 - [x] Connect the manual staging worker to the guarded Recharge writer.
-  Backend CI passed. Actual provider creation is still pending.
+  Backend CI and the protected staging deployment passed. Actual provider
+  creation is still pending.
 - [ ] Provision scoped staging Shopify delivery and catalogue access for the
   worker. Run against the paid enrollment. Use the exact prepaid orders, confirmed
   Shopify deliveries, current cancellation and refund state, and a revised
