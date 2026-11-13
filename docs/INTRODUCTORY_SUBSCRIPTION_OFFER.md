@@ -20,14 +20,20 @@ existing monthly plans and subscriber contracts in place.
 
 - A staging purchase proved the introductory payment and redemption, one
   10%-off monthly continuation using accelerated timing, and its first paid
-  renewal. The production schedule still needs its own verification.
+  renewal. A read-only recheck confirmed the same result without creating a new
+  order or changing the subscription. The production schedule still needs its
+  own verification.
 - Production Firebase purchase telemetry is deployed. A signed Shopify sample
   reached Firebase successfully. Verify one PostHog event from a naturally
   occurring eligible live purchase.
 - The five production prepaid plans are merchant-only and the offer is disabled.
   Shopify checkout and the production continuation are still pending verification.
-- Backend PR #83 adds validation for mapped public 10% monthly plans and fresh
-  GBP pricing. Verify Recharge creation and readback on a matching staging plan.
+- Backend PR #83 is merged. It validates mapped public 10% monthly plans and
+  fresh GBP pricing. Verify Recharge creation and readback on a matching
+  staging plan.
+- The normal worker now has a proposed check for verified delivery evidence
+  and revised prepaid coverage. Local tests passed. Live evidence sources and
+  scheduling still need to be connected and tested in staging.
 
 ## Before a paid pilot
 
