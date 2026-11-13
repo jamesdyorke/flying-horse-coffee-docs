@@ -57,6 +57,8 @@ existing monthly plans and subscriber contracts in place.
   account. The iOS checkout and Firebase offer-details updates are available
   in staging. The app withheld checkout for an ineligible account. Verify
   automatic discount handoff with the eligible account before a new paid test.
+  The staging build with the sign-out fix reached a fresh Shopify sign-in
+  when switching accounts. The eligible account's verification is pending.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
