@@ -216,6 +216,15 @@ through preparation.
   the exact HTTPS storefront origin and callback. The normal storefront
   account session is available, and the offer still needs a customer token
   Firebase can verify. Leave the mobile client configuration in place.
+  In the development store's Headless channel, select a separate Public
+  (web app) client. Register these values:
+
+  - JavaScript origin: `https://development-flying-horse-coffee.myshopify.com`
+  - HTTPS callback: `https://development-flying-horse-coffee.myshopify.com/products/staging-public-continuation-test`
+
+  Backend PR #106 merged and deployed successfully to staging. It supplies
+  the sign-in helper. Shopify client registration and the browser callback
+  remain to be verified.
 - [ ] Prepare a fresh eligible staging buyer and a verified, single-use
   discount bound to that buyer and the fixture. The previous fixture buyer
   has redeemed, and the previous discount verification window has elapsed.
