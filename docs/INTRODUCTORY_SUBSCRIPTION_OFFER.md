@@ -47,6 +47,17 @@ existing monthly plans and subscriber contracts in place.
   and the normal worker connected. The accelerated fixture remains available
   as evidence of the earlier checkout and renewal.
 
+## Separate production pilot draft
+
+A separate £1 product was created in production Shopify on 13 November 2026
+for a future controlled pilot. It remains Draft with no sales channels selected.
+The public product URL returned a page-not-found response. No selling plan
+was attached and no order or payment was created. The existing subscription
+plans and the disabled offer are unchanged.
+
+Keep the pilot product unpublished until the checkout restriction and
+production continuation have been verified and the paid pilot is approved.
+
 ## Before a paid pilot
 
 1. Verify that the website displays the offer and hands off the exact selected
