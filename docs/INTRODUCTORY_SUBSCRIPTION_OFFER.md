@@ -231,6 +231,9 @@ through preparation.
   2026 read-only audit returned 55 variants across five active products.
   The 54 bagged variants had no inventory block. All Day Brewing Capsules
   had no sellable stock and Shopify blocks overselling for that variant.
+- [x] Verify Shopify selling-plan terms on all five catalogue products. The
+  product-level plan groups returned monthly billing and delivery at 10%
+  off. No three-delivery prepaid plan appeared in those groups.
 - [ ] Verify each Recharge prepaid and monthly plan mapping and the shipping
   and fulfillment routes. Confirm one payment for three monthly deliveries
   and the current applicable variant price with 10% off. Leave the capsule
