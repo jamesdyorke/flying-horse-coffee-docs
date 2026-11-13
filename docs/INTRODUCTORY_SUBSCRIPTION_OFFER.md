@@ -40,8 +40,8 @@ existing monthly plans and subscriber contracts in place.
   coverage end, the worker sent zero create requests until revised coverage
   ended. Concurrent workers, a lost response and retries then produced one
   £9 monthly subscription request, one simulated subscription and one
-  milestone. Actual provider proof still requires a paid staging source
-  and verified delivery and coverage records.
+  milestone. The provider test now has a paid staging source and still needs
+  verified delivery and coverage records.
 - A separate £10 product is now configured in the development store with an
   development product page, a public 10% monthly plan, and a three-delivery prepaid
   plan that expires after one charge. Both Recharge plans have linked Shopify
@@ -61,7 +61,9 @@ existing monthly plans and subscriber contracts in place.
   switching to the eligible account, the app opened Shopify checkout with
   the exact prepaid plan and the £7.50 discount already applied. The
   merchandise subtotal was £22.50 before shipping. No order was submitted.
-  A fresh paid staging test and normal-schedule continuation proof remain.
+  A separate hosted staging checkout then confirmed a simulated payment at
+  £22.50 plus £4.99 shipping. Firebase confirmed the paid enrollment and
+  redemption.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
@@ -75,11 +77,13 @@ existing monthly plans and subscriber contracts in place.
   schedule. The Shopify read transport passed CI and deployed to staging.
   The worker still needs Shopify Admin access and an authoritative coverage
   source before the provider test can run.
-- Verify the checkout applies the 25% introductory discount and records a
-  fresh paid staging enrollment. Then verify the normal worker creates one
-  continuation after confirmed deliveries and the end of prepaid coverage.
-  The earlier accelerated fixture remains available as evidence of checkout
-  and renewal.
+- Recharge confirmed that the final prepaid shipment was delayed by seven
+  days and that the earlier shipment kept its original date. The source had
+  no renewal scheduled and no monthly continuation existed. Shopify had
+  yet to record fulfillment for the first shipment. Wire the normal worker
+  to verified deliveries and revised coverage, then verify zero creates
+  before that boundary and one £9 monthly subscription after it, including
+  on retries. The earlier accelerated fixture proved checkout and renewal.
 
 ## Separate production pilot draft
 
