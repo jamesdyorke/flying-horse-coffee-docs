@@ -41,9 +41,16 @@ existing monthly plans and subscriber contracts in place.
   boundary, two workers and subsequent retries produced one continuation
   request and one milestone.
 - A separate £10 product is now configured in the development store with an
-  unlisted product page, a public 10% monthly plan, and a three-delivery prepaid
+  development product page, a public 10% monthly plan, and a three-delivery prepaid
   plan that expires after one charge. Both Recharge plans have linked Shopify
   selling-plan IDs. The prepaid plan has no built-in discount.
+- The fixture is Active on the development Online Store and Headless channels
+  for app checkout testing. Shopify's Storefront API returned the £9 monthly
+  price and accepted the exact prepaid selling plan in an unpaid cart with a
+  £30 subtotal.
+- The existing Firebase staging checkout and paid-enrollment handlers are
+  bound to the earlier fixture. Add the new fixture alongside it before using
+  the new product for end-to-end enrollment testing.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
