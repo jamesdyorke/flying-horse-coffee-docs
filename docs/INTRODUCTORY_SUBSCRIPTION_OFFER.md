@@ -35,9 +35,17 @@ existing monthly plans and subscriber contracts in place.
   coverage. A staging read confirmed that Recharge can show all three orders
   processed while Shopify still has no fulfillment records. Those deliveries
   stay pending under the normal policy.
-- The current staging offer product uses a private monthly plan. A separate
-  staging fixture is needed to prove creation on a public 10% monthly plan.
-  The normal worker still needs its evidence sources and scheduling connected.
+- The Firestore emulator proved the normal worker's timing and duplicate
+  protection with a simulated public 10% Recharge plan. It issued zero
+  creates with a delivery missing or before revised coverage ended. At the
+  boundary, two workers and subsequent retries produced one continuation
+  request and one milestone.
+- A read-only check of the complete staging Recharge catalogue found no public
+  10% monthly plan. The existing paid fixture has already switched on its
+  private plan. The provider test needs a separate staging product and source
+  subscription with a mapped public monthly plan, verified delivery evidence
+  and the normal worker connected. The accelerated fixture remains available
+  as evidence of the earlier checkout and renewal.
 
 ## Before a paid pilot
 
