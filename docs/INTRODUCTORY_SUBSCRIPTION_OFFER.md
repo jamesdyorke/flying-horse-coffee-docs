@@ -226,11 +226,16 @@ through preparation.
 - [x] Verify that a signed production Shopify sample reaches Firebase purchase
   telemetry. A naturally occurring eligible purchase still needs PostHog
   verification.
-- [ ] Verify the live Shopify variant and Recharge plan mappings for each
-  in-scope 350g and 1kg blend and capsule. Confirm the prepaid plan bills
-  once for three monthly deliveries, and the mapped monthly plan uses the
-  current applicable variant price with 10% off. Check stock, currency,
-  shipping, and the treatment of existing subscriber contracts.
+- [x] Audit the live Shopify variant IDs, UK prices and inventory policy for
+  the five products linked from the subscriptions page. The 13 November
+  2026 read-only audit returned 55 variants across five active products.
+  The 54 bagged variants had no inventory block. All Day Brewing Capsules
+  had no sellable stock and Shopify blocks overselling for that variant.
+- [ ] Verify each Recharge prepaid and monthly plan mapping and the shipping
+  and fulfillment routes. Confirm one payment for three monthly deliveries
+  and the current applicable variant price with 10% off. Leave the capsule
+  variant out of checkout while its inventory remains blocked. Check the
+  treatment of existing subscriber contracts.
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. Confirm it can still obtain verified delivery,
@@ -243,6 +248,22 @@ through preparation.
 - [ ] Test the rollout controls. New offer checkout must be pausable while
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
+
+#### Shopify catalogue audit — 13 November 2026
+
+These are Shopify UK catalogue prices before discounts and shipping. They
+are evidence for the mapping review. The worker must read current pricing
+at execution.
+
+| Product | 350g options and price | 1kg options and price | Other |
+| --- | --- | --- | --- |
+| Espresso Blend | 7 at £16.95 | 7 at £35.95 | |
+| Espresso Single Origin | 7 at £18.95 | 7 at £37.95 | |
+| Filter Single Origin | 6 at £18.95 | 6 at £37.95 | |
+| Caffeine Free | 7 at £19.95 | 7 at £39.95 | |
+| All Day Brewing Capsules | | | 1 at £5.99, inventory blocked |
+
+[Live subscription catalogue](https://flyinghorsecoffee.com/pages/subscriptions)
 
 ### 4. Run a controlled live website pilot
 
