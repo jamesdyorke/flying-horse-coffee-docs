@@ -48,9 +48,11 @@ existing monthly plans and subscriber contracts in place.
   for app checkout testing. Shopify's Storefront API returned the £9 monthly
   price and accepted the exact prepaid selling plan in an unpaid cart with a
   £30 subtotal.
-- The existing Firebase staging checkout and paid-enrollment handlers are
-  bound to the earlier fixture. Add the new fixture alongside it before using
-  the new product for end-to-end enrollment testing.
+- Backend PR #87 adds the second fixture to Firebase eligibility, checkout
+  preparation and paid enrollment while preserving the original fixture and
+  the shared redemption limit. Local tests passed. Protected staging deployment
+  and the customer-bound discount configuration are still needed before a
+  discounted checkout preview.
 - Verify the checkout applies the 25% introductory discount and records a
   fresh paid staging enrollment. Then verify the normal worker creates one
   continuation after confirmed deliveries and the end of prepaid coverage.
