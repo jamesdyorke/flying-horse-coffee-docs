@@ -204,6 +204,11 @@ through preparation.
 
 ### 2. Finish the website purchase flow in staging
 
+- [ ] Verify the development storefront can call Firebase from a browser.
+  Backend PR #103 allows the exact staging storefront origin. After
+  deployment, verify that origin is allowed, foreign origins are excluded
+  and anonymous checkout preparation is rejected.
+
 - [ ] Connect the website offer entry to signed-in eligibility and checkout
   preparation in Firebase. Preserve one redemption per customer across
   website, app and eligible products.
@@ -239,6 +244,9 @@ through preparation.
   and the current applicable variant price with 10% off. Leave the capsule
   variant out of checkout while its inventory remains blocked. Check the
   treatment of existing subscriber contracts.
+- [x] Verify the unregistered production Shopify reader can fetch the
+  current UK price on one variant from each catalogue product. Backend
+  PR #102 merged. Provider-linked fulfillment verification remains open.
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. Confirm it can still obtain verified delivery,
