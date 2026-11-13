@@ -13,6 +13,7 @@ Only James may merge pull requests or enable auto-merge.
 - [SUBSCRIPTION_INTEGRATION_AUDIT.md](docs/SUBSCRIPTION_INTEGRATION_AUDIT.md)
 - [SUBSCRIPTION_IMPLEMENTATION.md](docs/SUBSCRIPTION_IMPLEMENTATION.md)
 - [SHOPIFY_SUBSCRIPTION_STORE_FINDINGS.md](docs/SHOPIFY_SUBSCRIPTION_STORE_FINDINGS.md)
+- [Introductory subscription offer and rollout plan](docs/INTRODUCTORY_SUBSCRIPTION_OFFER.md)
 
 ## Loyalty and rewards
 
