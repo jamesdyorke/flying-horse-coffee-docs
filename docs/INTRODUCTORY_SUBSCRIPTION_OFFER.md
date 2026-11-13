@@ -35,11 +35,13 @@ existing monthly plans and subscriber contracts in place.
   coverage. A staging read confirmed that Recharge can show all three orders
   processed while Shopify still has no fulfillment records. Those deliveries
   stay pending under the normal policy.
-- The Firestore emulator proved the normal worker's timing and duplicate
-  protection with a simulated public 10% Recharge plan. It issued zero
-  creates with a delivery missing or before revised coverage ended. At the
-  boundary, two workers and subsequent retries produced one continuation
-  request and one milestone.
+- The Firestore emulator ran the normal worker and Recharge adapter with
+  a simulated provider. When the final delivery arrived after the original
+  coverage end, the worker sent zero create requests until revised coverage
+  ended. Concurrent workers, a lost response and retries then produced one
+  £9 monthly subscription request, one simulated subscription and one
+  milestone. Actual provider proof still requires a paid staging source
+  and verified delivery and coverage records.
 - A separate £10 product is now configured in the development store with an
   development product page, a public 10% monthly plan, and a three-delivery prepaid
   plan that expires after one charge. Both Recharge plans have linked Shopify
