@@ -40,12 +40,15 @@ existing monthly plans and subscriber contracts in place.
   creates with a delivery missing or before revised coverage ended. At the
   boundary, two workers and subsequent retries produced one continuation
   request and one milestone.
-- A read-only check of the complete staging Recharge catalogue found no public
-  10% monthly plan. The existing paid fixture has already switched on its
-  private plan. The provider test needs a separate staging product and source
-  subscription with a mapped public monthly plan, verified delivery evidence
-  and the normal worker connected. The accelerated fixture remains available
-  as evidence of the earlier checkout and renewal.
+- A separate £10 product is now configured in the development store with an
+  unlisted product page, a public 10% monthly plan, and a three-delivery prepaid
+  plan that expires after one charge. Both Recharge plans have linked Shopify
+  selling-plan IDs. The prepaid plan has no built-in discount.
+- Verify the checkout applies the 25% introductory discount and records a
+  fresh paid staging enrollment. Then verify the normal worker creates one
+  continuation after confirmed deliveries and the end of prepaid coverage.
+  The earlier accelerated fixture remains available as evidence of checkout
+  and renewal.
 
 ## Separate production pilot draft
 
