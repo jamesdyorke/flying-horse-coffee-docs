@@ -52,7 +52,9 @@ existing monthly plans and subscriber contracts in place.
   Live checks rejected an unauthenticated request and a mismatched selling
   plan. Shopify rejected an invalid discount in the unpaid development cart.
   The unpaid staging cart returned £22.50 before shipping for the exact
-  prepaid plan. The signed-in hosted checkout preview is pending.
+  prepaid plan. Signed-in hosted checkout confirmed £22.50 plus £4.99 shipping
+  after manual discount entry. It rejected the same discount for a different
+  account. The automatic checkout handoff and a new paid test remain pending.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
