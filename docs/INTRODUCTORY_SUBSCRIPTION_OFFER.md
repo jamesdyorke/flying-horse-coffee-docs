@@ -51,7 +51,7 @@ existing monthly plans and subscriber contracts in place.
 - Backend PR #87 merged and deployed the second fixture to Firebase staging.
   Live checks rejected an unauthenticated request and a mismatched selling
   plan. Shopify rejected an invalid discount in the unpaid development cart.
-  A valid customer-bound discount is still needed for the £22.50 preview.
+  Discount setup is complete. The signed-in £22.50 preview is pending.
 - The staging Recharge adapter for the public monthly plan passed local
   request and readback tests. It sends the quoted amount and checks that the
   provider returns exactly one matching subscription with the expected
