@@ -219,6 +219,10 @@ through preparation.
 - [ ] Prepare a fresh eligible staging buyer and a verified, single-use
   discount bound to that buyer and the fixture. The previous fixture buyer
   has redeemed, and the previous discount verification window has elapsed.
+- [x] Implement and test the browser cart handoff against fixtures. Backend
+  PR #105 applies the discount automatically and returns a checkout link
+  only for the exact staging prepaid plan at a £22.50 GBP subtotal.
+  A signed-in browser preview remains pending.
 - [ ] Add an offer checkout entry to the existing staging product fixture.
   The current page renders standard £10 purchase controls. Stop before
   order submission and verify the Shopify checkout subtotal is £22.50
@@ -263,8 +267,9 @@ through preparation.
   PR #102 merged. Provider-linked fulfillment verification remains open.
 - [x] Verify the dedicated production Shopify credential exchanges for a
   token with the expected read-only scopes and returns a current UK price
-  through the unregistered worker adapter. Backend PR #104 passed both
-  required checks. Runtime secret binding remains part of deployment.
+  through the unregistered worker adapter. Backend PR #104 merged after
+  both required checks and its staging deployment passed. Runtime secret
+  binding remains part of production deployment.
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. Confirm it can still obtain verified delivery,
