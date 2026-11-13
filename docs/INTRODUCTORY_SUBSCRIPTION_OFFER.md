@@ -261,6 +261,10 @@ through preparation.
 - [x] Verify the unregistered production Shopify reader can fetch the
   current UK price on one variant from each catalogue product. Backend
   PR #102 merged. Provider-linked fulfillment verification remains open.
+- [x] Verify the dedicated production Shopify credential exchanges for a
+  token with the expected read-only scopes and returns a current UK price
+  through the unregistered worker adapter. Backend PR #104 passed both
+  required checks. Runtime secret binding remains part of deployment.
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. Confirm it can still obtain verified delivery,
