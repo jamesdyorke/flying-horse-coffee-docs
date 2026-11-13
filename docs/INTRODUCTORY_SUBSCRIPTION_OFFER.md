@@ -115,7 +115,10 @@ pilot product Draft with no sales channels while this work is in progress.
   prepaid shipment's one-week delay in Recharge.
 - [x] Verify the deployed observer handles a controlled webhook burst and
   duplicates for the existing paid order without opening incidents.
-- [ ] Connect the normal worker to scoped staging Shopify and Recharge
+- [x] Retain the original schedule for the paid staging fixture. Two
+  read-only runs used that baseline and fresh provider reads and held
+  continuation while deliveries were outstanding.
+- [ ] Connect the deployed normal worker to scoped staging Shopify and Recharge
   readers and the paid enrollment. Use the exact prepaid orders, confirmed
   Shopify deliveries, current cancellation and refund state, and a revised
   coverage schedule that preserves the original paid period.
