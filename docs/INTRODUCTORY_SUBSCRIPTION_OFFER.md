@@ -362,6 +362,10 @@ introductory Shopify selling-plan IDs are unset.
 Production Firebase currently has only the existing Shopify paid-order receiver
 and publisher active. Cloud Scheduler API is disabled. Protected deployment of
 the continuation runtime and its scheduler remains open.
+The current deployment scripts reject staging offer modes in production. Add a
+production-specific runtime registration and verify its default-off controls in
+CI before provisioning its scheduler. A normal production release of the
+current code will not register this worker.
 
 #### Shopify catalogue audit — 13 November 2026
 
