@@ -98,16 +98,15 @@ existing monthly plans and subscriber contracts in place.
   The delayed fixture later passed provider creation and retry readback
   using the private staging test clock.
 
-## Separate production pilot draft
+## Separate production pilot
 
 A separate £1 product was created in production Shopify on 13 November 2026
-for a future controlled pilot. It remains Draft with no sales channels selected.
-On 14 November, Shopify reported Draft and no publication timestamp, and
-both storefront product URLs returned 404. Recharge now has both
+for a controlled pilot. It was initially Draft with no sales channels selected.
+The initial 14 November audit found no publication timestamp and both
+storefront product URLs returned 404. Recharge initially had both
 Merchant Portal-only pilot plans. The read-only audit verified the saved
 25% prepaid and 10% monthly terms, Draft state, no Online Store publication
-and zero Shopify selling-plan groups. Shopify checkout and the complete Shopify
-sales-channel list remain unverified. Backend PR #116 added the repeatable read-only pilot
+and zero Shopify selling-plan groups at that point. Backend PR #116 added the repeatable read-only pilot
 audit. Both required checks passed before merge, and the protected staging
 deployment succeeded for the merge commit. [Pilot audit PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/116)
 
@@ -116,21 +115,20 @@ subscription path, so a draft invoice cannot substitute for the pilot's
 Recharge and website checkout proof.
 [Recharge checkout troubleshooting](https://support.getrecharge.com/hc/en-us/articles/12075818832663-Customer-missing-from-Recharge)
 
-Keep the pilot product unpublished until the checkout restriction and
-production continuation have been verified and the paid pilot is approved.
+The £1 pilot is now Unlisted and available by direct link. James accepted
+link access for the pilot. The wider offer remains disabled.
 
 ## Production launch checklist
 
-Carry forward the completed staging proof. Prepare the Grow checkout rule,
-isolated production pilot and production backend in parallel. Keep the
-production offer disabled and the pilot product Draft with no sales channels.
+Carry forward the completed staging proof. Prepare the isolated production
+pilot and production backend in parallel. Keep the wider production offer
+disabled and the pilot Unlisted.
 
 ### Execution order
 
 Use the checkboxes below to record verified results. If a step depends on
 access, CI, or owner input, record that dependency and take the next available
-step. The production offer stays disabled and the pilot stays unpublished
-through preparation.
+step. The wider production offer stays disabled through preparation.
 
 1. Confirm the fulfillment fix reached staging. The protected deployment
    passed. Preserve the existing £9 subscription and its retry evidence.
@@ -155,9 +153,8 @@ through preparation.
    production Shopify web sign-in client before enabling checkout. Exercise the ability to
    pause new checkouts while servicing existing subscriptions. Check
    failure/recovery correlation and live purchase telemetry.
-7. Review the unpublished pilot and prove the tester restriction before
-   opening access. Keep the pilot read-only if the restriction cannot be
-   enforced. Prepare the owner QA and rollout handoff.
+7. Keep the pilot Unlisted and verify the direct-link checkout. Confirm the
+   named prepaid plan, total including shipping, and payment capture handoff.
 8. After owner approval, run the controlled paid pilot. Verify one payment,
    redemption and correct prepaid schedule. Record who will check the
    normal continuation and renewal when due.
@@ -554,21 +551,15 @@ at execution.
   document that daily intervals are unsupported. Use a supported cadence
   and evaluate a private clock limited to the verified pilot enrollment.
   The worker clock can advance continuation eligibility. Recharge controls
-  when it actually bills. Backend PR #125 adds a one-charge expiry for the £0.90 continuation and
-  rejects an uncapped provider readback. Fixture proof passed. Recharge
+  when it actually bills. Merged backend PR #125 adds a one-charge expiry
+  for the £0.90 continuation and rejects an uncapped provider readback. Fixture proof passed. Recharge
   still needs to confirm the cap on a created pilot and show expiry with
-  no queued charge after the first approved renewal. Rehearse teardown
-  before a paid pilot.
-  [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125) The direct-link preview above is for price verification only.
+  no queued charge after the first approved renewal.
+  [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125)
   [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
-- [ ] Verify the direct-link experience and check discovery through search,
-  collections and recommendations, including third-party tools. Verify
-  Shopify checkout enforces the designated signed-in tester. Test a copied
-  link, a different account and direct cart access. Keep the live pilot
-  read-only if checkout cannot enforce that restriction. Production Shopify
-  listed only Recharge Cart Validation for Quantity Upsells. Its setup
-  showed no customer or product targeting, so tester enforcement remains
-  unproved. No rule was saved or enabled.
+- [x] Verify the pilot direct link and check discovery. The pilot opened by
+  direct link and was absent from the storefront search and listings tested.
+  James accepted access for anyone with the link on 14 November 2026.
 - [ ] After owner approval, submit one real pilot order using normal live
   payment settings. Verify the total, single payment and redemption, correct
   Recharge source, prepaid schedule, and monitoring events. A normal live
