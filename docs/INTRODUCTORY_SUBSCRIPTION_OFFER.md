@@ -334,6 +334,23 @@ sent no alerts.
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
 
+#### Production checkout controls
+
+Shopify Grow supports eligible public Shopify App Store apps with Functions.
+A custom app containing a Function requires Shopify Plus. Verify the intended
+checkout protection on the production plan before relying on it.
+[Shopify Functions availability](https://shopify.dev/docs/apps/build/functions)
+
+Shopify’s native subscription discounts document product and collection scope,
+with separate customer or segment eligibility. Exact selling-plan targeting
+still needs proof. The monthly and prepaid plans share product variants, so
+verify that the 25% applies to the eligible prepaid checkout and leaves the
+ordinary monthly plan at 10%. Check a copied checkout link, an ineligible
+buyer and an already-redeemed buyer. Keep the production pilot read-only
+until checkout enforces the tester restriction.
+[Subscription discounts](https://help.shopify.com/en/manual/products/purchase-options/subscriptions/manage-subscriptions/subscription-discounts)
+· [Customer eligibility](https://help.shopify.com/en/manual/discounts/managing-discounts)
+
 #### Recharge plan audit — 14 November 2026
 
 The production merchant portal shows both plans on Espresso Blend, Espresso
