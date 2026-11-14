@@ -328,6 +328,54 @@ through preparation.
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
 
+#### Recharge plan audit — 14 November 2026
+
+The production merchant portal shows both plans on Espresso Blend, Espresso
+Single Origin, Filter Single Origin, Caffeine Free and All Day Brewing Capsules.
+The active recurring plan ships monthly at 10% off and is visible on the
+storefront, customer portal, merchant portal and API. The active intro plan
+ships monthly, charges every three months and expires after one charge. Its
+visibility is Merchant portal only. The portal summary does not establish a
+25% intro discount or a storefront checkout mapping. Preserve the capsule stock
+hold. Verify provider plan IDs and exact variant coverage with the dedicated
+read-only audit credential before marking the mapping complete.
+
+Recharge’s variant assignment table showed both plans assigned to all 54
+bagged coffee variants: 14 Espresso Blend, 14 Espresso Single Origin, 12 Filter
+Single Origin and 14 Caffeine Free. Both plans are listed on the single capsule
+product variant, which remains inventory-blocked. The Filter Single Origin
+prepaid plan editor showed the plan discount unchecked.
+
+A read-only production Firestore check confirmed the catalogue draft is disabled
+and matches the reviewed backend mapping for all 55 variants. The IDs below
+are from that draft. Fresh Recharge API verification is pending. All five
+introductory Shopify selling-plan IDs are unset. A fresh production Shopify
+Admin read confirmed all 55 variant IDs and five monthly Shopify selling-plan
+IDs match the draft. Each product returned only its monthly selling plan.
+Website checkout still needs a verified Shopify mapping for the prepaid plans.
+
+| Product | Recharge prepaid | Recharge monthly |
+| --- | --- | --- |
+| Espresso Blend | 23714211 | 2508960 |
+| Espresso Single Origin | 23714235 | 2508979 |
+| Filter Single Origin | 23714247 | 2509003 |
+| Caffeine Free | 23714263 | 2509027 |
+| All Day Brewing Capsules | 23714265 | 17212604 |
+
+Production Firebase currently has only the existing Shopify paid-order receiver
+and publisher active. Cloud Scheduler API is disabled. Protected deployment of
+the continuation runtime and its scheduler remains open.
+The current deployment scripts reject staging offer modes in production. Add a
+production-specific runtime registration and verify its default-off controls in
+CI before provisioning its scheduler. A normal production release of the
+current code will not register this worker.
+
+Backend PR #110 starts production integration with an unregistered quote-only
+preview. Its tests hold until the revised coverage boundary, select the mapped
+monthly plan and quote 10% off the current UK variant price without creating a
+continuation. Production enrollment evidence, Recharge transport and runtime
+registration remain open.
+
 #### Shopify catalogue audit — 13 November 2026
 
 These are Shopify UK catalogue prices before discounts and shipping. They
