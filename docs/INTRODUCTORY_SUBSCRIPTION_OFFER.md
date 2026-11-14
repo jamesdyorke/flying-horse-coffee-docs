@@ -128,9 +128,11 @@ through preparation.
    read access. Confirm three monthly deliveries under one prepaid payment,
    plus a monthly plan with 10% off. The dedicated Recharge credential is
    currently outstanding. Continue with steps 4 and 5 while that is resolved.
-4. Wire the staging website offer to Firebase eligibility and checkout
-   preparation. Verify the signed-in mobile and desktop journeys, discount
-   rejection, repeat eligibility and existing purchase paths.
+4. Show the introductory offer on eligible product pages before sign-in.
+   Wire the checkout button to Shopify sign-in, Firebase eligibility and
+   checkout preparation. Verify the guest-to-checkout journey on mobile
+   and desktop, discount rejection, repeat eligibility and existing
+   purchase paths.
 5. Prepare the production continuation worker behind disabled offer controls.
    Verify current pricing, fulfillment and revised coverage, durable payment
    evidence, cancellation and refund holds, and one continuation on retries.
@@ -264,12 +266,16 @@ sent no alerts.
   The order summary showed three prepaid monthly deliveries at £30.00
   before discount, £7.50 automatically applied and a £22.50 subtotal before
   shipping. No code was entered and no order was submitted.
-- [ ] Connect the website offer entry to signed-in eligibility and checkout
-  preparation in Firebase. Preserve one redemption per customer across
-  website, app and eligible products.
-- [ ] On mobile and desktop, verify the product and variant selection, three
-  prepaid deliveries at 25% off, shipping, and the 10% monthly continuation.
-  Use Shopify's subscription agreement at checkout.
+- [ ] On mobile and desktop, verify that signed-out shoppers can see and
+  select the introductory option on eligible product pages. Show the three
+  prepaid deliveries at 25% off, shipping and the 10% monthly continuation.
+- [ ] When a shopper proceeds to checkout, prompt them to sign in if needed
+  and preserve their product, variant and prepaid selection. Check eligibility
+  in Firebase and carry the selected plan through to Shopify checkout at the
+  discounted price for eligible buyers. Offer the regular 10% monthly option
+  if the introductory offer is unavailable to that shopper. Preserve one
+  redemption per customer across website, app and eligible products. Use
+  Shopify's subscription agreement at checkout.
 - [ ] Verify checkout receives the exact variant, prepaid plan and discount.
   If the discount is rejected, stop the offer checkout. Verify the website
   payment and redemption with a staging test order or equivalent verified
@@ -295,8 +301,10 @@ sent no alerts.
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
 - [ ] Choose and verify how the production checkout applies the introductory
-  25% discount automatically for eligible signed-in buyers. Show the offer on
-  the product and carry the discounted price into checkout. The buyer does
+  25% discount automatically for eligible signed-in buyers. Show the offer
+  publicly on eligible product pages once launched. Check eligibility after
+  sign-in at the checkout step and carry the discounted price into checkout.
+  The buyer does
   not enter, copy or receive a discount code. The customer-bound staging code
   was a test fixture. Verify plan-specific pricing or an automatic discount, with
   checkout enforcing eligibility and one redemption per customer across web
