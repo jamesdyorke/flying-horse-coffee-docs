@@ -103,7 +103,11 @@ for a future controlled pilot. It remains Draft with no sales channels selected.
 On 14 November, Shopify reported Draft and no publication timestamp, and
 both storefront product URLs returned 404. Shopify and Recharge each showed
 zero plans for the pilot. Its per-channel publication list still requires
-a separate check. Recharge documents storefront checkout as the supported
+a separate check. Backend PR #116 added the repeatable read-only pilot
+audit. Both required checks passed before merge, and the protected staging
+deployment succeeded for the merge commit. [Pilot audit PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/116)
+
+Recharge documents storefront checkout as the supported
 subscription path, so a draft invoice cannot substitute for the pilot's
 Recharge and website checkout proof.
 [Recharge checkout troubleshooting](https://support.getrecharge.com/hc/en-us/articles/12075818832663-Customer-missing-from-Recharge)
