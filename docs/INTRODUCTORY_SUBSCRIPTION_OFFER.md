@@ -365,10 +365,17 @@ development preview's exact-plan validation active, Shopify returned
 `VALIDATION_CUSTOM` and no checkout URL for a guest prepaid cart. A guest
 monthly cart still returned £9.00 and a checkout URL.
 
-The staging preview requires a signed-in test customer with an eligibility tag
-and limits the introductory plan to one unit per cart. A signed-in eligible
-checkout, copied-link enforcement and prior redemption checks remain open.
-The test tag does not yet reflect Firebase history or redemption state.
+The staging preview uses a manual eligibility tag for the Website Test account
+and limits the introductory plan to one unit per cart. An existing prepaid
+checkout link showed an eligibility error and disabled payment for a guest.
+After signing in as Website Test on the same checkout, the error cleared and
+the three-delivery plan displayed a £22.50 merchandise subtotal without a code.
+The test stopped before payment.
+
+Production eligibility must be evaluated automatically from the signed-in
+customer's history and redemption record, with the result enforced at
+checkout. Production enforcement, a signed-in prior redeemer check and the
+product button's handoff to this code-free selling plan remain open.
 
 #### Production checkout controls
 
