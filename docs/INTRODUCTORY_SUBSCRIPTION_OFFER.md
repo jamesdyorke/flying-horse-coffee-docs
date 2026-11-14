@@ -528,8 +528,8 @@ at execution.
   access to the existing Shopify, Recharge and PostHog secrets. The corrected
   [staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43642948423)
   succeeded. The exact [v0.3.0 staging candidate](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43643394067)
-  also deployed successfully. [Production promotion #130](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/130)
-  is open. Production pilot intake is unset and public offer availability
+  also deployed successfully. [Production promotion #131](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/131)
+  replaces #130 and includes the current production branch ancestry. Production pilot intake is unset and public offer availability
   stays disabled.
   [Isolation fix](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/128)
   · [Version PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/129)
