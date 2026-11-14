@@ -332,8 +332,8 @@ recorded staging lifecycle results for the pilot decision.
   existing subscription widget on eligible product pages, including for
   signed-out shoppers. Use the standalone staging product page to verify
   checkout behavior. Check eligibility after sign-in at the checkout step and
-  carry the discounted price into checkout without requiring a discount code. The customer-bound staging code
-  was a test fixture. Verify plan-specific pricing or an automatic discount, with
+  carry the discounted price into checkout without asking customers to enter
+  a code. A native discount attached by the website is a candidate only. Verify plan-specific pricing or an automatic discount, with
   checkout enforcing eligibility and one redemption per customer across eligible website products. Verify the discount applies to the intended prepaid purchase only,
   and that an ineligible or already-redeemed buyer cannot use a direct cart or
   checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
@@ -419,49 +419,23 @@ On 14 November 2026, a read-only request to the production Shopify Admin
 API confirmed the public plan is Grow, with Plus and development both
 disabled.
 
-BlockCart documents a selling-plan title check that can be combined with a
-customer tag. Its documented input matrix only exposes plan title under
-Attribute input, which excludes the login check. Its negative tag condition
-also skips guests. This supports isolating a uniquely named prepaid plan
-from monthly in principle, but leaves a guest bypass in the documented
-configuration. Do not use that configuration as the offer's only control.
-Shop-wide login would affect ordinary checkout and is outside this test.
-[BlockCart input matrix](https://discomerchant.com/apps/blockcart/help-center/which-conditions-work-with-which-rule-type)
-· [Guest tag behavior](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
+Use Shopify and Recharge with the existing Firebase backend. Reuse the
+staging proof for plan pricing and checkout isolation. The custom staging
+rule cannot be installed as a custom app on Grow. Parallel carts with the
+same eligible state also passed the local tag-only test, so a tag updated
+after payment cannot enforce one redemption by itself.
 
-SupaEasy documents selling-plan, buyer authentication and customer-tag
-conditions and offers checkout validation on non-Plus stores. Verify those
-conditions are available together in the same validation rule and exercise
-the published App Store app on the development store before selecting it for
-Grow. Post-payment tags alone leave a window between simultaneous checkouts
-and redemption updates. Ten local checks against the existing staging rule
-reproduced this gap: both independent prepaid carts passed when given the
-same eligible buyer state. This is a rule-level check. SupaEasy still needs
-an actual checkout test. Keep the checkout proof open.
-[SupaEasy qualifier and validation features](https://supaeasy.com/features/)
-
-A candidate must block an already
-redeemed buyer and a guest using a direct prepaid link, allow an eligible
-buyer at the 25% price, and leave the same coffee at 10% on the monthly
-plan for both accounts. Check pre-existing and parallel carts so a delayed
-redemption update cannot allow a second payment. The existing staging rule
-does not establish production Grow compatibility.
-
-Evaluate these checkout options for enforcing one introductory redemption per customer:
-
-1. Keep the offer in the Recharge widget on the existing coffee products.
-   Verify an App Store checkout rule on Grow can distinguish the exact prepaid
-   selling plan and enforce customer eligibility without touching the monthly
-   plan. General product-level checkout rules do not prove this capability.
-2. Test a separate prepaid-only offer item if the same-product rule cannot
-   enforce sign-in. BlockCart documents a product-scoped rule combining a
-   guest block and a customer tag. This can exercise access on the pilot
-   without targeting the ordinary monthly product. The pilot is still Draft.
-   Before adopting this route for the website, verify a shared redemption
-   across all offer variants, parallel checkout behavior, and a continuation
-   mapping back to the original coffee. A tester allowlist alone does not
-   establish once-per-customer enforcement.
-   [Product-scoped checkout rules](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
+Evaluate a native Shopify discount scoped to a separate prepaid-only offer
+item. Shopify documents a once-per-customer setting and a usage hold at
+payment submission for discount codes. The website can attach a native
+discount on the buyer's behalf. Verify one shared redemption across
+eligible variants, buyer identity on copied checkout links, a second and a
+parallel checkout, and the regular 10% monthly price. This candidate could
+enforce the discounted redemption. A direct buyer might still be able to
+buy the prepaid item at full price. The stricter checkout block and a
+code-free native route remain unproved. Keep the offer disabled.
+[Shopify discount usage](https://help.shopify.com/en/manual/discounts/discounts-faq)
+· [Shopify cart creation](https://shopify.dev/docs/api/storefront/latest/mutations/cartCreate)
 
 On 14 November, read-only production checks confirmed zero Shopify links
 across the 55 Recharge prepaid plans. Shopify returned only the mapped
@@ -483,11 +457,6 @@ comparison. Before publication, prove a prepaid-only discount on the same
 variant and separately verify buyer eligibility at checkout. The regular
 monthly plan must remain £9.00 in the staging comparison.
 
-
-Shopify Grow supports eligible public Shopify App Store apps with Functions.
-A custom app containing a Function requires Shopify Plus. Verify the intended
-checkout protection on the production plan before relying on it.
-[Shopify Functions availability](https://shopify.dev/docs/apps/build/functions)
 
 Shopify’s native subscription discounts document product and collection scope,
 with separate customer or segment eligibility. Exact selling-plan targeting
