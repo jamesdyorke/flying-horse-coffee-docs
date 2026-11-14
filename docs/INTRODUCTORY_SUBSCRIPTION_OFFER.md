@@ -562,16 +562,19 @@ at execution.
   duplicate-write tests are in [backend PR #138](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/138).
   The schedule-recovery change merged in
   [backend PR #137](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/137).
-- [x] Exercise the accelerated read-only cutoff rehearsal against live #5043.
-  Advancing only the coverage decision still held for unfulfilled orders.
-- [ ] Confirm the two remaining prepaid shipments are £0, then process the
-  pilot shipments and record Shopify fulfilment. Rerun the cutoff rehearsal
-  against the three verified fulfilments to get the live price quote before
-  February.
-- [ ] For an early paid renewal test, prepare a pilot-only live switch and
-  confirm the real queued amount and one-charge limit before billing. The
-  existing live switch command uses the normal schedule, with 14 February as
-  the earliest cutoff. The rehearsal mode has no provider writes.
+- [x] Process both £0 prepaid shipments and verify all three Shopify
+  fulfilments. Recharge preserved the original dates and created only the
+  two £0 Shopify follow-ups, #5044 and #5045. Shopify shows #5043–#5045 all
+  fulfilled and the original payment remains the only charge.
+- [x] Run the early rehearsal against live #5043 with all three fulfilments.
+  It returned `quote_ready` at £0.90 merchandise. The public offer remained
+  disabled. #138 merged and deployed to staging. The rehearsal change and
+  separately invoked early renewal are in
+  [backend #139](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/139).
+- [ ] Review #139 and choose an approved early billing date. Only then run the
+  private switch for #5043. Verify one Recharge continuation, the one-charge
+  cap and the queued total including any shipping before billing. No renewal
+  was scheduled during preparation.
 - [ ] After the approved renewal, verify the pilot subscription expired
   and Recharge has no second charge queued.
 - [ ] Wire automatic production website enrollment and complete alert parity.
