@@ -109,10 +109,9 @@ production continuation have been verified and the paid pilot is approved.
 
 ## Production launch checklist
 
-The delayed staging purchase passed the normal worker switch in section 1.
-Next, finish the staging website checkout and prepare production runtime
-and catalogue mappings in parallel. Keep the production
-offer disabled and the pilot product Draft with no sales channels.
+Carry forward the completed staging proof. Prepare the Grow checkout rule,
+isolated production pilot and production backend in parallel. Keep the
+production offer disabled and the pilot product Draft with no sales channels.
 
 ### Execution order
 
@@ -353,7 +352,9 @@ recorded staging lifecycle results for the pilot decision.
   checkout. [Website identity](https://linear.app/flyinghorsecoffee/issue/FLY-172)
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
-  and separate offer controls. Confirm it can still obtain verified delivery,
+  and separate offer controls. The 14 November read-only production inventory
+  showed the two Shopify paid-order functions. The production continuation
+  runtime was absent. Confirm it can still obtain verified delivery,
   refund and cancellation evidence when the original order or charge is
   outside a provider's ordinary read window.
 - [ ] Verify live enrollment correlation, current price and plan.
@@ -420,7 +421,15 @@ Shop-wide login would affect ordinary checkout and is outside this test.
 [BlockCart input matrix](https://discomerchant.com/apps/blockcart/help-center/which-conditions-work-with-which-rule-type)
 · [Guest tag behavior](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
 
-Keep the website checkout proof open. A candidate must block an already
+SupaEasy documents selling-plan, buyer authentication and customer-tag
+conditions and offers checkout validation on non-Plus stores. Verify those
+conditions are available together in the same validation rule and exercise
+the published App Store app on the development store before selecting it for
+Grow. Post-payment tags alone leave a window between simultaneous checkouts
+and redemption updates. Keep the checkout proof open.
+[SupaEasy qualifier and validation features](https://supaeasy.com/features/)
+
+A candidate must block an already
 redeemed buyer and a guest using a direct prepaid link, allow an eligible
 buyer at the 25% price, and leave the same coffee at 10% on the monthly
 plan for both accounts. Check pre-existing and parallel carts so a delayed
@@ -553,9 +562,17 @@ at execution.
 
 - [x] Create the £1 pilot product as a Draft with no sales channels. Confirm
   the production product URL returns page not found.
-- [ ] Review the pilot product, exact plans and price before changing
-  visibility. The £1 draft stays unpublished until the owner approves the
-  pilot visibility and purchase steps.
+- [ ] Review the draft pilot's two plans and actual checkout totals. On a
+  £1-per-delivery variant, 25% off three prepaid deliveries is £2.25
+  before shipping, and 10% off a £1 continuation is £0.90 before shipping.
+  £7.50 was the saving on the £30 staging bundle.
+- [ ] Verify the pilot schedule. Recharge Product Subscription Plans
+  document that daily intervals are unsupported. Use a supported cadence
+  and evaluate a private clock limited to the verified pilot enrollment.
+  The worker clock can advance continuation eligibility. Recharge controls
+  when it actually bills. Rehearse the one-renewal limit and teardown before
+  a paid pilot. Keep the draft unpublished.
+  [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Verify the direct-link experience and check discovery through search,
   collections and recommendations, including third-party tools. Verify
   Shopify checkout enforces the designated signed-in tester. Test a copied
