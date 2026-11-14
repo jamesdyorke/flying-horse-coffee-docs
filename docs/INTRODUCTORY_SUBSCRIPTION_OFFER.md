@@ -535,8 +535,11 @@ at execution.
   plan and total, then matches the Recharge charge and records one
   enrollment. The production read-only preflight passed. Fixtures covered
   a delayed original schedule and duplicate attempts. The first actual
-  payment and original three-order schedule are still pending. Automatic
-  continuation remains a separate check.
+  payment and original three-order schedule are still pending. Each
+  distinct prepaid purchase gets its own enrollment. The two £0 prepaid
+  follow-ups are fulfillment records. Each paid monthly renewal needs a
+  separate production observation keyed by the Recharge charge. Production
+  renewal observation and automatic continuation remain open.
   [Backend observer PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/124)
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
