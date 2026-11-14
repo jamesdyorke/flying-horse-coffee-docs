@@ -301,11 +301,12 @@ sent no alerts.
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
 - [ ] Choose and verify how the production checkout applies the introductory
-  25% discount automatically for eligible signed-in buyers. Show the offer
-  publicly on eligible product pages once launched. Check eligibility after
-  sign-in at the checkout step and carry the discounted price into checkout.
-  The buyer does
-  not enter, copy or receive a discount code. The customer-bound staging code
+  25% discount automatically for eligible signed-in buyers. In production,
+  show the prepaid option alongside the regular 10% monthly option in the
+  existing subscription widget on eligible product pages, including for
+  signed-out shoppers. Use the standalone staging product page to verify
+  checkout behavior. Check eligibility after sign-in at the checkout step and
+  carry the discounted price into checkout without requiring a discount code. The customer-bound staging code
   was a test fixture. Verify plan-specific pricing or an automatic discount, with
   checkout enforcing eligibility and one redemption per customer across web
   and app. Verify the discount applies to the intended prepaid purchase only,
