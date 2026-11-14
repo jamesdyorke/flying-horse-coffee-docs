@@ -551,30 +551,29 @@ must produce its own payment event and enrollment without operator replay.
 [Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
 · [Recharge prepaid shipments](https://support.getrecharge.com/hc/en-us/articles/32581132524055-Offering-prepaid-subscriptions)
 
-#### Repeat these checks for every live product
+#### Verify catalogue mappings and the shared checkout
 
-- [ ] For each eligible blend in 350 g and 1 kg and each capsule variant,
-  record the Shopify product and variant IDs, Recharge prepaid plan ID and
-  Shopify prepaid selling-plan ID. Confirm the exact monthly Recharge plan
-  and, where it is sold through the widget, its Shopify selling-plan ID.
-- [ ] Verify the manufacturer SKU or fulfilment key, stock at a location
-  that ships to the UK, and shipping rates for the actual product. Keep
-  variants with missing mappings or unavailable stock outside the rollout.
-- [ ] In the existing product widget, show the three-delivery offer and
-  explain the monthly continuation before sign-in. The dedicated action
-  adds one prepaid bundle with the correct selling plan. Check that the
-  25% price appears without code entry, shipping is shown separately,
-  and the existing 10% monthly option still selects its original plan.
-- [ ] Confirm the backend recognises each approved variant and selling
-  plan, verifies the captured price and binds the Recharge schedule to
-  the correct purchase. At continuation, verify the current UK price
-  for the same variant and plan before applying 10%. The £1 pilot's
-  fixed subtotal, IDs and one-renewal limit apply only to that pilot.
-- [ ] Confirm refunds and cancellations block continuation, and retries
-  cannot create a second enrollment or continuation for one purchase.
-  Check that regular subscriptions and unrelated orders stay outside
-  the offer pipeline. Record approval for the actual variants before
-  making the offer visible.
+- [x] Map all 55 eligible variants to their exact Recharge prepaid plans
+  and the five product-wide monthly plans. The disabled production
+  catalogue retains the variant mappings.
+- [ ] Verify each Recharge prepaid plan has the correct Shopify
+  selling-plan link and 25% price when the approved plans are connected.
+  Audit all variants against the catalogue, including their fulfilment
+  keys, UK stock and shipping configuration. Keep incomplete variants
+  outside the rollout.
+- [ ] Prove the shared widget and checkout flow once. Show the offer
+  before sign-in, add one three-delivery bundle on the correct plan,
+  verify 25% off without code entry, and confirm the regular 10% monthly
+  option still selects its existing plan. Use an unpaid preview only
+  where a product has different widget, pricing or shipping behaviour.
+- [ ] Use automated checks across the approved catalogue to verify
+  plan matching, captured-price validation and the 10% continuation
+  quote from the current UK price. Use one paid pilot to verify the
+  full Shopify → Recharge → Firebase → PostHog path. The £1 price and
+  one-renewal cap apply only to the pilot.
+- [ ] Verify the shared worker checks current refund and cancellation
+  state before continuation, ignores unrelated purchases and creates
+  one enrollment and continuation per paid purchase even on retries.
 
 ### 5. Open to customers and monitor
 
