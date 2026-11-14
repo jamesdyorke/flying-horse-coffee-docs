@@ -525,8 +525,9 @@ at execution.
   workflow with public offer availability disabled. Backend #127 added
   signed website payment intake. #128 isolates its production-only secret
   declarations from staging discovery. The production runtime has verified
-  access to the existing Shopify, Recharge and PostHog secrets. Verify the
-  corrected staging deployment before promoting v0.3.0.
+  access to the existing Shopify, Recharge and PostHog secrets. The corrected
+  [staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43642948423)
+  succeeded before v0.3.0 promotion.
   [Isolation fix](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/128)
   · [Version PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/129)
 - [ ] Verify the original prepaid schedule. The queued records were updated
