@@ -6,12 +6,14 @@ Implementation guides and detailed test evidence live in the owning repositories
 
 ## Offer
 
-Eligible customers can buy three monthly deliveries upfront at 25% off.
+Customers can buy three monthly deliveries upfront at 25% off.
 After the prepaid deliveries and coverage are complete, the subscription
 continues monthly at 10% off the current applicable price. Checkout shows the
 selected product, payment and shipping totals, and the subscription terms
-through Shopify's existing checkout. The website launch allows one
-introductory redemption per customer across the offer catalogue.
+through Shopify's existing checkout. If the current Shopify and Recharge
+setup cannot enforce one redemption per customer, the website will allow
+repeat purchases. Every distinct paid prepaid order can start its own
+monthly subscription. Retries of one order must reuse its continuation.
 
 The intended catalogue includes the existing subscription coffees in 350g and
 1kg and the capsules, subject to stock and confirmed plan coverage. Keep the
@@ -134,8 +136,8 @@ through preparation.
    capsules to exact variant IDs, current UK prices, stock and shipping.
 3. Verify Recharge mappings for those variants using dedicated production
    read access. Confirm three monthly deliveries under one prepaid payment,
-   plus a monthly plan with 10% off. The dedicated Recharge credential is
-   currently outstanding. Continue with steps 4 and 5 while that is resolved.
+   plus a monthly plan with 10% off. The catalogue audit passed. The audit
+   credential does not have the permissions needed for paid order evidence.
 4. Carry forward the existing staging proof for code-free prepaid pricing,
    payment and redemption, and the delayed, duplicate-safe £9 continuation.
    Build the customer-facing entry in the existing subscription widget for an
@@ -277,27 +279,19 @@ sent no alerts.
 - [ ] On mobile and desktop, verify that signed-out shoppers can see and
   select the introductory option on eligible product pages. Show the three
   prepaid deliveries at 25% off, shipping and the 10% monthly continuation.
-- [ ] When a shopper proceeds to checkout, prompt them to sign in if needed
-  and preserve their product, variant and prepaid selection. Check eligibility
-  in Firebase and carry the selected plan through to Shopify checkout at the
-  discounted price for eligible buyers. Offer the regular 10% monthly option
-  if the introductory offer is unavailable to that shopper. Preserve one
-  redemption per customer across eligible products on the website. Use
-  Shopify's subscription agreement at checkout.
-- [ ] Verify checkout receives the exact variant, prepaid plan and discount.
-  If the discount is rejected, stop the offer checkout. Verify the website
-  payment and redemption with a staging test order or equivalent verified
-  evidence from that website path.
-- [ ] Verify ordinary one-off purchases and existing subscription options still
-  work. Check an eligible buyer, a prior subscriber, an already-redeemed
-  buyer, and a retry after an interrupted checkout.
+- [ ] Preserve the selected coffee, variant and prepaid plan through normal
+  Shopify checkout. Verify that the plan applies the 25% price without a
+  code and that ordinary monthly and one-off purchases retain their prices.
+- [ ] For the repeatable route, verify two distinct purchases from the same
+  account and replay both. Each paid order must produce one payment record
+  and one continuation. Reuse the existing staged lifecycle evidence.
+
 
 ### 3. Prepare production with the offer disabled
 
-Prioritise the Shopify links for the audited Recharge prepaid plans and an
-eligibility control supported by the live store. Verify the 25% prepaid price,
-existing 10% monthly option and direct-checkout protection together in the
-production preview before accepting payment. In parallel, verify deployment
+Prioritise the 25% price on the Recharge prepaid plan and its Shopify link.
+Verify the 25% prepaid price and existing 10% monthly option before
+accepting payment. In parallel, verify deployment
 and configuration of the disabled production continuation worker. Reuse the
 recorded staging lifecycle results for the pilot decision.
 
@@ -319,24 +313,17 @@ recorded staging lifecycle results for the pilot decision.
   On 14 November, the copy was verified unpublished and both product
   templates matched the live copies, including the existing Recharge
   Subscription Widget app block.
-- [ ] Establish checkout protection before connecting the live coffee plans
-  to the Recharge Storefront widget channel. Recharge creates the Shopify
-  selling-plan group when that channel is selected. The theme copy isolates
-  template changes, while Recharge plan availability belongs to the store.
-  Test the product-scoped restriction on the separate pilot and verify
-  exact selling-plan targeting before applying a rule to shared coffee
-  variants. [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
-- [ ] Choose and verify how the production checkout applies the introductory
-  25% discount automatically for eligible signed-in buyers. In production,
-  show the prepaid option alongside the regular 10% monthly option in the
-  existing subscription widget on eligible product pages, including for
-  signed-out shoppers. Use the standalone staging product page to verify
-  checkout behavior. Check eligibility after sign-in at the checkout step and
-  carry the discounted price into checkout without asking customers to enter
-  a code. A native discount attached by the website is a candidate only. Verify plan-specific pricing or an automatic discount, with
-  checkout enforcing eligibility and one redemption per customer across eligible website products. Verify the discount applies to the intended prepaid purchase only,
-  and that an ineligible or already-redeemed buyer cannot use a direct cart or
-  checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
+- [ ] Prepare the 25% price on the Recharge prepaid plans. Check the
+  exact variant, three monthly deliveries paid upfront, one prepaid charge,
+  and no change to the 10% monthly plan. Keep the plans merchant-only for
+  preparation. Selecting Storefront widget creates a Shopify selling plan
+  and can expose it in the live widget. This is a launch step.
+  [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
+- [ ] Verify the existing subscription widget shows the prepaid option to
+  signed-out shoppers and passes the chosen plan to Shopify checkout at
+  the 25% price. A one-redemption gate is optional if Shopify and Recharge
+  cannot enforce it on the current plans.
+  [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
   the dedicated production read-only credential.
 - [ ] Prove shipping, fulfillment and treatment of existing subscriber
@@ -408,65 +395,22 @@ After signing in as Website Test on the same checkout, the error cleared and
 the three-delivery plan displayed a £22.50 merchandise subtotal without a code.
 The test stopped before payment.
 
-Production eligibility must be evaluated automatically from the signed-in
-customer's history and redemption record, with the result enforced at
-checkout. Production enforcement, a signed-in prior redeemer check and the
-product button's handoff to this code-free selling plan remain open.
+#### Production checkout
 
-#### Production checkout controls
+On 14 November 2026, the production Shopify Admin API confirmed Grow.
+The custom eligibility rule ran in the development store. A native
+one-redemption control for the same Recharge prepaid plan remains
+unverified on production. James approved allowing repeat purchases if
+the current Shopify and Recharge setup cannot enforce the limit. Use
+Recharge plan pricing for the 25% and the existing Shopify checkout.
+Scope production payment records to a verified paid checkout and reconcile
+continuations by Recharge source subscription. Keep existing staging
+redemption evidence as historical proof.
 
-On 14 November 2026, a read-only request to the production Shopify Admin
-API confirmed the public plan is Grow, with Plus and development both
-disabled.
-
-Use Shopify and Recharge with the existing Firebase backend. Reuse the
-staging proof for plan pricing and checkout isolation. The custom staging
-rule cannot be installed as a custom app on Grow. Parallel carts with the
-same eligible state also passed the local tag-only test, so a tag updated
-after payment cannot enforce one redemption by itself.
-
-Evaluate a native Shopify discount scoped to a separate prepaid-only offer
-item. Shopify documents a once-per-customer setting and a usage hold at
-payment submission for discount codes. The website can attach a native
-discount on the buyer's behalf. Verify one shared redemption across
-eligible variants, buyer identity on copied checkout links, a second and a
-parallel checkout, and the regular 10% monthly price. This candidate could
-enforce the discounted redemption. A direct buyer might still be able to
-buy the prepaid item at full price. The stricter checkout block and a
-code-free native route remain unproved. Keep the offer disabled.
-[Shopify discount usage](https://help.shopify.com/en/manual/discounts/discounts-faq)
-· [Shopify cart creation](https://shopify.dev/docs/api/storefront/latest/mutations/cartCreate)
-
-On 14 November, read-only production checks confirmed zero Shopify links
-across the 55 Recharge prepaid plans. Shopify returned only the mapped
-monthly plan for every production variant.
-
-The signed-in staging website previously reached the £22.50 prepaid checkout
-with the code applied automatically. A subsequent unpaid Storefront API test
-used the same staging variant with both selling plans:
-
-| Staging cart | Without code | With the intro code supplied |
-| --- | ---: | ---: |
-| Three prepaid deliveries | £30.00 | £22.50 |
-| Regular 10% monthly plan | £9.00 | £1.50 |
-
-Shopify marked the code applicable on both guest carts. This verifies that
-the staged product-scoped code does not isolate the prepaid plan at cart
-level. Final checkout enforcement and payment were not exercised in this
-comparison. Before publication, prove a prepaid-only discount on the same
-variant and separately verify buyer eligibility at checkout. The regular
-monthly plan must remain £9.00 in the staging comparison.
-
-
-Shopify’s native subscription discounts document product and collection scope,
-with separate customer or segment eligibility. Exact selling-plan targeting
-still needs proof. The monthly and prepaid plans share product variants, so
-verify that the 25% applies to the eligible prepaid checkout and leaves the
-ordinary monthly plan at 10%. Check a copied checkout link, an ineligible
-buyer and an already-redeemed buyer. Keep the production pilot read-only
-until checkout enforces the tester restriction.
-[Subscription discounts](https://help.shopify.com/en/manual/products/purchase-options/subscriptions/manage-subscriptions/subscription-discounts)
-· [Customer eligibility](https://help.shopify.com/en/manual/discounts/managing-discounts)
+The production audit found zero Shopify links across the 55 Recharge prepaid
+plans. The existing 10% monthly plans are already linked. Connecting the
+prepaid plans to the storefront can expose them on the live widget, so
+leave that step for launch approval.
 
 #### Recharge plan audit — 14 November 2026
 
