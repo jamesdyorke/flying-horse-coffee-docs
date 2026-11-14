@@ -532,6 +532,25 @@ at execution.
   hourly insight alerts are disabled. Recheck the production health signal
   before enabling corresponding hourly alerts.
 
+#### Website production readiness compared with staging
+
+| Area | Staging evidence | Production gap |
+| --- | --- | --- |
+| Storefront and checkout | The fixture proved the prepaid price and the regular monthly option. | The unlisted pilot paid successfully through a cart built with the exact selling plan. Verify the normal product widget selects that plan and maps the approved catalogue variants before exposing the public offer. |
+| Payment and lifecycle events | Deployed offer handlers consume signed order, payment, refund and subscription events and retry receipts. | The deployed production Functions inventory contains only `shopifyOrderPaid` and `publishPaidOrder`. Their purchase feed recognises iOS attribution. The website pilot currently needs the private observer. Wire website enrollment and refund/cancellation handling with durable retries and exact plan mapping. |
+| Prepaid coverage | The original schedule was retained. The staging worker held for a delayed delivery and created one continuation on retry. | The paid pilot's two queued rows were updated after creation. Verify their original dates from independent evidence. Deploy a production worker with the coverage gate and price check before a second paid test of the automatic path. |
+| Renewal | Staging recorded a paid renewal and exercised duplicate-safe receipt handling. | The production pilot worker is private and unscheduled. Live creation, observation of the £0.90 renewal and confirmation of the one-charge cap remain open. |
+| Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
+
+If repeating the paid pilot after the automatic path is ready, reconcile the
+original Shopify refund and Recharge records first. A refund and cancellation
+are separate checks. Confirm that the two queued prepaid shipments and future
+charges are stopped before placing a replacement order. Keep the original
+Firebase record for audit and verify that it cannot continue. The replacement
+must produce its own payment event and enrollment without operator replay.
+[Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
+· [Recharge prepaid shipments](https://support.getrecharge.com/hc/en-us/articles/32581132524055-Offering-prepaid-subscriptions)
+
 ### 5. Open to customers and monitor
 
 - [ ] Get owner QA sign-off and launch approval. Confirm the final catalogue,
