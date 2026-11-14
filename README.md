@@ -8,6 +8,12 @@ access notes or raw operational evidence. Review every migration before publishi
 
 Only James may merge pull requests or enable auto-merge.
 
+## Staging website
+
+[Open the staging website](https://development-flying-horse-coffee.myshopify.com/)
+for storefront and checkout testing. See the [staging website guide](docs/STAGING_WEBSITE.md)
+for the test journey and current limitations.
+
 ## Shared subscription documents
 
 - [SUBSCRIPTION_INTEGRATION_AUDIT.md](docs/SUBSCRIPTION_INTEGRATION_AUDIT.md)
