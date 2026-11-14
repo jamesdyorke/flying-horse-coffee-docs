@@ -22,9 +22,16 @@ payment methods can follow a different journey.
 
 - The existing staging store and checkout are accessible.
 - Earlier staging tests verified accepting and declining a Recharge
-  post-purchase offer with a real catalog product and test payments. Rendering
-  after the branding update is being rechecked; a later test reached an empty
-  post-purchase screen.
+  post-purchase offer with a real catalog product and test payments. Two later
+  fresh checkouts in an isolated browser session displayed the offer directly
+  with the redesigned theme and checkout branding unchanged; declining both
+  completed the expected test orders. Acceptance was not repeated in this run.
+- Intermittent empty post-purchase screens remain unresolved. The regular test
+  session retained a theme-preview parameter; the successful isolated session
+  did not. This is a diagnostic difference, not proof of the cause, because
+  browser storage and login state also differed. No theme or branding rollback
+  was performed during this comparison. Start a new checkout from the staging
+  homepage rather than reuse an old checkout or theme-preview link.
 - The staging default theme is **Flying Horse | Production match | Staging**,
   copied from the production theme with staging assets and navigation. The
   previous **Horizon** theme remains available in staging for rollback.
