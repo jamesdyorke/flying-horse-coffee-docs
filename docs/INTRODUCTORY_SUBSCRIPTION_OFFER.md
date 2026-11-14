@@ -223,12 +223,13 @@ through preparation.
   In the development store's Headless channel, select a separate Public
   (web app) client. Register these values:
 
+  - Public web Client ID: `9a4225e4-67c4-4dfc-bc2d-67e7a2b7f029`
   - JavaScript origin: `https://development-flying-horse-coffee.myshopify.com`
   - HTTPS callback: `https://development-flying-horse-coffee.myshopify.com/products/staging-public-continuation-test`
 
   Backend PR #106 merged and deployed successfully to staging. It supplies
   the sign-in helper. James reported completing the Shopify client setup.
-  Confirm the public client ID and verify the browser callback.
+  The public web Client ID is recorded above. Verify the browser callback.
 - [ ] Prepare a fresh eligible staging buyer and a verified, single-use
   discount bound to that buyer and the fixture. The previous fixture buyer
   has redeemed, and the previous discount verification window has elapsed.
