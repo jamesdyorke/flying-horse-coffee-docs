@@ -374,7 +374,9 @@ and matches the reviewed backend mapping for all 55 variants. The IDs below
 are from that draft. Fresh Recharge API verification is pending. All five
 introductory Shopify selling-plan IDs are unset. A fresh production Shopify
 Admin read confirmed all 55 variant IDs and five monthly Shopify selling-plan
-IDs match the draft. Each product returned only its monthly selling plan.
+IDs match the draft. Each product returned only its monthly selling plan. A separate
+complete read of the plan groups attached to each of the 55 exact variants
+returned the expected monthly plan and no additional plan for each variant.
 Website checkout still needs a verified Shopify mapping for the prepaid plans.
 
 | Product | Recharge prepaid | Recharge monthly |
