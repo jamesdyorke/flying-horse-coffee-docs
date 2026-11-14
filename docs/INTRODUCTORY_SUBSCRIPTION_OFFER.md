@@ -529,6 +529,15 @@ at execution.
   production catalogue still reads `status: draft` and `enabled: false`.
   [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43643929938)
   · [Release](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.0)
+- [ ] Activate and replay the private production pilot intake using the
+  existing paid order #5043. The production variable is set. Firebase
+  stopped the v0.3.0 activation before creating the retry-enabled observer.
+  Backend #132 scopes the required acknowledgement to that missing
+  function. After the protected deployment, replay the paid evidence twice
+  and verify the receipt, existing enrollment and one PostHog event.
+  The public offer stays disabled.
+  [Activation run](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43644952904)
+  · [Deployment fix](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/132)
 - [ ] Verify the original prepaid schedule. The queued records were updated
   after creation, so the verifier held the continuation. Check the original
   schedule against independent evidence before authorizing any transition.
