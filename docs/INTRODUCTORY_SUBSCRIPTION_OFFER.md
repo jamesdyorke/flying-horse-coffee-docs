@@ -542,11 +542,19 @@ at execution.
   which logged two duplicate enrollment outcomes. The original payment and
   outbox delivery timestamps remained unchanged. Firestore counted one
   enrollment and PostHog counted one production payment milestone.
-  The receipt continues retrying schedule validation independently of payment.
+  The automatic receipt handles schedule validation separately from payment.
   [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
-- [ ] Verify the original prepaid schedule. The queued records were updated
-  after creation, so the verifier held the continuation. Check the original
-  schedule against independent evidence before authorizing any transition.
+- [x] Verify and retain the original prepaid schedule for #5043. The Recharge
+  read taken on 14 November at 20:33 UTC, before the queued records were
+  updated at 20:41 UTC, matches the linked live records. The original dates
+  are 14 November, 14 December and 14 January at 05:00 UTC. Firebase retained
+  the dates on the existing enrollment. The payment count remained one and
+  the existing PostHog event stayed delivered with one attempt.
+- [x] Verify the production pilot price and hold without creating anything.
+  The live preflight verified the private £0.90 monthly plan. The read-only
+  worker returned `prepaid_deliveries_outstanding`. The nominal cutoff is
+  14 February 2027 at 05:00 UTC and can move if fulfilments are delayed.
+  The public offer was disabled at verification.
 - [ ] Prove the £0.90 monthly continuation and one-renewal limit for the paid
   pilot. Recharge controls the actual billing date.
 - [ ] Wire automatic production website enrollment and complete alert parity.
@@ -561,7 +569,7 @@ at execution.
 | --- | --- | --- |
 | Storefront and checkout | The fixture proved the prepaid price and the regular monthly option. | The unlisted pilot paid successfully through a cart built with the exact selling plan. Verify the normal product widget selects that plan and maps the approved catalogue variants before exposing the public offer. |
 | Payment and lifecycle events | Deployed offer handlers consume signed order, payment, refund and subscription events and retry receipts. | The deployed production Functions inventory contains only `shopifyOrderPaid` and `publishPaidOrder`. Their purchase feed recognises iOS attribution. The website pilot currently needs the private observer. Wire website enrollment and refund/cancellation handling with durable retries and exact plan mapping. |
-| Prepaid coverage | The original schedule was retained. The staging worker held for a delayed delivery and created one continuation on retry. | The paid pilot's two queued rows were updated after creation. Verify their original dates from independent evidence. Deploy a production worker with the coverage gate and price check before a second paid test of the automatic path. |
+| Prepaid coverage | The original schedule was retained. The staging worker held for a delayed delivery and created one continuation on retry. | The original pilot dates are retained and the read-only production worker held for outstanding deliveries. Wire the production worker with the coverage gate and live price check for automatic processing. |
 | Renewal | Staging recorded a paid renewal and exercised duplicate-safe receipt handling. | The production pilot worker is private and unscheduled. Live creation, observation of the £0.90 renewal and confirmation of the one-charge cap remain open. |
 | Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
 
