@@ -359,9 +359,16 @@ UTC fixture rule to live enrollments.
 Unpaid Shopify carts using the same development variant showed £22.50 for
 the new three-delivery prepaid plan (Recharge 23732091, Shopify 693083275612)
 and £9.00 for the existing monthly plan. Both carts had zero discount codes.
-The 25% adjustment is built into the prepaid plan. A guest could still
-create a prepaid cart and receive a checkout handoff URL. Checkout eligibility,
-including copied links and already-redeemed buyers, remains open.
+The 25% adjustment is built into the prepaid plan. Before validation was
+activated, a guest could receive a prepaid checkout URL. With the staging
+development preview's exact-plan validation active, Shopify returned
+`VALIDATION_CUSTOM` and no checkout URL for a guest prepaid cart. A guest
+monthly cart still returned £9.00 and a checkout URL.
+
+The staging preview requires a signed-in test customer with an eligibility tag
+and limits the introductory plan to one unit per cart. A signed-in eligible
+checkout, copied-link enforcement and prior redemption checks remain open.
+The test tag does not yet reflect Firebase history or redemption state.
 
 #### Production checkout controls
 
