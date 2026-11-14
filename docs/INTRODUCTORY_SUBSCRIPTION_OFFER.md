@@ -103,9 +103,11 @@ existing monthly plans and subscriber contracts in place.
 A separate £1 product was created in production Shopify on 13 November 2026
 for a future controlled pilot. It remains Draft with no sales channels selected.
 On 14 November, Shopify reported Draft and no publication timestamp, and
-both storefront product URLs returned 404. Shopify and Recharge each showed
-zero plans for the pilot. Its per-channel publication list still requires
-a separate check. Backend PR #116 added the repeatable read-only pilot
+both storefront product URLs returned 404. Recharge now has both
+Merchant Portal-only pilot plans. The read-only audit verified the saved
+25% prepaid and 10% monthly terms, Draft state, no Online Store publication
+and zero Shopify selling-plan groups. Shopify checkout and the complete Shopify
+sales-channel list remain unverified. Backend PR #116 added the repeatable read-only pilot
 audit. Both required checks passed before merge, and the protected staging
 deployment succeeded for the merge commit. [Pilot audit PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/116)
 
@@ -509,10 +511,12 @@ at execution.
 
 - [x] Create the £1 pilot product as a Draft with no sales channels. Confirm
   the production product URL returns page not found.
-- [ ] Review the draft pilot's two plans and actual checkout totals. On a
-  £1-per-delivery variant, 25% off three prepaid deliveries is £2.25
-  before shipping, and 10% off a £1 continuation is £0.90 before shipping.
-  £7.50 was the saving on the £30 staging bundle.
+- [x] Save and verify the two Merchant Portal-only Recharge plans for the
+  £1 draft. Recharge previews £2.25 for three prepaid deliveries at 25%
+  off, expiring after one charge, and £0.90 per month at 10% off. Both
+  previews are before shipping. Storefront Widget, Customer Portal and
+  API sales channels are off for both plans.
+- [ ] Verify actual Shopify checkout totals for the approved pilot.
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
   and evaluate a private clock limited to the verified pilot enrollment.
