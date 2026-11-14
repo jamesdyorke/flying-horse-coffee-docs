@@ -521,6 +521,14 @@ at execution.
 - [x] Verify the production payment milestone. One production
   `offer_payment_confirmed` event arrived, and the Slack destination completed
   for `#backend-alerts`. [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
+- [ ] Release the production pilot intake through the protected Firebase
+  workflow with public offer availability disabled. Backend #127 added
+  signed website payment intake. #128 isolates its production-only secret
+  declarations from staging discovery. The production runtime has verified
+  access to the existing Shopify, Recharge and PostHog secrets. Verify the
+  corrected staging deployment before promoting v0.3.0.
+  [Isolation fix](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/128)
+  · [Version PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/129)
 - [ ] Verify the original prepaid schedule. The queued records were updated
   after creation, so the verifier held the continuation. Check the original
   schedule against independent evidence before authorizing any transition.
