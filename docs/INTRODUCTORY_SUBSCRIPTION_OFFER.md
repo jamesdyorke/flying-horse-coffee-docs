@@ -530,6 +530,14 @@ at execution.
   review. No order or payment was submitted and the live offer stayed
   disabled. A paid pilot requires separate approval.
   [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
+- [ ] Capture the approved pilot in Firebase immediately after payment.
+  The private operator command checks the exact paid Shopify order, buyer,
+  plan and total, then matches the Recharge charge and records one
+  enrollment. The production read-only preflight passed. Fixtures covered
+  a delayed original schedule and duplicate attempts. The first actual
+  payment and original three-order schedule are still pending. Automatic
+  continuation remains a separate check.
+  [Backend observer PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/124)
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
   and evaluate a private clock limited to the verified pilot enrollment.
