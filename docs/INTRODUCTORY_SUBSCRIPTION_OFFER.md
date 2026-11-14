@@ -509,41 +509,28 @@ at execution.
 
 ### 4. Run a controlled live website pilot
 
-- [x] Create the £1 pilot product as a Draft with no sales channels. Confirm
-  the production product URL returns page not found.
-- [x] Save and verify the two Merchant Portal-only Recharge plans for the
-  £1 draft. Recharge previews £2.25 for three prepaid deliveries at 25%
-  off, expiring after one charge, and £0.90 per month at 10% off. Both
-  previews are before shipping. Storefront Widget, Customer Portal and
-  API sales channels are off for both plans.
-- [ ] Verify actual Shopify checkout totals for the approved pilot.
-  A fresh read-only audit confirmed the £1 product is still Draft and
-  unpublished on the Online Store, with zero Shopify selling-plan groups.
-  The private Recharge plans verify £2.25 prepaid and £0.90 monthly before
-  shipping. A normal storefront checkout requires a published Active or
-  Unlisted product with a Shopify-linked prepaid selling plan. A draft
-  invoice does not verify Recharge's storefront flow. Once pilot access
-  and publication are separately approved, review the Shopify total and
-  selling plan before payment. The live offer stays disabled during this
-  check.
-  [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
-- [ ] Verify the pilot schedule. Recharge Product Subscription Plans
-  document that daily intervals are unsupported. Use a supported cadence
-  and evaluate a private clock limited to the verified pilot enrollment.
-  The worker clock can advance continuation eligibility. Recharge controls
-  when it actually bills. Rehearse the one-renewal limit and teardown before
-  a paid pilot. Keep the draft unpublished.
-  [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
-- [ ] Verify the direct-link experience and check discovery through search,
-  collections and recommendations, including third-party tools. Verify
-  Shopify checkout enforces the designated signed-in tester. Test a copied
-  link, a different account and direct cart access. Keep the live pilot
-  read-only if checkout cannot enforce that restriction.
-- [ ] After owner approval, submit one real pilot order using normal live
-  payment settings. Verify the total, single payment and redemption, correct
-  Recharge source, prepaid schedule, and monitoring events. A normal live
-  renewal can only be observed when it comes due. Track its due date and
-  assign someone to verify it.
+- [x] Verify the unlisted £1 pilot via direct link. One bundle covers three
+  prepaid deliveries and uses the linked 25% Recharge plan. The broader offer
+  remains disabled.
+- [x] Complete one paid website pilot. Shopify #5043 charged £2.25 for the
+  bundle plus £2.90 UK shipping, £5.15 total. Recharge confirmed one checkout
+  charge and two £0 shipments queued for 14 December 2026 and 14 January 2027.
+- [x] Record the payment in Firebase. The private production observer verified
+  the exact Shopify order and Recharge charge. An identical retry returned
+  duplicate. [Backend PR #126](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/126)
+- [x] Verify the production payment milestone. One production
+  `offer_payment_confirmed` event arrived, and the Slack destination completed
+  for `#backend-alerts`. [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
+- [ ] Verify the original prepaid schedule. The queued records were updated
+  after creation, so the verifier held the continuation. Check the original
+  schedule against independent evidence before authorizing any transition.
+- [ ] Prove the £0.90 monthly continuation and one-renewal limit for the paid
+  pilot. Recharge controls the actual billing date.
+- [ ] Wire automatic production website enrollment and complete alert parity.
+  The milestone route is enabled. Production failure and recovery routes are
+  saved disabled pending an end-to-end Firebase incident feed. Staging's two
+  hourly insight alerts are disabled. Recheck the production health signal
+  before enabling corresponding hourly alerts.
 
 ### 5. Open to customers and monitor
 
