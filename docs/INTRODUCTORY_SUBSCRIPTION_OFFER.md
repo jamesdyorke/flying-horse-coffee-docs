@@ -216,7 +216,7 @@ through preparation.
   authenticated Firebase checkout handoff. Browser identity is tracked in
   [FLY-172](https://linear.app/flyinghorsecoffee/issue/FLY-172).
 
-- [ ] Configure a dedicated staging Customer Account API web client with
+- [x] Configure a dedicated staging Customer Account API web client with
   the exact HTTPS storefront origin and callback. The normal storefront
   account session is available, and the offer still needs a customer token
   Firebase can verify. Leave the mobile client configuration in place.
@@ -229,7 +229,9 @@ through preparation.
 
   Backend PR #106 merged and deployed successfully to staging. It supplies
   the sign-in helper. James reported completing the Shopify client setup.
-  The public web Client ID is recorded above. Verify the browser callback.
+  On 14 November, Shopify accepted the public Client ID in Chrome and
+  redirected to the exact staging callback. The product page token exchange
+  still requires the theme asset installation.
 - [ ] Prepare a fresh eligible staging buyer and a verified, single-use
   discount bound to that buyer and the fixture. The previous fixture buyer
   has redeemed, and the previous discount verification window has elapsed.
@@ -242,7 +244,8 @@ through preparation.
   at £22.50 remains pending.
 - [x] Wire the staging checkout button to Shopify sign-in and cart preparation.
   Backend PR #107 passed CI, merged and deployed to staging. The staging
-  theme asset was bundled and syntax-checked.
+  theme asset was bundled and syntax-checked. A staging-only Custom Liquid
+  mount is prepared for installation.
 - [ ] Add an offer checkout entry to the existing staging product fixture.
   The current page renders standard £10 purchase controls. Stop before
   order submission and verify the Shopify checkout subtotal is £22.50
