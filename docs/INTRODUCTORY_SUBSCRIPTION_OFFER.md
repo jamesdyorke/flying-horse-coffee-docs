@@ -354,6 +354,29 @@ UTC fixture rule to live enrollments.
 [Processing time](https://support.getrecharge.com/hc/en-us/articles/13002255447703-Adjust-your-order-processing-time)
 · [Charge-day schedules](https://support.getrecharge.com/hc/en-us/articles/360006293074-Charging-on-a-specific-day-of-the-week-or-month)
 
+#### Code-free staging pricing
+
+Unpaid Shopify carts using the same development variant showed £22.50 for
+the new three-delivery prepaid plan (Recharge 23732091, Shopify 693083275612)
+and £9.00 for the existing monthly plan. Both carts had zero discount codes.
+The 25% adjustment is built into the prepaid plan. Before validation was
+activated, a guest could receive a prepaid checkout URL. With the staging
+development preview's exact-plan validation active, Shopify returned
+`VALIDATION_CUSTOM` and no checkout URL for a guest prepaid cart. A guest
+monthly cart still returned £9.00 and a checkout URL.
+
+The staging preview uses a manual eligibility tag for the Website Test account
+and limits the introductory plan to one unit per cart. An existing prepaid
+checkout link showed an eligibility error and disabled payment for a guest.
+After signing in as Website Test on the same checkout, the error cleared and
+the three-delivery plan displayed a £22.50 merchandise subtotal without a code.
+The test stopped before payment.
+
+Production eligibility must be evaluated automatically from the signed-in
+customer's history and redemption record, with the result enforced at
+checkout. Production enforcement, a signed-in prior redeemer check and the
+product button's handoff to this code-free selling plan remain open.
+
 #### Production checkout controls
 
 On 14 November, read-only production checks confirmed zero Shopify links
