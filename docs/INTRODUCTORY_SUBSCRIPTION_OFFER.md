@@ -362,8 +362,14 @@ recorded staging lifecycle results for the pilot decision.
   still needs to verify the Recharge response shape. Backend PR #121 added
   the fulfillment observation adapter and passed protected staging deployment.
   It joins retained Recharge order IDs to Shopify fulfillment and rechecks
-  payment, refund and cancellation evidence before a continuation. These
-  pilot adapters remain unregistered in production.
+  payment, refund and cancellation evidence before a continuation. Backend
+  #122 added the disabled pilot-only writer and passed protected staging
+  deployment. Backend #123 composed the private worker. Its synthetic
+  end-to-end test held until revised coverage, quoted £0.90, then found one
+  monthly continuation after a lost response and on retry. The pilot
+  adapters have no production runtime registration. A live pilot and the
+  wider customer catalogue worker remain separate.
+  [Private pilot worker](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/123)
   [Original schedule reader](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/120)
   [Recharge evidence join](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/118)
   · [Paid enrollment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/119) Confirm it can still obtain verified delivery,
