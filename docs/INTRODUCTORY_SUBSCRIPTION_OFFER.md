@@ -1,6 +1,7 @@
 # Introductory subscription offer
 
-This is the shared rollout plan for the website, iOS and Firebase backend.
+The first release covers the website and its Firebase backend. iOS is a
+follow-up. Keep existing iOS evidence for that release.
 Implementation guides and detailed test evidence live in the owning repositories.
 
 ## Offer
@@ -9,8 +10,8 @@ Eligible customers can buy three monthly deliveries upfront at 25% off.
 After the prepaid deliveries and coverage are complete, the subscription
 continues monthly at 10% off the current applicable price. Checkout shows the
 selected product, payment and shipping totals, and the subscription terms
-through Shopify's existing checkout. Eligibility and redemption apply once
-per customer across the offer catalogue.
+through Shopify's existing checkout. The website launch allows one
+introductory redemption per customer across the offer catalogue.
 
 The intended catalogue includes the existing subscription coffees in 350g and
 1kg and the capsules, subject to stock and confirmed plan coverage. Keep the
@@ -99,19 +100,22 @@ existing monthly plans and subscriber contracts in place.
 
 A separate £1 product was created in production Shopify on 13 November 2026
 for a future controlled pilot. It remains Draft with no sales channels selected.
-The public product URL returned a page-not-found response. No selling plan
-was attached and no order or payment was created. The existing subscription
-plans and the disabled offer are unchanged.
+On 14 November, Shopify reported Draft and no publication timestamp, and
+both storefront product URLs returned 404. Shopify and Recharge each showed
+zero plans for the pilot. Its per-channel publication list still requires
+a separate check. Recharge documents storefront checkout as the supported
+subscription path, so a draft invoice cannot substitute for the pilot's
+Recharge and website checkout proof.
+[Recharge checkout troubleshooting](https://support.getrecharge.com/hc/en-us/articles/12075818832663-Customer-missing-from-Recharge)
 
 Keep the pilot product unpublished until the checkout restriction and
 production continuation have been verified and the paid pilot is approved.
 
 ## Production launch checklist
 
-The delayed staging purchase passed the normal worker switch in section 1.
-Next, finish the staging website checkout and prepare production runtime
-and catalogue mappings in parallel. Keep the production
-offer disabled and the pilot product Draft with no sales channels.
+Carry forward the completed staging proof. Prepare the Grow checkout rule,
+isolated production pilot and production backend in parallel. Keep the
+production offer disabled and the pilot product Draft with no sales channels.
 
 ### Execution order
 
@@ -128,9 +132,11 @@ through preparation.
    read access. Confirm three monthly deliveries under one prepaid payment,
    plus a monthly plan with 10% off. The dedicated Recharge credential is
    currently outstanding. Continue with steps 4 and 5 while that is resolved.
-4. Wire the staging website offer to Firebase eligibility and checkout
-   preparation. Verify the signed-in mobile and desktop journeys, discount
-   rejection, repeat eligibility and existing purchase paths.
+4. Carry forward the existing staging proof for code-free prepaid pricing,
+   payment and redemption, and the delayed, duplicate-safe £9 continuation.
+   Build the customer-facing entry in the existing subscription widget for an
+   unpublished production theme preview. Keep the standalone staging page
+   available for targeted checks if a new integration changes a proven path.
 5. Prepare the production continuation worker behind disabled offer controls.
    Verify current pricing, fulfillment and revised coverage, durable payment
    evidence, cancellation and refund holds, and one continuation on retries.
@@ -264,12 +270,16 @@ sent no alerts.
   The order summary showed three prepaid monthly deliveries at £30.00
   before discount, £7.50 automatically applied and a £22.50 subtotal before
   shipping. No code was entered and no order was submitted.
-- [ ] Connect the website offer entry to signed-in eligibility and checkout
-  preparation in Firebase. Preserve one redemption per customer across
-  website, app and eligible products.
-- [ ] On mobile and desktop, verify the product and variant selection, three
-  prepaid deliveries at 25% off, shipping, and the 10% monthly continuation.
-  Use Shopify's subscription agreement at checkout.
+- [ ] On mobile and desktop, verify that signed-out shoppers can see and
+  select the introductory option on eligible product pages. Show the three
+  prepaid deliveries at 25% off, shipping and the 10% monthly continuation.
+- [ ] When a shopper proceeds to checkout, prompt them to sign in if needed
+  and preserve their product, variant and prepaid selection. Check eligibility
+  in Firebase and carry the selected plan through to Shopify checkout at the
+  discounted price for eligible buyers. Offer the regular 10% monthly option
+  if the introductory offer is unavailable to that shopper. Preserve one
+  redemption per customer across eligible products on the website. Use
+  Shopify's subscription agreement at checkout.
 - [ ] Verify checkout receives the exact variant, prepaid plan and discount.
   If the discount is rejected, stop the offer checkout. Verify the website
   payment and redemption with a staging test order or equivalent verified
@@ -279,6 +289,13 @@ sent no alerts.
   buyer, and a retry after an interrupted checkout.
 
 ### 3. Prepare production with the offer disabled
+
+Prioritise the Shopify links for the audited Recharge prepaid plans and an
+eligibility control supported by the live store. Verify the 25% prepaid price,
+existing 10% monthly option and direct-checkout protection together in the
+production preview before accepting payment. In parallel, verify deployment
+and configuration of the disabled production continuation worker. Reuse the
+recorded staging lifecycle results for the pilot decision.
 
 - [x] Provision a separate read-only Shopify app for production. Verified the
   production credential can read products and orders older than 60 days.
@@ -294,13 +311,26 @@ sent no alerts.
 - [x] Verify Shopify selling-plan terms on all five catalogue products. The
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
+- [x] Duplicate the current production theme for the unpublished preview.
+  On 14 November, the copy was verified unpublished and both product
+  templates matched the live copies, including the existing Recharge
+  Subscription Widget app block.
+- [ ] Establish checkout protection before connecting the live coffee plans
+  to the Recharge Storefront widget channel. Recharge creates the Shopify
+  selling-plan group when that channel is selected. The theme copy isolates
+  template changes, while Recharge plan availability belongs to the store.
+  Test the product-scoped restriction on the separate pilot and verify
+  exact selling-plan targeting before applying a rule to shared coffee
+  variants. [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Choose and verify how the production checkout applies the introductory
-  25% discount automatically for eligible signed-in buyers. Show the offer on
-  the product and carry the discounted price into checkout. The buyer does
-  not enter, copy or receive a discount code. The customer-bound staging code
+  25% discount automatically for eligible signed-in buyers. In production,
+  show the prepaid option alongside the regular 10% monthly option in the
+  existing subscription widget on eligible product pages, including for
+  signed-out shoppers. Use the standalone staging product page to verify
+  checkout behavior. Check eligibility after sign-in at the checkout step and
+  carry the discounted price into checkout without requiring a discount code. The customer-bound staging code
   was a test fixture. Verify plan-specific pricing or an automatic discount, with
-  checkout enforcing eligibility and one redemption per customer across web
-  and app. Verify the discount applies to the intended prepaid purchase only,
+  checkout enforcing eligibility and one redemption per customer across eligible website products. Verify the discount applies to the intended prepaid purchase only,
   and that an ineligible or already-redeemed buyer cannot use a direct cart or
   checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
@@ -326,7 +356,9 @@ sent no alerts.
   checkout. [Website identity](https://linear.app/flyinghorsecoffee/issue/FLY-172)
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
-  and separate offer controls. Confirm it can still obtain verified delivery,
+  and separate offer controls. The 14 November read-only production inventory
+  showed the two Shopify paid-order functions. The production continuation
+  runtime was absent. Confirm it can still obtain verified delivery,
   refund and cancellation evidence when the original order or charge is
   outside a provider's ordinary read window.
 - [ ] Verify live enrollment correlation, current price and plan.
@@ -378,6 +410,54 @@ checkout. Production enforcement, a signed-in prior redeemer check and the
 product button's handoff to this code-free selling plan remain open.
 
 #### Production checkout controls
+
+On 14 November 2026, a read-only request to the production Shopify Admin
+API confirmed the public plan is Grow, with Plus and development both
+disabled.
+
+BlockCart documents a selling-plan title check that can be combined with a
+customer tag. Its documented input matrix only exposes plan title under
+Attribute input, which excludes the login check. Its negative tag condition
+also skips guests. This supports isolating a uniquely named prepaid plan
+from monthly in principle, but leaves a guest bypass in the documented
+configuration. Do not use that configuration as the offer's only control.
+Shop-wide login would affect ordinary checkout and is outside this test.
+[BlockCart input matrix](https://discomerchant.com/apps/blockcart/help-center/which-conditions-work-with-which-rule-type)
+· [Guest tag behavior](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
+
+SupaEasy documents selling-plan, buyer authentication and customer-tag
+conditions and offers checkout validation on non-Plus stores. Verify those
+conditions are available together in the same validation rule and exercise
+the published App Store app on the development store before selecting it for
+Grow. Post-payment tags alone leave a window between simultaneous checkouts
+and redemption updates. Ten local checks against the existing staging rule
+reproduced this gap: both independent prepaid carts passed when given the
+same eligible buyer state. This is a rule-level check. SupaEasy still needs
+an actual checkout test. Keep the checkout proof open.
+[SupaEasy qualifier and validation features](https://supaeasy.com/features/)
+
+A candidate must block an already
+redeemed buyer and a guest using a direct prepaid link, allow an eligible
+buyer at the 25% price, and leave the same coffee at 10% on the monthly
+plan for both accounts. Check pre-existing and parallel carts so a delayed
+redemption update cannot allow a second payment. The existing staging rule
+does not establish production Grow compatibility.
+
+Evaluate these checkout options for enforcing one introductory redemption per customer:
+
+1. Keep the offer in the Recharge widget on the existing coffee products.
+   Verify an App Store checkout rule on Grow can distinguish the exact prepaid
+   selling plan and enforce customer eligibility without touching the monthly
+   plan. General product-level checkout rules do not prove this capability.
+2. Test a separate prepaid-only offer item if the same-product rule cannot
+   enforce sign-in. BlockCart documents a product-scoped rule combining a
+   guest block and a customer tag. This can exercise access on the pilot
+   without targeting the ordinary monthly product. The pilot is still Draft.
+   Before adopting this route for the website, verify a shared redemption
+   across all offer variants, parallel checkout behavior, and a continuation
+   mapping back to the original coffee. A tester allowlist alone does not
+   establish once-per-customer enforcement.
+   [Product-scoped checkout rules](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
 
 On 14 November, read-only production checks confirmed zero Shopify links
 across the 55 Recharge prepaid plans. Shopify returned only the mapped
@@ -489,9 +569,17 @@ at execution.
 
 - [x] Create the £1 pilot product as a Draft with no sales channels. Confirm
   the production product URL returns page not found.
-- [ ] Review the pilot product, exact plans and price before changing
-  visibility. The £1 draft stays unpublished until the owner approves the
-  pilot visibility and purchase steps.
+- [ ] Review the draft pilot's two plans and actual checkout totals. On a
+  £1-per-delivery variant, 25% off three prepaid deliveries is £2.25
+  before shipping, and 10% off a £1 continuation is £0.90 before shipping.
+  £7.50 was the saving on the £30 staging bundle.
+- [ ] Verify the pilot schedule. Recharge Product Subscription Plans
+  document that daily intervals are unsupported. Use a supported cadence
+  and evaluate a private clock limited to the verified pilot enrollment.
+  The worker clock can advance continuation eligibility. Recharge controls
+  when it actually bills. Rehearse the one-renewal limit and teardown before
+  a paid pilot. Keep the draft unpublished.
+  [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Verify the direct-link experience and check discovery through search,
   collections and recommendations, including third-party tools. Verify
   Shopify checkout enforces the designated signed-in tester. Test a copied
