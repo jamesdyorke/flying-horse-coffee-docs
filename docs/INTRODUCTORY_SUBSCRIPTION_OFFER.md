@@ -295,9 +295,10 @@ sent no alerts.
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
 - [ ] Choose and verify how the production checkout applies the introductory
-  25% discount automatically for eligible signed-in buyers. The manually
-  created, customer-bound code is a staging test fixture. Evaluate a Shopify
-  automatic discount or pricing built into the prepaid selling plan, with
+  25% discount automatically for eligible signed-in buyers. Show the offer on
+  the product and carry the discounted price into checkout. The buyer does
+  not enter, copy or receive a discount code. The customer-bound staging code
+  was a test fixture. Verify plan-specific pricing or an automatic discount, with
   checkout enforcing eligibility and one redemption per customer across web
   and app. Verify the discount applies to the intended prepaid purchase only,
   and that an ineligible or already-redeemed buyer cannot use a direct cart or
