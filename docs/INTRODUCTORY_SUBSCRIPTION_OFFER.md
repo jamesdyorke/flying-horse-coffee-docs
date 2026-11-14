@@ -334,6 +334,23 @@ sent no alerts.
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
 
+#### Production schedule evidence
+
+- [ ] From the approved pilot, retain the original provider schedule alongside
+  the verified paid enrollment before any reschedule. Compare its exact order
+  IDs and provider dates with the refreshed schedule and Shopify fulfillment
+  evidence. Verify that a delay extends coverage and that the first monthly
+  charge falls after that boundary in Recharge’s configured processing window.
+  Include a month-end and a daylight-saving boundary in the schedule tests.
+
+Recharge documents Eastern Time as its default charge processing window,
+including prepaid shipments, and allows stores to change the processing time.
+Specific charge days and cutoffs can also shift the prepaid schedule. Confirm
+the production settings and actual provider dates before applying the staging
+UTC fixture rule to live enrollments.
+[Processing time](https://support.getrecharge.com/hc/en-us/articles/13002255447703-Adjust-your-order-processing-time)
+· [Charge-day schedules](https://support.getrecharge.com/hc/en-us/articles/360006293074-Charging-on-a-specific-day-of-the-week-or-month)
+
 #### Production checkout controls
 
 Shopify Grow supports eligible public Shopify App Store apps with Functions.
