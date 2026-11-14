@@ -568,10 +568,11 @@ at execution.
   fulfilled and the original payment remains the only charge.
 - [x] Run the early rehearsal against live #5043 with all three fulfilments.
   It returned `quote_ready` at £0.90 merchandise. The public offer remained
-  disabled. #138 merged and deployed to staging. The rehearsal change and
-  separately invoked early renewal are in
-  [backend #139](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/139).
-- [ ] Review #139 and choose an approved early billing date. Only then run the
+  disabled. #138 merged and deployed to staging. The read-only rehearsal
+  merged in [backend #139](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/139).
+- [ ] Review the separately invoked early switch in
+  [backend #140](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/140)
+  and choose an approved early billing date. Only then run the
   private switch for #5043. Verify one Recharge continuation, the one-charge
   cap and the queued total including any shipping before billing. No renewal
   was scheduled during preparation.
