@@ -562,10 +562,16 @@ at execution.
   duplicate-write tests are in [backend PR #138](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/138).
   The schedule-recovery change merged in
   [backend PR #137](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/137).
-- [ ] At the actual cutoff, run the private command for the approved live
-  switch after verifying all three fulfilments. Check Recharge shows one
-  continuation at £0.90 for merchandise, its first billing date and a
-  one-charge limit. The command is run by an operator.
+- [x] Exercise the accelerated read-only cutoff rehearsal against live #5043.
+  Advancing only the coverage decision still held for unfulfilled orders.
+- [ ] Confirm the two remaining prepaid shipments are £0, then process the
+  pilot shipments and record Shopify fulfilment. Rerun the cutoff rehearsal
+  against the three verified fulfilments to get the live price quote before
+  February.
+- [ ] For an early paid renewal test, prepare a pilot-only live switch and
+  confirm the real queued amount and one-charge limit before billing. The
+  existing live switch command uses the normal schedule, with 14 February as
+  the earliest cutoff. The rehearsal mode has no provider writes.
 - [ ] After the approved renewal, verify the pilot subscription expired
   and Recharge has no second charge queued.
 - [ ] Wire automatic production website enrollment and complete alert parity.
