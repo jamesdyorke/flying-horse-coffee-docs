@@ -517,17 +517,16 @@ at execution.
   previews are before shipping. Storefront Widget, Customer Portal and
   API sales channels are off for both plans.
 - [ ] Verify actual Shopify checkout totals for the approved pilot.
-  The owner approved an unpaid, direct-link checkout preview for the
-  isolated pilot. At the latest merchant check the product was still
-  Draft, Online Store unpublished, and both Recharge plans were
-  Merchant Portal-only. Shopify checkout verification is pending.
-  Enable Storefront Widget for the pilot prepaid plan only and verify
-  that Recharge links its selling plan to the pilot variant in Shopify.
-  Use Unlisted and the Online Store channel only. Check Shopify and
-  any third-party search, collections and recommendations for the pilot,
-  then open checkout from the direct link. Verify £2.25 merchandise
-  before shipping and stop before payment. Keep the live offer disabled.
-  A paid pilot requires separate approval.
+  On 14 November 2026, the direct link opened the £1 pilot. Shopify
+  confirmed Unlisted status and one linked selling plan for the three
+  prepaid deliveries at 25% off. The pilot was absent from the tested
+  storefront search results, Coffee and Equipment, Merch and Equipment,
+  and the subscription landing page and collection. Shopify reported zero
+  available units with sales blocked when out of stock. The storefront
+  showed Sold out, so checkout and the £2.25 subtotal before shipping
+  remain unverified. Set one available unit for the pilot variant at the
+  online fulfilment location, then verify checkout and stop before payment.
+  Keep the live offer disabled. A paid pilot requires separate approval.
   [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
