@@ -206,6 +206,12 @@ through preparation.
   to investigate and retries reuse the original incident. The existing
   accelerated test already covers a simulated monthly renewal.
 
+The 14 November read-only check of the original paid staging fixture confirmed
+one payment and redemption, one linked monthly continuation, one paid renewal
+and the next renewal queued. All three milestones were delivered. Acceleration
+and repair were disabled. The check made no provider or Firestore writes and
+sent no alerts.
+
 ### 2. Finish the website purchase flow in staging
 
 - [x] Verify the staging browser transport after backend PR #103 deployed.
