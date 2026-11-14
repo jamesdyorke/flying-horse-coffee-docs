@@ -247,20 +247,17 @@ through preparation.
   only for the exact staging prepaid plan at a £22.50 GBP subtotal.
   CI and the staging deployment passed. A separate unpaid request using
   the same cart query verified the exact prepaid plan and a £30 subtotal
-  against the real staging Storefront API. The signed-in browser preview
-  at £22.50 remains pending.
+  against the real staging Storefront API.
 - [x] Wire the staging checkout button to Shopify sign-in and cart preparation.
   Backend PR #107 passed CI, merged and deployed to staging. The staging
   theme asset and Custom Liquid mount are installed on the development
-  product template. The offer button opens Shopify sign-in. The installed
-  button rejected Shopify’s cart handoff URL after Shopify applied the
-  discount. Following that exact URL opened the unpaid staging checkout at
-  £22.50. Backend PR #109 fixes the route check. Install its rebuilt theme
-  asset and repeat from the product button before marking the flow verified.
-- [ ] Add an offer checkout entry to the existing staging product fixture.
-  The current page renders standard £10 purchase controls. Stop before
-  order submission and verify the Shopify checkout subtotal is £22.50
-  with the discount already applied.
+  product template. Backend PR #109 accepts Shopify’s cart handoff URL.
+- [x] Verify the unpaid checkout from the staging product button. On 14
+  November, after the rebuilt Horizon asset was saved, the staging buyer
+  signed in through Shopify and the button took them directly to checkout.
+  The order summary showed three prepaid monthly deliveries at £30.00
+  before discount, £7.50 automatically applied and a £22.50 subtotal before
+  shipping. No code was entered and no order was submitted.
 - [ ] Connect the website offer entry to signed-in eligibility and checkout
   preparation in Firebase. Preserve one redemption per customer across
   website, app and eligible products.
