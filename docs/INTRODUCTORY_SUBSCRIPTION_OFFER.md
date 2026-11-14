@@ -356,8 +356,12 @@ recorded staging lifecycle results for the pilot decision.
   matching production pilot payment remains open. Backend PR #119 added
   durable enrollment keyed by verified prepaid source, with transactional
   checks against duplicate Shopify orders and Recharge charges. It passed
-  protected CI and staging deployment. The enrollment adapter is disabled
-  and awaits verified original schedule evidence and production wiring.
+  protected CI and staging deployment. Backend PR #120 added the read-only
+  original schedule reader for the paid checkout and two queued £0 orders.
+  Its fixture tests and protected staging deployment passed. A real pilot
+  still needs to verify the Recharge response shape. Neither adapter is
+  registered in production.
+  [Original schedule reader](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/120)
   [Recharge evidence join](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/118)
   · [Paid enrollment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/119) Confirm it can still obtain verified delivery,
   refund and cancellation evidence when the original order or charge is
