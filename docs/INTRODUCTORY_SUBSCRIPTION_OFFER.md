@@ -230,11 +230,13 @@ through preparation.
   Backend PR #106 merged and deployed successfully to staging. It supplies
   the sign-in helper. James reported completing the Shopify client setup.
   On 14 November, Shopify accepted the public Client ID in Chrome and
-  redirected to the exact staging callback. The product page token exchange
-  still requires the theme asset installation.
+  redirected to the exact staging callback. After the theme asset was
+  installed, the button completed token exchange with an existing test login.
 - [ ] Prepare a fresh eligible staging buyer and a verified, single-use
-  discount bound to that buyer and the fixture. The previous fixture buyer
-  has redeemed, and the previous discount verification window has elapsed.
+  discount bound to that buyer and the fixture. The fresh customer had no
+  offer record. The active, unused £7.50 discount was verified in Shopify
+  and configured in staging Firebase. Fresh-buyer sign-in and checkout
+  verification are pending.
 - [x] Implement and test the browser cart handoff against fixtures. Backend
   PR #105 applies the discount automatically and returns a checkout link
   only for the exact staging prepaid plan at a £22.50 GBP subtotal.
@@ -244,8 +246,8 @@ through preparation.
   at £22.50 remains pending.
 - [x] Wire the staging checkout button to Shopify sign-in and cart preparation.
   Backend PR #107 passed CI, merged and deployed to staging. The staging
-  theme asset was bundled and syntax-checked. A staging-only Custom Liquid
-  mount is prepared for installation.
+  theme asset and Custom Liquid mount are installed on the development
+  product template. The offer button opens Shopify sign-in.
 - [ ] Add an offer checkout entry to the existing staging product fixture.
   The current page renders standard £10 purchase controls. Stop before
   order submission and verify the Shopify checkout subtotal is £22.50
