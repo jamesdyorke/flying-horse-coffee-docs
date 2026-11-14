@@ -433,10 +433,15 @@ Evaluate these checkout options for enforcing one introductory redemption per cu
    Verify an App Store checkout rule on Grow can distinguish the exact prepaid
    selling plan and enforce customer eligibility without touching the monthly
    plan. General product-level checkout rules do not prove this capability.
-2. If exact-plan targeting is unavailable, use a separate prepaid-only offer
-   item reached from the coffee page. This lets checkout target the offer by
-   product. Verify the customer restriction, variant mapping and continuation
-   to the original coffee before choosing this route.
+2. Test a separate prepaid-only offer item if the same-product rule cannot
+   enforce sign-in. BlockCart documents a product-scoped rule combining a
+   guest block and a customer tag. This can exercise access on the pilot
+   without targeting the ordinary monthly product. The pilot is still Draft.
+   Before adopting this route for the website, verify a shared redemption
+   across all offer variants, parallel checkout behavior, and a continuation
+   mapping back to the original coffee. A tester allowlist alone does not
+   establish once-per-customer enforcement.
+   [Product-scoped checkout rules](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
 
 On 14 November, read-only production checks confirmed zero Shopify links
 across the 55 Recharge prepaid plans. Shopify returned only the mapped
