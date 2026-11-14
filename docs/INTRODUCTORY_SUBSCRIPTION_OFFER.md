@@ -280,6 +280,14 @@ through preparation.
 - [x] Verify Shopify selling-plan terms on all five catalogue products. The
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
+- [ ] Choose and verify how the production checkout applies the introductory
+  25% discount automatically for eligible signed-in buyers. The manually
+  created, customer-bound code is a staging test fixture. Evaluate a Shopify
+  automatic discount or pricing built into the prepaid selling plan, with
+  checkout enforcing eligibility and one redemption per customer across web
+  and app. Verify the discount applies to the intended prepaid purchase only,
+  and that an ineligible or already-redeemed buyer cannot use a direct cart or
+  checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [ ] Verify each Recharge prepaid and monthly plan mapping and the shipping
   and fulfillment routes. Confirm one payment for three monthly deliveries
   and the current applicable variant price with 10% off. Leave the capsule
