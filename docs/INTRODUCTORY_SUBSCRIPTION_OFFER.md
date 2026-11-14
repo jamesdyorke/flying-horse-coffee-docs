@@ -430,7 +430,10 @@ conditions and offers checkout validation on non-Plus stores. Verify those
 conditions are available together in the same validation rule and exercise
 the published App Store app on the development store before selecting it for
 Grow. Post-payment tags alone leave a window between simultaneous checkouts
-and redemption updates. Keep the checkout proof open.
+and redemption updates. Ten local checks against the existing staging rule
+reproduced this gap: both independent prepaid carts passed when given the
+same eligible buyer state. This is a rule-level check. SupaEasy still needs
+an actual checkout test. Keep the checkout proof open.
 [SupaEasy qualifier and validation features](https://supaeasy.com/features/)
 
 A candidate must block an already
