@@ -529,15 +529,21 @@ at execution.
   production catalogue still reads `status: draft` and `enabled: false`.
   [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43643929938)
   · [Release](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.0)
-- [ ] Activate and replay the private production pilot intake using the
-  existing paid order #5043. The production variable is set. Firebase
-  stopped the v0.3.0 activation before creating the retry-enabled observer.
-  Backend #132 scopes the required acknowledgement to that missing
-  function. After the protected deployment, replay the paid evidence twice
-  and verify the receipt, existing enrollment and one PostHog event.
-  The public offer stays disabled.
-  [Activation run](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43644952904)
-  · [Deployment fix](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/132)
+- [x] Deploy v0.3.1 with private production pilot intake enabled and the
+  public offer disabled. #132 scoped Firebase's retry acknowledgement to
+  the new observer. #133 prepared v0.3.1 and #134 promoted the passing
+  staging candidate. The Eventarc service account has invoker access on
+  the private observer only.
+  [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43646593585)
+- [x] Prove payment deduplication for already-paid #5043 on private
+  production intake. Two signed no-charge replays returned HTTP 200 and
+  created one receipt. Eventarc initially received HTTP 403. A service-only
+  invoker grant to its existing identity let redelivery reach the observer,
+  which logged two duplicate enrollment outcomes. The original payment and
+  outbox delivery timestamps remained unchanged. Firestore counted one
+  enrollment and PostHog counted one production payment milestone.
+  The receipt continues retrying schedule validation independently of payment.
+  [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
 - [ ] Verify the original prepaid schedule. The queued records were updated
   after creation, so the verifier held the continuation. Check the original
   schedule against independent evidence before authorizing any transition.
