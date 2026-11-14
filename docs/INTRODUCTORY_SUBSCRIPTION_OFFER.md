@@ -538,6 +538,7 @@ at execution.
 - [ ] Check the selected plan before payment. The initial add-to-cart can
   add a £1 one-off item. Select the 25% prepaid option and verify the
   named three-delivery plan at £2.25 before shipping in Shopify checkout.
+  One bundle (cart quantity 1) prepays for all three deliveries.
 - [ ] Capture the approved pilot in Firebase immediately after payment.
   The private operator command checks the exact paid Shopify order, buyer,
   plan and total, then matches the Recharge charge and records one
@@ -553,14 +554,21 @@ at execution.
   document that daily intervals are unsupported. Use a supported cadence
   and evaluate a private clock limited to the verified pilot enrollment.
   The worker clock can advance continuation eligibility. Recharge controls
-  when it actually bills. Rehearse the one-renewal limit and teardown before
-  a paid pilot. The direct-link preview above is for price verification only.
+  when it actually bills. Backend PR #125 adds a one-charge expiry for the £0.90 continuation and
+  rejects an uncapped provider readback. Fixture proof passed. Recharge
+  still needs to confirm the cap on a created pilot and show expiry with
+  no queued charge after the first approved renewal. Rehearse teardown
+  before a paid pilot.
+  [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125) The direct-link preview above is for price verification only.
   [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Verify the direct-link experience and check discovery through search,
   collections and recommendations, including third-party tools. Verify
   Shopify checkout enforces the designated signed-in tester. Test a copied
   link, a different account and direct cart access. Keep the live pilot
-  read-only if checkout cannot enforce that restriction.
+  read-only if checkout cannot enforce that restriction. Production Shopify
+  listed only Recharge Cart Validation for Quantity Upsells. Its setup
+  showed no customer or product targeting, so tester enforcement remains
+  unproved. No rule was saved or enabled.
 - [ ] After owner approval, submit one real pilot order using normal live
   payment settings. Verify the total, single payment and redemption, correct
   Recharge source, prepaid schedule, and monitoring events. A normal live
