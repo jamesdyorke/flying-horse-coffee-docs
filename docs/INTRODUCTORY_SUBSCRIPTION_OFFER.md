@@ -136,8 +136,10 @@ through preparation.
    capsules to exact variant IDs, current UK prices, stock and shipping.
 3. Verify Recharge mappings for those variants using dedicated production
    read access. Confirm three monthly deliveries under one prepaid payment,
-   plus a monthly plan with 10% off. The catalogue audit passed. The audit
-   credential does not have the permissions needed for paid order evidence.
+   plus a monthly plan with 10% off. The catalogue audit passed. Production
+   order, charge and subscription reads now return HTTP 200. The dedicated
+   credential also has subscription write permission for the future worker.
+   The production worker remains disabled.
 4. Carry forward the existing staging proof for code-free prepaid pricing,
    payment and redemption, and the delayed, duplicate-safe £9 continuation.
    Build the customer-facing entry in the existing subscription widget for an
@@ -349,7 +351,10 @@ recorded staging lifecycle results for the pilot decision.
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. The 14 November read-only production inventory
   showed the two Shopify paid-order functions. The production continuation
-  runtime was absent. Confirm it can still obtain verified delivery,
+  runtime was absent. The Shopify payment reader and Recharge evidence join
+  passed protected staging deployment in backend PRs #117 and #118. A
+  matching production pilot payment and durable enrollment remain open.
+  [Recharge evidence join](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/118) Confirm it can still obtain verified delivery,
   refund and cancellation evidence when the original order or charge is
   outside a provider's ordinary read window.
 - [ ] Verify live enrollment correlation, current price and plan.
