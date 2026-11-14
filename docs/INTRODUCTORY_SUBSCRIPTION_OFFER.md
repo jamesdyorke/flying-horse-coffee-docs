@@ -517,22 +517,24 @@ at execution.
   previews are before shipping. Storefront Widget, Customer Portal and
   API sales channels are off for both plans.
 - [ ] Verify actual Shopify checkout totals for the approved pilot.
-  A fresh read-only audit confirmed the £1 product is still Draft and
-  unpublished on the Online Store, with zero Shopify selling-plan groups.
-  The private Recharge plans verify £2.25 prepaid and £0.90 monthly before
-  shipping. A normal storefront checkout requires a published Active or
-  Unlisted product with a Shopify-linked prepaid selling plan. A draft
-  invoice does not verify Recharge's storefront flow. Once pilot access
-  and publication are separately approved, review the Shopify total and
-  selling plan before payment. The live offer stays disabled during this
-  check.
+  The owner approved an unpaid, direct-link checkout preview for the
+  isolated pilot. At the latest merchant check the product was still
+  Draft, Online Store unpublished, and both Recharge plans were
+  Merchant Portal-only. Shopify checkout verification is pending.
+  Enable Storefront Widget for the pilot prepaid plan only and verify
+  that Recharge links its selling plan to the pilot variant in Shopify.
+  Use Unlisted and the Online Store channel only. Check Shopify and
+  any third-party search, collections and recommendations for the pilot,
+  then open checkout from the direct link. Verify £2.25 merchandise
+  before shipping and stop before payment. Keep the live offer disabled.
+  A paid pilot requires separate approval.
   [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
   and evaluate a private clock limited to the verified pilot enrollment.
   The worker clock can advance continuation eligibility. Recharge controls
   when it actually bills. Rehearse the one-renewal limit and teardown before
-  a paid pilot. Keep the draft unpublished.
+  a paid pilot. The direct-link preview above is for price verification only.
   [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Verify the direct-link experience and check discovery through search,
   collections and recommendations, including third-party tools. Verify
