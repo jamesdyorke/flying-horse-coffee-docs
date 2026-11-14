@@ -370,6 +370,12 @@ production-specific runtime registration and verify its default-off controls in
 CI before provisioning its scheduler. A normal production release of the
 current code will not register this worker.
 
+Backend PR #110 starts production integration with an unregistered quote-only
+preview. Its tests hold until the revised coverage boundary, select the mapped
+monthly plan and quote 10% off the current UK variant price without creating a
+continuation. Production enrollment evidence, Recharge transport and runtime
+registration remain open.
+
 #### Shopify catalogue audit — 13 November 2026
 
 These are Shopify UK catalogue prices before discounts and shipping. They
