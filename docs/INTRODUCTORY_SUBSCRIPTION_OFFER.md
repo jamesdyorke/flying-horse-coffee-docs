@@ -320,6 +320,18 @@ recorded staging lifecycle results for the pilot decision.
   preparation. Selecting Storefront widget creates a Shopify selling plan
   and can expose it in the live widget. This is a launch step.
   [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
+- [ ] Add the prepaid option to the existing Recharge widget on eligible
+  coffee product pages. Use **Prepay for 3 deliveries — save 25%** as the
+  button label. Put this copy directly above it:
+
+  > Pay upfront for your first three monthly deliveries and save 25%.
+  > You’ll get one delivery a month. After the prepaid period, your
+  > subscription automatically continues monthly at 10% off the then-current
+  > price.
+
+  Show the upfront total for all three deliveries next to the button and
+  show shipping separately. The button selects the prepaid plan for the
+  selected variant. One bundle (cart quantity 1) covers three deliveries.
 - [ ] Verify the existing subscription widget shows the prepaid option to
   signed-out shoppers and passes the chosen plan to Shopify checkout at
   the 25% price. A one-redemption gate is optional if Shopify and Recharge
