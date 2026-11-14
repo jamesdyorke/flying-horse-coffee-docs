@@ -11,8 +11,7 @@ After the prepaid deliveries and coverage are complete, the subscription
 continues monthly at 10% off the current applicable price. Checkout shows the
 selected product, payment and shipping totals, and the subscription terms
 through Shopify's existing checkout. The website launch allows one
-introductory redemption per customer across the offer catalogue. Repeat
-purchases are a fallback only if the launch policy changes.
+introductory redemption per customer across the offer catalogue.
 
 The intended catalogue includes the existing subscription coffees in 350g and
 1kg and the capsules, subject to stock and confirmed plan coverage. Keep the
@@ -407,7 +406,7 @@ product button's handoff to this code-free selling plan remain open.
 
 #### Production checkout controls
 
-The website launch has three routes to evaluate, in this order:
+Evaluate these checkout options for enforcing one introductory redemption per customer:
 
 1. Keep the offer in the Recharge widget on the existing coffee products.
    Verify an App Store checkout rule on Grow can distinguish the exact prepaid
@@ -417,10 +416,6 @@ The website launch has three routes to evaluate, in this order:
    item reached from the coffee page. This lets checkout target the offer by
    product. Verify the customer restriction, variant mapping and continuation
    to the original coffee before choosing this route.
-3. If the launch policy changes to allow repeat purchases, each separate paid
-   prepaid purchase can create its own monthly subscription. Retries must reuse
-   the same continuation. That route requires per-purchase payment enrollment
-   and is outside the current website launch scope.
 
 On 14 November, read-only production checks confirmed zero Shopify links
 across the 55 Recharge prepaid plans. Shopify returned only the mapped
