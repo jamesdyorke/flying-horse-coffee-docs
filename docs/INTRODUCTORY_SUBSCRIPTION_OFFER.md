@@ -406,6 +406,27 @@ product button's handoff to this code-free selling plan remain open.
 
 #### Production checkout controls
 
+On 14 November 2026, a read-only request to the production Shopify Admin
+API confirmed the public plan is Grow, with Plus and development both
+disabled.
+
+BlockCart documents a selling-plan title check that can be combined with a
+customer tag. Its documented input matrix only exposes plan title under
+Attribute input, which excludes the login check. Its negative tag condition
+also skips guests. This supports isolating a uniquely named prepaid plan
+from monthly in principle, but leaves a guest bypass in the documented
+configuration. Do not use that configuration as the offer's only control.
+Shop-wide login would affect ordinary checkout and is outside this test.
+[BlockCart input matrix](https://discomerchant.com/apps/blockcart/help-center/which-conditions-work-with-which-rule-type)
+· [Guest tag behavior](https://discomerchant.com/apps/blockcart/help-center/customer-conditions-tags-login-orders-total-spent-email)
+
+Keep the website checkout proof open. A candidate must block an already
+redeemed buyer and a guest using a direct prepaid link, allow an eligible
+buyer at the 25% price, and leave the same coffee at 10% on the monthly
+plan for both accounts. Check pre-existing and parallel carts so a delayed
+redemption update cannot allow a second payment. The existing staging rule
+does not establish production Grow compatibility.
+
 Evaluate these checkout options for enforcing one introductory redemption per customer:
 
 1. Keep the offer in the Recharge widget on the existing coffee products.
