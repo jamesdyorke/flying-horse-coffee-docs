@@ -302,11 +302,12 @@ sent no alerts.
   and app. Verify the discount applies to the intended prepaid purchase only,
   and that an ineligible or already-redeemed buyer cannot use a direct cart or
   checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
-- [ ] Verify each Recharge prepaid and monthly plan mapping and the shipping
-  and fulfillment routes. Confirm one payment for three monthly deliveries
-  and the current applicable variant price with 10% off. Leave the capsule
-  variant out of checkout while its inventory remains blocked. Check the
-  treatment of existing subscriber contracts.
+- [x] Verify the Recharge plans, terms and coverage for all 55 variants with
+  the dedicated production read-only credential.
+- [ ] Prove shipping, fulfillment and treatment of existing subscriber
+  contracts. Keep the capsule variant out of checkout while inventory is
+  blocked. Wire the exact per-variant prepaid plan IDs into the disabled
+  catalogue before relying on it for enrollment.
 - [x] Verify the unregistered production Shopify reader can fetch the
   current UK price on one variant from each catalogue product. Backend
   PR #102 merged. Provider-linked fulfillment verification remains open.
@@ -370,42 +371,33 @@ until checkout enforces the tester restriction.
 
 #### Recharge plan audit — 14 November 2026
 
-The production merchant portal shows both plans on Espresso Blend, Espresso
-Single Origin, Filter Single Origin, Caffeine Free and All Day Brewing Capsules.
-The active recurring plan ships monthly at 10% off and is visible on the
-storefront, customer portal, merchant portal and API. The active intro plan
-ships monthly, charges every three months and expires after one charge. Its
-visibility is Merchant portal only. The portal summary does not establish a
-25% intro discount or a storefront checkout mapping. Preserve the capsule stock
-hold. Verify provider plan IDs and exact variant coverage with the dedicated
-read-only audit credential before marking the mapping complete.
+The live Recharge API audit verified 55 prepaid plans, one per Shopify
+variant, and five product-wide monthly plans. All 55 mapped variants have
+exactly one active prepaid plan. The five previously recorded prepaid IDs
+are representative variant plans. The standalone audit in backend #114
+assumed one prepaid ID per product and reported a coverage mismatch. A
+complete product-filtered API read verified the full set.
 
-Recharge’s variant assignment table showed both plans assigned to all 54
-bagged coffee variants: 14 Espresso Blend, 14 Espresso Single Origin, 12 Filter
-Single Origin and 14 Caffeine Free. Both plans are listed on the single capsule
-product variant, which remains inventory-blocked. The Filter Single Origin
-prepaid plan editor showed the plan discount unchecked.
+| Product | Variants | Recharge prepaid IDs | Recharge monthly ID |
+| --- | ---: | --- | --- |
+| Espresso Blend | 14 | 23714198–23714211 | 2508960 |
+| Espresso Single Origin | 14 | 23714222–23714235 | 2508979 |
+| Filter Single Origin | 12 | 23714236–23714247 | 2509003 |
+| Caffeine Free | 14 | 23714250–23714263 | 2509027 |
+| All Day Brewing Capsules | 1 | 23714265 | 17212604 |
 
-A read-only production Firestore check confirmed the catalogue draft is disabled
-and matches the reviewed backend mapping for all 55 variants. The IDs below
-are from that draft. Fresh Recharge API verification is pending. Backend PR #114
-adds the protected, tested read-only plan audit command. Run it after the
-dedicated production credential is stored to verify all ten plans.
-[Backend audit command](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/114) All five
-introductory Shopify selling-plan IDs are unset. A fresh production Shopify
-Admin read confirmed all 55 variant IDs and five monthly Shopify selling-plan
-IDs match the draft. Each product returned only its monthly selling plan. A separate
-complete read of the plan groups attached to each of the 55 exact variants
-returned the expected monthly plan and no additional plan for each variant.
-Website checkout still needs a verified Shopify mapping for the prepaid plans.
+All prepaid plans ship monthly, charge every three months and expire after
+one charge. They have zero built-in discount, Merchant portal visibility
+only and no Shopify selling-plan links. The monthly plans charge and ship
+monthly at 10% off and match the five expected Shopify selling-plan IDs.
+Shopify’s complete variant-level read returned only those monthly plans.
+Website checkout still needs the prepaid selling-plan links and proof of
+the 25% discount. The capsule variant remains inventory-blocked.
 
-| Product | Recharge prepaid | Recharge monthly |
-| --- | --- | --- |
-| Espresso Blend | 23714211 | 2508960 |
-| Espresso Single Origin | 23714235 | 2508979 |
-| Filter Single Origin | 23714247 | 2509003 |
-| Caffeine Free | 23714263 | 2509027 |
-| All Day Brewing Capsules | 23714265 | 17212604 |
+A separate production Firestore read confirmed the catalogue draft is disabled
+and matches the reviewed Shopify variant and monthly plan mapping. Its
+prepaid references still need to move from representative IDs to exact
+variant-level IDs.
 
 Production Firebase currently has only the existing Shopify paid-order receiver
 and publisher active. Cloud Scheduler API is disabled. Protected deployment of
@@ -428,8 +420,8 @@ each bag size across the four bagged coffees and the capsule variant. The
 preview calculation gave £15.26/£32.36 for Espresso Blend, £17.06/£34.16 for
 both Single Origins and £17.96/£35.96 for Caffeine Free (350g/1kg). The
 capsule result was £5.39 for audit only. These are sample calculations
-before shipping. Production enrollment evidence, live Recharge verification
-and runtime registration remain open.
+before shipping. Production enrollment evidence and runtime registration
+remain open.
 
 #### Shopify catalogue audit — 13 November 2026
 
