@@ -355,6 +355,27 @@ UTC fixture rule to live enrollments.
 
 #### Production checkout controls
 
+On 14 November, read-only production checks confirmed zero Shopify links
+across the 55 Recharge prepaid plans. Shopify returned only the mapped
+monthly plan for every production variant.
+
+The signed-in staging website previously reached the £22.50 prepaid checkout
+with the code applied automatically. A subsequent unpaid Storefront API test
+used the same staging variant with both selling plans:
+
+| Staging cart | Without code | With the intro code supplied |
+| --- | ---: | ---: |
+| Three prepaid deliveries | £30.00 | £22.50 |
+| Regular 10% monthly plan | £9.00 | £1.50 |
+
+Shopify marked the code applicable on both guest carts. This verifies that
+the staged product-scoped code does not isolate the prepaid plan at cart
+level. Final checkout enforcement and payment were not exercised in this
+comparison. Before publication, prove a prepaid-only discount on the same
+variant and separately verify buyer eligibility at checkout. The regular
+monthly plan must remain £9.00 in the staging comparison.
+
+
 Shopify Grow supports eligible public Shopify App Store apps with Functions.
 A custom app containing a Function requires Shopify Plus. Verify the intended
 checkout protection on the production plan before relying on it.
