@@ -555,8 +555,19 @@ at execution.
   worker returned `prepaid_deliveries_outstanding`. The nominal cutoff is
   14 February 2027 at 05:00 UTC and can move if fulfilments are delayed.
   The public offer was disabled at verification.
-- [ ] Prove the £0.90 monthly continuation and one-renewal limit for the paid
-  pilot. Recharge controls the actual billing date.
+- [x] Verify the private #5043 cutoff command in read-only mode against
+  production. The original Recharge source is expired with no renewal queued.
+  The operator held for outstanding deliveries and verified that the public
+  catalogue is still disabled. The helper and local cutoff, price-cap and
+  duplicate-write tests are in [backend PR #138](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/138).
+  The schedule-recovery change merged in
+  [backend PR #137](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/137).
+- [ ] At the actual cutoff, run the private command for the approved live
+  switch after verifying all three fulfilments. Check Recharge shows one
+  continuation at £0.90 for merchandise, its first billing date and a
+  one-charge limit. The command is run by an operator.
+- [ ] After the approved renewal, verify the pilot subscription expired
+  and Recharge has no second charge queued.
 - [ ] Wire automatic production website enrollment and complete alert parity.
   The milestone route is enabled. Production failure and recovery routes are
   saved disabled pending an end-to-end Firebase incident feed. Staging's two
@@ -570,7 +581,7 @@ at execution.
 | Storefront and checkout | The fixture proved the prepaid price and the regular monthly option. | The unlisted pilot paid successfully through a cart built with the exact selling plan. Verify the normal product widget selects that plan and maps the approved catalogue variants before exposing the public offer. |
 | Payment and lifecycle events | Deployed offer handlers consume signed order, payment, refund and subscription events and retry receipts. | The deployed production Functions inventory contains only `shopifyOrderPaid` and `publishPaidOrder`. Their purchase feed recognises iOS attribution. The website pilot currently needs the private observer. Wire website enrollment and refund/cancellation handling with durable retries and exact plan mapping. |
 | Prepaid coverage | The original schedule was retained. The staging worker held for a delayed delivery and created one continuation on retry. | The original pilot dates are retained and the read-only production worker held for outstanding deliveries. Wire the production worker with the coverage gate and live price check for automatic processing. |
-| Renewal | Staging recorded a paid renewal and exercised duplicate-safe receipt handling. | The production pilot worker is private and unscheduled. Live creation, observation of the £0.90 renewal and confirmation of the one-charge cap remain open. |
+| Renewal | Staging recorded a paid renewal and exercised duplicate-safe receipt handling. | The private operator was verified read-only in production. Live creation at the verified cutoff, observation of the £0.90 renewal and confirmation of the one-charge cap remain open. |
 | Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
 
 If repeating the paid pilot after the automatic path is ready, reconcile the
