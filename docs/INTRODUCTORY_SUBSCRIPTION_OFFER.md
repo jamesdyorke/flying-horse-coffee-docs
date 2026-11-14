@@ -516,17 +516,19 @@ at execution.
   off, expiring after one charge, and £0.90 per month at 10% off. Both
   previews are before shipping. Storefront Widget, Customer Portal and
   API sales channels are off for both plans.
-- [ ] Verify actual Shopify checkout totals for the approved pilot.
+- [x] Verify the Shopify merchandise subtotal for the approved pilot.
   On 14 November 2026, the direct link opened the £1 pilot. Shopify
   confirmed Unlisted status and one linked selling plan for the three
   prepaid deliveries at 25% off. The pilot was absent from the tested
   storefront search results, Coffee and Equipment, Merch and Equipment,
-  and the subscription landing page and collection. Shopify reported zero
-  available units with sales blocked when out of stock. The storefront
-  showed Sold out, so checkout and the £2.25 subtotal before shipping
-  remain unverified. Set one available unit for the pilot variant at the
-  online fulfilment location, then verify checkout and stop before payment.
-  Keep the live offer disabled. A paid pilot requires separate approval.
+  and the subscription landing page and collection. The cart showed
+  £2.25 with stock at White City, but checkout rejected the item. The
+  general shipping profile has UK rates from Mare Street Market and no
+  shipping zones at White City. Moving the single pilot unit to Mare
+  Street Market let Shopify checkout show the prepaid plan and £2.25
+  merchandise subtotal before shipping. The check stopped before order
+  review. No order or payment was submitted and the live offer stayed
+  disabled. A paid pilot requires separate approval.
   [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
