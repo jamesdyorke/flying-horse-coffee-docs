@@ -509,6 +509,8 @@ at execution.
 
 ### 4. Run a controlled live website pilot
 
+[15 November handoff and fresh pilot purchase](INTRODUCTORY_OFFER_RESUME_2026-11-15.md)
+
 - [x] Verify the unlisted £1 pilot via direct link. One bundle covers three
   prepaid deliveries and uses the linked 25% Recharge plan. The broader offer
   remains disabled.
@@ -589,19 +591,16 @@ at execution.
 | Area | Staging evidence | Production gap |
 | --- | --- | --- |
 | Storefront and checkout | The fixture proved the prepaid price and the regular monthly option. | The unlisted pilot paid successfully through a cart built with the exact selling plan. Verify the normal product widget selects that plan and maps the approved catalogue variants before exposing the public offer. |
-| Payment and lifecycle events | Deployed offer handlers consume signed order, payment, refund and subscription events and retry receipts. | The deployed production Functions inventory contains only `shopifyOrderPaid` and `publishPaidOrder`. Their purchase feed recognises iOS attribution. The website pilot currently needs the private observer. Wire website enrollment and refund/cancellation handling with durable retries and exact plan mapping. |
+| Payment and lifecycle events | Deployed offer handlers consume signed order, payment, refund and subscription events and retry receipts. | Production v0.3.1 wires the private website pilot payment observer alongside the regular purchase feed. Prove it accepts a fresh checkout without a signed replay. Wire ordinary catalogue enrollment and current refund/cancellation checks with durable retries and exact plan mapping. |
 | Prepaid coverage | The original schedule was retained. The staging worker held for a delayed delivery and created one continuation on retry. | The original pilot dates are retained and the read-only production worker held for outstanding deliveries. Wire the production worker with the coverage gate and live price check for automatic processing. |
 | Renewal | Staging recorded a paid renewal and exercised duplicate-safe receipt handling. | The private operator was verified read-only in production. Live creation at the verified cutoff, observation of the £0.90 renewal and confirmation of the one-charge cap remain open. |
 | Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
 
-If repeating the paid pilot after the automatic path is ready, reconcile the
-original Shopify refund and Recharge records first. A refund and cancellation
-are separate checks. Confirm that the two queued prepaid shipments and future
-charges are stopped before placing a replacement order. Keep the original
-Firebase record for audit and verify that it cannot continue. The replacement
-must produce its own payment event and enrollment without operator replay.
+A fresh paid pilot is a separate order. Keep both Firebase enrollments and
+verify each order's schedule and continuation independently. If a refund
+is requested, reconcile Shopify's refund and the Recharge contract before
+further processing of that order.
 [Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
-· [Recharge prepaid shipments](https://support.getrecharge.com/hc/en-us/articles/32581132524055-Offering-prepaid-subscriptions)
 
 #### Verify catalogue mappings and the shared checkout
 
