@@ -388,7 +388,10 @@ prepaid plan editor showed the plan discount unchecked.
 
 A read-only production Firestore check confirmed the catalogue draft is disabled
 and matches the reviewed backend mapping for all 55 variants. The IDs below
-are from that draft. Fresh Recharge API verification is pending. All five
+are from that draft. Fresh Recharge API verification is pending. Backend PR #114
+adds the protected, tested read-only plan audit command. Run it after the
+dedicated production credential is stored to verify all ten plans.
+[Backend audit command](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/114) All five
 introductory Shopify selling-plan IDs are unset. A fresh production Shopify
 Admin read confirmed all 55 variant IDs and five monthly Shopify selling-plan
 IDs match the draft. Each product returned only its monthly selling plan. A separate
