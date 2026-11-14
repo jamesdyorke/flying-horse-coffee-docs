@@ -237,6 +237,11 @@ through preparation.
   offer record. The active, unused £7.50 discount was verified in Shopify
   and configured in staging Firebase. The fresh buyer signed in and
   Firebase prepared the purchase successfully.
+  Reuse that buyer and code for unpaid checkout previews while the discount
+  is active. Refresh the staging fixture verification if its 30-minute window
+  expires. Shopify counts a use when an order is submitted. For repeat paid
+  staging tests, a multi-use code alone is insufficient because Firebase also
+  records redemption per customer. Use fresh eligible buyers for paid tests.
 - [x] Implement and test the browser cart handoff against fixtures. Backend
   PR #105 applies the discount automatically and returns a checkout link
   only for the exact staging prepaid plan at a £22.50 GBP subtotal.
