@@ -340,6 +340,13 @@ visibility is Merchant portal only. The portal summary does not establish a
 hold. Verify provider plan IDs and exact variant coverage with the dedicated
 read-only audit credential before marking the mapping complete.
 
+Recharge’s variant assignment table showed both plans assigned to all 54
+bagged coffee variants: 14 Espresso Blend, 14 Espresso Single Origin, 12 Filter
+Single Origin and 14 Caffeine Free. Both plans are listed on the single capsule
+product variant, which remains inventory-blocked. The Filter Single Origin
+prepaid plan editor showed the plan discount unchecked. Exact Recharge plan
+IDs and API verification remain open.
+
 #### Shopify catalogue audit — 13 November 2026
 
 These are Shopify UK catalogue prices before discounts and shipping. They
