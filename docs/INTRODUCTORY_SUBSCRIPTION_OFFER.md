@@ -373,8 +373,17 @@ current code will not register this worker.
 Backend PR #110 starts production integration with an unregistered quote-only
 preview. Its tests hold until the revised coverage boundary, select the mapped
 monthly plan and quote 10% off the current UK variant price without creating a
-continuation. Production enrollment evidence, Recharge transport and runtime
-registration remain open.
+continuation. Backend PR #111 merged and its protected staging deployment
+passed. The Recharge reader only fetches store identity and the mapped monthly
+plan. The production preview remains unregistered.
+
+The production Shopify reader returned current UK prices for one variant of
+each bag size across the four bagged coffees and the capsule variant. The
+preview calculation gave £15.26/£32.36 for Espresso Blend, £17.06/£34.16 for
+both Single Origins and £17.96/£35.96 for Caffeine Free (350g/1kg). The
+capsule result was £5.39 for audit only. These are sample calculations
+before shipping. Production enrollment evidence, live Recharge verification
+and runtime registration remain open.
 
 #### Shopify catalogue audit — 13 November 2026
 
