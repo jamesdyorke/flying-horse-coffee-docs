@@ -230,26 +230,34 @@ through preparation.
   Backend PR #106 merged and deployed successfully to staging. It supplies
   the sign-in helper. James reported completing the Shopify client setup.
   On 14 November, Shopify accepted the public Client ID in Chrome and
-  redirected to the exact staging callback. The product page token exchange
-  still requires the theme asset installation.
-- [ ] Prepare a fresh eligible staging buyer and a verified, single-use
-  discount bound to that buyer and the fixture. The previous fixture buyer
-  has redeemed, and the previous discount verification window has elapsed.
+  redirected to the exact staging callback. After the theme asset was
+  installed, the button completed token exchange with an existing test login.
+- [x] Prepare a fresh eligible staging buyer and a verified, single-use
+  discount bound to that buyer and the fixture. The fresh customer had no
+  offer record. The active, unused £7.50 discount was verified in Shopify
+  and configured in staging Firebase. The fresh buyer signed in and
+  Firebase prepared the purchase successfully.
+  Reuse that buyer and code for unpaid checkout previews while the discount
+  is active. Refresh the staging fixture verification if its 30-minute window
+  expires. Shopify counts a use when an order is submitted. For repeat paid
+  staging tests, a multi-use code alone is insufficient because Firebase also
+  records redemption per customer. Use fresh eligible buyers for paid tests.
 - [x] Implement and test the browser cart handoff against fixtures. Backend
   PR #105 applies the discount automatically and returns a checkout link
   only for the exact staging prepaid plan at a £22.50 GBP subtotal.
   CI and the staging deployment passed. A separate unpaid request using
   the same cart query verified the exact prepaid plan and a £30 subtotal
-  against the real staging Storefront API. The signed-in browser preview
-  at £22.50 remains pending.
+  against the real staging Storefront API.
 - [x] Wire the staging checkout button to Shopify sign-in and cart preparation.
   Backend PR #107 passed CI, merged and deployed to staging. The staging
-  theme asset was bundled and syntax-checked. A staging-only Custom Liquid
-  mount is prepared for installation.
-- [ ] Add an offer checkout entry to the existing staging product fixture.
-  The current page renders standard £10 purchase controls. Stop before
-  order submission and verify the Shopify checkout subtotal is £22.50
-  with the discount already applied.
+  theme asset and Custom Liquid mount are installed on the development
+  product template. Backend PR #109 accepts Shopify’s cart handoff URL.
+- [x] Verify the unpaid checkout from the staging product button. On 14
+  November, after the rebuilt Horizon asset was saved, the staging buyer
+  signed in through Shopify and the button took them directly to checkout.
+  The order summary showed three prepaid monthly deliveries at £30.00
+  before discount, £7.50 automatically applied and a £22.50 subtotal before
+  shipping. No code was entered and no order was submitted.
 - [ ] Connect the website offer entry to signed-in eligibility and checkout
   preparation in Firebase. Preserve one redemption per customer across
   website, app and eligible products.
@@ -280,6 +288,14 @@ through preparation.
 - [x] Verify Shopify selling-plan terms on all five catalogue products. The
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
+- [ ] Choose and verify how the production checkout applies the introductory
+  25% discount automatically for eligible signed-in buyers. The manually
+  created, customer-bound code is a staging test fixture. Evaluate a Shopify
+  automatic discount or pricing built into the prepaid selling plan, with
+  checkout enforcing eligibility and one redemption per customer across web
+  and app. Verify the discount applies to the intended prepaid purchase only,
+  and that an ineligible or already-redeemed buyer cannot use a direct cart or
+  checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [ ] Verify each Recharge prepaid and monthly plan mapping and the shipping
   and fulfillment routes. Confirm one payment for three monthly deliveries
   and the current applicable variant price with 10% off. Leave the capsule
