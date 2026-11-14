@@ -417,7 +417,8 @@ preview. Its tests hold until the revised coverage boundary, select the mapped
 monthly plan and quote 10% off the current UK variant price without creating a
 continuation. Backend PR #111 merged and its protected staging deployment
 passed. The Recharge reader only fetches store identity and the mapped monthly
-plan. The production preview remains unregistered.
+plan. The production preview remains unregistered. Backend PR #113 verified
+that the preview logs diagnostics without writing Firestore telemetry.
 
 The production Shopify reader returned current UK prices for one variant of
 each bag size across the four bagged coffees and the capsule variant. The
