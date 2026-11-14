@@ -326,7 +326,9 @@ recorded staging lifecycle results for the pilot decision.
   cannot enforce it on the current plans.
   [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
-  the dedicated production read-only credential.
+  the dedicated production read-only credential. The 14 November re-audit
+  passed for five products and 55 variants. Zero of the catalogue prepaid
+  plans was linked to a Shopify selling plan.
 - [ ] Prove shipping, fulfillment and treatment of existing subscriber
   contracts. Keep the capsule variant out of checkout while inventory is
   blocked.
