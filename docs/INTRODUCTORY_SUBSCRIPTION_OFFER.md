@@ -307,6 +307,17 @@ recorded staging lifecycle results for the pilot decision.
 - [x] Verify Shopify selling-plan terms on all five catalogue products. The
   product-level plan groups returned monthly billing and delivery at 10%
   off. No three-delivery prepaid plan appeared in those groups.
+- [x] Duplicate the current production theme for the unpublished preview.
+  On 14 November, the copy was verified unpublished and both product
+  templates matched the live copies, including the existing Recharge
+  Subscription Widget app block.
+- [ ] Establish checkout protection before connecting the live coffee plans
+  to the Recharge Storefront widget channel. Recharge creates the Shopify
+  selling-plan group when that channel is selected. The theme copy isolates
+  template changes, while Recharge plan availability belongs to the store.
+  Test the product-scoped restriction on the separate pilot and verify
+  exact selling-plan targeting before applying a rule to shared coffee
+  variants. [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Choose and verify how the production checkout applies the introductory
   25% discount automatically for eligible signed-in buyers. In production,
   show the prepaid option alongside the regular 10% monthly option in the
