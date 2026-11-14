@@ -10,8 +10,11 @@ Eligible customers can buy three monthly deliveries upfront at 25% off.
 After the prepaid deliveries and coverage are complete, the subscription
 continues monthly at 10% off the current applicable price. Checkout shows the
 selected product, payment and shipping totals, and the subscription terms
-through Shopify's existing checkout. Eligibility and redemption apply once
-per customer across the offer catalogue.
+through Shopify's existing checkout. For the proposed repeatable website
+route, each distinct paid prepaid purchase may start its own monthly
+subscription, including overlapping purchases by the same customer. A retry
+of the same purchase must reuse its continuation. The original first-time-only
+route remains an alternative until the launch route is chosen.
 
 The intended catalogue includes the existing subscription coffees in 350g and
 1kg and the capsules, subject to stock and confirmed plan coverage. Keep the
@@ -416,10 +419,15 @@ The website launch has three routes to evaluate, in this order:
    item reached from the coffee page. This lets checkout target the offer by
    product. Verify the customer restriction, variant mapping and continuation
    to the original coffee before choosing this route.
-3. A repeatable prepaid offer is a commercial fallback for James to decide.
-   The current redemption and enrollment logic assumes one redemption per
-   customer. A repeatable launch needs per-purchase enrollment and a rule
-   for overlapping subscriptions before accepting payment.
+3. James confirmed that on the repeatable prepaid route, two separate paid
+   purchases may each create a monthly subscription. The continuation worker
+   already keys its operation by Recharge source subscription. The staging
+   payment and checkout paths still enforce customer-level redemption.
+   Production enrollment for this route must record each verified purchase
+   separately and route retries to the same source. Verify two paid-order
+   fixtures for the same customer and coffee, with exactly one continuation
+   per source. Keep the first-time checkout tests scoped to the restricted
+   routes above.
 
 On 14 November, read-only production checks confirmed zero Shopify links
 across the 55 Recharge prepaid plans. Shopify returned only the mapped
