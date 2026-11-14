@@ -100,9 +100,13 @@ existing monthly plans and subscriber contracts in place.
 
 A separate £1 product was created in production Shopify on 13 November 2026
 for a future controlled pilot. It remains Draft with no sales channels selected.
-The public product URL returned a page-not-found response. No selling plan
-was attached and no order or payment was created. The existing subscription
-plans and the disabled offer are unchanged.
+On 14 November, Shopify reported Draft and no publication timestamp, and
+both storefront product URLs returned 404. Shopify and Recharge each showed
+zero plans for the pilot. Its per-channel publication list still requires
+a separate check. Recharge documents storefront checkout as the supported
+subscription path, so a draft invoice cannot substitute for the pilot's
+Recharge and website checkout proof.
+[Recharge checkout troubleshooting](https://support.getrecharge.com/hc/en-us/articles/12075818832663-Customer-missing-from-Recharge)
 
 Keep the pilot product unpublished until the checkout restriction and
 production continuation have been verified and the paid pilot is approved.
