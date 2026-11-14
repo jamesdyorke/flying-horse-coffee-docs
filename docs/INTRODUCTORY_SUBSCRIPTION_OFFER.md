@@ -128,11 +128,11 @@ through preparation.
    read access. Confirm three monthly deliveries under one prepaid payment,
    plus a monthly plan with 10% off. The dedicated Recharge credential is
    currently outstanding. Continue with steps 4 and 5 while that is resolved.
-4. Show the introductory offer on eligible product pages before sign-in.
-   Wire the checkout button to Shopify sign-in, Firebase eligibility and
-   checkout preparation. Verify the guest-to-checkout journey on mobile
-   and desktop, discount rejection, repeat eligibility and existing
-   purchase paths.
+4. Carry forward the existing staging proof for code-free prepaid pricing,
+   payment and redemption, and the delayed, duplicate-safe £9 continuation.
+   Build the customer-facing entry in the existing subscription widget for an
+   unpublished production theme preview. Keep the standalone staging page
+   available for targeted checks if a new integration changes a proven path.
 5. Prepare the production continuation worker behind disabled offer controls.
    Verify current pricing, fulfillment and revised coverage, durable payment
    evidence, cancellation and refund holds, and one continuation on retries.
@@ -285,6 +285,13 @@ sent no alerts.
   buyer, and a retry after an interrupted checkout.
 
 ### 3. Prepare production with the offer disabled
+
+Prioritise the Shopify links for the audited Recharge prepaid plans and an
+eligibility control supported by the live store. Verify the 25% prepaid price,
+existing 10% monthly option and direct-checkout protection together in the
+production preview before accepting payment. In parallel, verify deployment
+and configuration of the disabled production continuation worker. Reuse the
+recorded staging lifecycle results for the pilot decision.
 
 - [x] Provision a separate read-only Shopify app for production. Verified the
   production credential can read products and orders older than 60 days.
