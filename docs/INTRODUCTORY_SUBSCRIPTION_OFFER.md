@@ -328,6 +328,18 @@ through preparation.
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
 
+#### Recharge plan audit — 14 November 2026
+
+The production merchant portal shows both plans on Espresso Blend, Espresso
+Single Origin, Filter Single Origin, Caffeine Free and All Day Brewing Capsules.
+The active recurring plan ships monthly at 10% off and is visible on the
+storefront, customer portal, merchant portal and API. The active intro plan
+ships monthly, charges every three months and expires after one charge. Its
+visibility is Merchant portal only. The portal summary does not establish a
+25% intro discount or a storefront checkout mapping. Preserve the capsule stock
+hold. Verify provider plan IDs and exact variant coverage with the dedicated
+read-only audit credential before marking the mapping complete.
+
 #### Shopify catalogue audit — 13 November 2026
 
 These are Shopify UK catalogue prices before discounts and shipping. They
