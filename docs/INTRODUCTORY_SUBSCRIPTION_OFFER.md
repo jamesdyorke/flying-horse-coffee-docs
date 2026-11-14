@@ -1,6 +1,7 @@
 # Introductory subscription offer
 
-This is the shared rollout plan for the website, iOS and Firebase backend.
+The first release covers the website and its Firebase backend. iOS is a
+follow-up. Keep existing iOS evidence for that release.
 Implementation guides and detailed test evidence live in the owning repositories.
 
 ## Offer
@@ -274,7 +275,7 @@ sent no alerts.
   in Firebase and carry the selected plan through to Shopify checkout at the
   discounted price for eligible buyers. Offer the regular 10% monthly option
   if the introductory offer is unavailable to that shopper. Preserve one
-  redemption per customer across website, app and eligible products. Use
+  redemption per customer across eligible products on the website. Use
   Shopify's subscription agreement at checkout.
 - [ ] Verify checkout receives the exact variant, prepaid plan and discount.
   If the discount is rejected, stop the offer checkout. Verify the website
@@ -326,8 +327,7 @@ recorded staging lifecycle results for the pilot decision.
   checkout behavior. Check eligibility after sign-in at the checkout step and
   carry the discounted price into checkout without requiring a discount code. The customer-bound staging code
   was a test fixture. Verify plan-specific pricing or an automatic discount, with
-  checkout enforcing eligibility and one redemption per customer across web
-  and app. Verify the discount applies to the intended prepaid purchase only,
+  checkout enforcing eligibility and one redemption per customer across eligible website products. Verify the discount applies to the intended prepaid purchase only,
   and that an ineligible or already-redeemed buyer cannot use a direct cart or
   checkout link to get it. [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
@@ -405,6 +405,21 @@ checkout. Production enforcement, a signed-in prior redeemer check and the
 product button's handoff to this code-free selling plan remain open.
 
 #### Production checkout controls
+
+The website launch has three routes to evaluate, in this order:
+
+1. Keep the offer in the Recharge widget on the existing coffee products.
+   Verify an App Store checkout rule on Grow can distinguish the exact prepaid
+   selling plan and enforce customer eligibility without touching the monthly
+   plan. General product-level checkout rules do not prove this capability.
+2. If exact-plan targeting is unavailable, use a separate prepaid-only offer
+   item reached from the coffee page. This lets checkout target the offer by
+   product. Verify the customer restriction, variant mapping and continuation
+   to the original coffee before choosing this route.
+3. A repeatable prepaid offer is a commercial fallback for James to decide.
+   The current redemption and enrollment logic assumes one redemption per
+   customer. A repeatable launch needs per-purchase enrollment and a rule
+   for overlapping subscriptions before accepting payment.
 
 On 14 November, read-only production checks confirmed zero Shopify links
 across the 55 Recharge prepaid plans. Shopify returned only the mapped
