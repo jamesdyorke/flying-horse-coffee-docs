@@ -517,6 +517,16 @@ at execution.
   previews are before shipping. Storefront Widget, Customer Portal and
   API sales channels are off for both plans.
 - [ ] Verify actual Shopify checkout totals for the approved pilot.
+  A fresh read-only audit confirmed the £1 product is still Draft and
+  unpublished on the Online Store, with zero Shopify selling-plan groups.
+  The private Recharge plans verify £2.25 prepaid and £0.90 monthly before
+  shipping. A normal storefront checkout requires a published Active or
+  Unlisted product with a Shopify-linked prepaid selling plan. A draft
+  invoice does not verify Recharge's storefront flow. Once pilot access
+  and publication are separately approved, review the Shopify total and
+  selling plan before payment. The live offer stays disabled during this
+  check.
+  [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
 - [ ] Verify the pilot schedule. Recharge Product Subscription Plans
   document that daily intervals are unsupported. Use a supported cadence
   and evaluate a private clock limited to the verified pilot enrollment.
