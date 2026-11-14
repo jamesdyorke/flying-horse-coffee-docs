@@ -354,6 +354,15 @@ UTC fixture rule to live enrollments.
 [Processing time](https://support.getrecharge.com/hc/en-us/articles/13002255447703-Adjust-your-order-processing-time)
 · [Charge-day schedules](https://support.getrecharge.com/hc/en-us/articles/360006293074-Charging-on-a-specific-day-of-the-week-or-month)
 
+#### Code-free staging pricing
+
+Unpaid Shopify carts using the same development variant showed £22.50 for
+the new three-delivery prepaid plan (Recharge 23732091, Shopify 693083275612)
+and £9.00 for the existing monthly plan. Both carts had zero discount codes.
+The 25% adjustment is built into the prepaid plan. A guest could still
+create a prepaid cart and receive a checkout handoff URL. Checkout eligibility,
+including copied links and already-redeemed buyers, remains open.
+
 #### Production checkout controls
 
 On 14 November, read-only production checks confirmed zero Shopify links
