@@ -521,18 +521,14 @@ at execution.
 - [x] Verify the production payment milestone. One production
   `offer_payment_confirmed` event arrived, and the Slack destination completed
   for `#backend-alerts`. [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
-- [ ] Release the production pilot intake through the protected Firebase
-  workflow with public offer availability disabled. Backend #127 added
-  signed website payment intake. #128 isolates its production-only secret
-  declarations from staging discovery. The production runtime has verified
-  access to the existing Shopify, Recharge and PostHog secrets. The corrected
-  [staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43642948423)
-  succeeded. The exact [v0.3.0 staging candidate](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43643394067)
-  also deployed successfully. [Production promotion #131](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/131)
-  replaces #130 and includes the current production branch ancestry. Production pilot intake is unset and public offer availability
-  stays disabled.
-  [Isolation fix](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/128)
-  · [Version PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/129)
+- [x] Deploy Firebase backend v0.3.0 to production with pilot intake and
+  the public offer disabled. The corrected staging deployment for #128
+  and the exact v0.3.0 staging candidate both succeeded. Production #131
+  merged and deployed successfully. The release tag matches the merge
+  commit, only the existing paid-order functions are active, and the
+  production catalogue still reads `status: draft` and `enabled: false`.
+  [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43643929938)
+  · [Release](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.0)
 - [ ] Verify the original prepaid schedule. The queued records were updated
   after creation, so the verifier held the continuation. Check the original
   schedule against independent evidence before authorizing any transition.
