@@ -344,8 +344,24 @@ Recharge’s variant assignment table showed both plans assigned to all 54
 bagged coffee variants: 14 Espresso Blend, 14 Espresso Single Origin, 12 Filter
 Single Origin and 14 Caffeine Free. Both plans are listed on the single capsule
 product variant, which remains inventory-blocked. The Filter Single Origin
-prepaid plan editor showed the plan discount unchecked. Exact Recharge plan
-IDs and API verification remain open.
+prepaid plan editor showed the plan discount unchecked.
+
+A read-only production Firestore check confirmed the catalogue draft is disabled
+and matches the reviewed backend mapping for all 55 variants. The IDs below
+are from that draft. Fresh Recharge API verification is pending. All five
+introductory Shopify selling-plan IDs are unset.
+
+| Product | Recharge prepaid | Recharge monthly |
+| --- | --- | --- |
+| Espresso Blend | 23714211 | 2508960 |
+| Espresso Single Origin | 23714235 | 2508979 |
+| Filter Single Origin | 23714247 | 2509003 |
+| Caffeine Free | 23714263 | 2509027 |
+| All Day Brewing Capsules | 23714265 | 17212604 |
+
+Production Firebase currently has only the existing Shopify paid-order receiver
+and publisher active. Cloud Scheduler API is disabled. Protected deployment of
+the continuation runtime and its scheduler remains open.
 
 #### Shopify catalogue audit — 13 November 2026
 
