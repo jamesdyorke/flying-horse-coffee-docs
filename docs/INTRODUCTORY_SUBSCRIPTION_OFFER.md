@@ -530,6 +530,14 @@ at execution.
   review. No order or payment was submitted and the live offer stayed
   disabled. A paid pilot requires separate approval.
   [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
+- [x] Verify the private £0.90 pilot continuation plan. Recharge now exposes
+  the monthly plan through the API and merchant portal only. The production
+  preflight verified the exact £1 UK variant, linked prepaid plan and private
+  monthly plan. Backend PR #124 uses the private plan in its continuation
+  fixtures. Actual production continuation and renewal still require proof.
+- [ ] Check the selected plan before payment. The initial add-to-cart can
+  add a £1 one-off item. Select the 25% prepaid option and verify the
+  named three-delivery plan at £2.25 before shipping in Shopify checkout.
 - [ ] Capture the approved pilot in Firebase immediately after payment.
   The private operator command checks the exact paid Shopify order, buyer,
   plan and total, then matches the Recharge charge and records one
