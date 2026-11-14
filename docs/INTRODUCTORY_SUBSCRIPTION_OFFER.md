@@ -306,8 +306,9 @@ sent no alerts.
   the dedicated production read-only credential.
 - [ ] Prove shipping, fulfillment and treatment of existing subscriber
   contracts. Keep the capsule variant out of checkout while inventory is
-  blocked. Wire the exact per-variant prepaid plan IDs into the disabled
-  catalogue before relying on it for enrollment.
+  blocked.
+- [x] Store the exact prepaid plan ID per variant in the disabled production
+  Firestore catalogue and verify it with the updated read-only Recharge audit.
 - [x] Verify the unregistered production Shopify reader can fetch the
   current UK price on one variant from each catalogue product. Backend
   PR #102 merged. Provider-linked fulfillment verification remains open.
@@ -394,10 +395,10 @@ Shopify’s complete variant-level read returned only those monthly plans.
 Website checkout still needs the prepaid selling-plan links and proof of
 the 25% discount. The capsule variant remains inventory-blocked.
 
-A separate production Firestore read confirmed the catalogue draft is disabled
-and matches the reviewed Shopify variant and monthly plan mapping. Its
-prepaid references still need to move from representative IDs to exact
-variant-level IDs.
+The updated audit passed against all 60 exact provider records. The
+production Firestore draft now stores the exact prepaid plan ID for all 55
+variants. Readback confirmed the mapping and the disabled offer state.
+[Backend audit update](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/115)
 
 Production Firebase currently has only the existing Shopify paid-order receiver
 and publisher active. Cloud Scheduler API is disabled. Protected deployment of
