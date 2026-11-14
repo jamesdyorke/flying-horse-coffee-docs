@@ -80,6 +80,9 @@ Automatic switching remains a separate launch requirement.
   and coverage, reads the current price and creates one continuation per
   distinct purchase. The pilot's early timing, fixed £0.90 price and
   one-renewal cap apply only to the pilot.
+- [ ] Keep the one-minute pilot cadence. Before launch, move the public
+  worker to a 5–10 minute cadence and prove it processes multiple due
+  purchases in one run, including purchases paid in the same minute.
 - [ ] Verify production payment and continuation monitoring, plus failure
   and recovery signals. Record owner QA and a rollback check in the launch
   checklist. Publish the offer only after James approves the rollout.

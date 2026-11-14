@@ -349,6 +349,12 @@ recorded staging lifecycle results for the pilot decision.
   Keep the existing mobile client intact. Verify sign-in and Firebase
   customer identity through the approved preview before enabling offer
   checkout. [Website identity](https://linear.app/flyinghorsecoffee/issue/FLY-172)
+- [ ] Keep the one-minute cadence for the accelerated pilot. Set the
+  public production worker to run every 5–10 minutes before launch. Verify
+  a single run processes multiple due purchases, including orders paid in
+  the same minute. Verify overlapping runs and retries cannot create more
+  than one continuation per purchase, and any due orders beyond the batch
+  limit are picked up on a later run.
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. The 14 November read-only production inventory
