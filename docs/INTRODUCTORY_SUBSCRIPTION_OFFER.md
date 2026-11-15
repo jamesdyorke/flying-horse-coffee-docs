@@ -4,6 +4,8 @@ The first release covers the website and its Firebase backend. iOS is a
 follow-up. Keep existing iOS evidence for that release.
 Implementation guides and detailed test evidence live in the owning repositories.
 
+[Staff guide for warehouse and support](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
+
 ## Offer
 
 Customers can buy three monthly deliveries upfront at 25% off.
@@ -620,6 +622,11 @@ at execution.
   Its automatic retry succeeded at 10:25 UTC on 15 November and PostHog
   recorded one production payment milestone. The two £0 follow-ups were
   still queued, the public offer was disabled, and no renewal was scheduled.
+- [x] Compare existing warehouse fulfilments with the offer worker on
+  production Shopify. All 18 fulfilled subscription orders in the sample
+  matched the single-item fulfilment check. The worker also accepted all
+  three fulfilled orders from the previous pilot, including both prepaid
+  follow-ups. [Staff guide](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
 - [ ] Once all three deliveries for #5048 are fulfilled,
   verify one automatic £0.90 continuation on the approved test date, one
   continuation milestone on retries and the actual queued total.
