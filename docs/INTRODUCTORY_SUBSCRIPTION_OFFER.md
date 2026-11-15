@@ -627,16 +627,20 @@ at execution.
   matched the single-item fulfilment check. The worker also accepted all
   three fulfilled orders from the previous pilot, including both prepaid
   follow-ups. [Staff guide](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
-- [ ] Merge and release the shared production queue in
+- [x] Merge and release the shared production queue in
   [backend #145](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/145).
-  It reuses the scheduler and automatically accepts verified paid orders.
-  The release imports the existing #5048 enrollment for read-only pilot
-  proof. Local batch and retry tests passed. A GET-only check against #5048
-  held for outstanding fulfilments. Verify the deployed queue holds before
-  processing either of its £0 follow-ups. Leave #5043 unscheduled.
-- [ ] Once all three deliveries for #5048 are fulfilled,
-  verify one automatic £0.90 continuation on the approved test date, one
-  continuation milestone on retries and the actual queued total.
+  [v0.3.3 deployed to production](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43706992117).
+  The deployed scheduler imported the verified #5048 enrollment and held at
+  11:07 UTC on 15 November with prepaid fulfilments outstanding.
+- [x] Process #5048's two £0 Recharge follow-ups as Shopify #5049 and #5050.
+  All three pilot orders show Fulfilled. Customer notifications were off.
+  At 11:15 UTC the five-minute scheduler reached `quote_ready`. The
+  read-only rehearsal quoted **£0.90 merchandise before shipping**.
+  The public offer was disabled and the billing control and renewal
+  operation were absent. The original Recharge delivery dates were retained.
+- [ ] Verify one automatic £0.90 continuation on the approved pilot billing
+  date, one continuation milestone on retries and the actual queued total.
+  Leave #5043 unscheduled.
 - [ ] After the approved renewal, verify the pilot subscription expired
   and Recharge has no second charge queued. Record each paid renewal
   separately using its Recharge charge. Backend fixtures cover the
