@@ -360,6 +360,12 @@ recorded staging lifecycle results for the pilot decision.
   Keep the existing mobile client intact. Verify sign-in and Firebase
   customer identity through the approved preview before enabling offer
   checkout. [Website identity](https://linear.app/flyinghorsecoffee/issue/FLY-172)
+- [ ] Keep the one-minute cadence for the accelerated pilot. Set the
+  public production worker to run every 5–10 minutes before launch. Verify
+  a single run processes multiple due purchases, including orders paid in
+  the same minute. Verify overlapping runs and retries cannot create more
+  than one continuation per purchase, and any due orders beyond the batch
+  limit are picked up on a later run.
 - [ ] Configure and deploy the production worker through protected CI. Verify
   its store, Firebase project, permissions, schedule, webhook registrations
   and separate offer controls. The 14 November read-only production inventory
@@ -520,65 +526,142 @@ at execution.
 
 ### 4. Run a controlled live website pilot
 
-- [x] Create the £1 pilot product as a Draft with no sales channels. Confirm
-  the production product URL returns page not found.
-- [x] Save and verify the two Merchant Portal-only Recharge plans for the
-  £1 draft. Recharge previews £2.25 for three prepaid deliveries at 25%
-  off, expiring after one charge, and £0.90 per month at 10% off. Both
-  previews are before shipping. Storefront Widget, Customer Portal and
-  API sales channels are off for both plans.
-- [x] Verify the Shopify merchandise subtotal for the approved pilot.
-  On 14 November 2026, the direct link opened the £1 pilot. Shopify
-  confirmed Unlisted status and one linked selling plan for the three
-  prepaid deliveries at 25% off. The pilot was absent from the tested
-  storefront search results, Coffee and Equipment, Merch and Equipment,
-  and the subscription landing page and collection. The cart showed
-  £2.25 with stock at White City, but checkout rejected the item. The
-  general shipping profile has UK rates from Mare Street Market and no
-  shipping zones at White City. Moving the single pilot unit to Mare
-  Street Market let Shopify checkout show the prepaid plan and £2.25
-  merchandise subtotal before shipping. The check stopped before order
-  review. No order or payment was submitted and the live offer stayed
-  disabled. A paid pilot requires separate approval.
+[15 November handoff and fresh pilot purchase](INTRODUCTORY_OFFER_RESUME_2026-11-15.md)
+
+- [x] Prepare the £1 pilot as a Draft with no sales channels, then verify
+  the Unlisted direct link on 14 November 2026. The pilot was absent from the
+  tested storefront search and collection listings. James accepted access
+  for anyone with the link. Moving the single pilot unit from White City
+  to Mare Street Market, which has UK shipping rates, let checkout show
+  the three-delivery plan and £2.25 merchandise subtotal. The preflight
+  ended before payment. Check the named prepaid plan before purchase, since
+  the initial add-to-cart can select the £1 one-off item.
   [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
-- [x] Verify the private £0.90 pilot continuation plan. Recharge now exposes
-  the monthly plan through the API and merchant portal only. The production
-  preflight verified the exact £1 UK variant, linked prepaid plan and private
-  monthly plan. Backend PR #124 uses the private plan in its continuation
-  fixtures. Actual production continuation and renewal still require proof.
-- [ ] Check the selected plan before payment. The initial add-to-cart can
-  add a £1 one-off item. Select the 25% prepaid option and verify the
-  named three-delivery plan at £2.25 before shipping in Shopify checkout.
-  One bundle (cart quantity 1) prepays for all three deliveries.
-- [ ] Capture the approved pilot in Firebase immediately after payment.
-  The private operator command checks the exact paid Shopify order, buyer,
-  plan and total, then matches the Recharge charge and records one
-  enrollment. The production read-only preflight passed. Fixtures covered
-  a delayed original schedule and duplicate attempts. The first actual
-  payment and original three-order schedule are still pending. Each
-  distinct prepaid purchase gets its own enrollment. The two £0 prepaid
-  follow-ups are fulfillment records. Each paid monthly renewal needs a
-  separate production observation keyed by the Recharge charge. Production
-  renewal observation and automatic continuation remain open.
-  [Backend observer PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/124)
-- [ ] Verify the pilot schedule. Recharge Product Subscription Plans
-  document that daily intervals are unsupported. Use a supported cadence
-  and evaluate a private clock limited to the verified pilot enrollment.
-  The worker clock can advance continuation eligibility. Recharge controls
-  when it actually bills. Merged backend PR #125 adds a one-charge expiry
-  for the £0.90 continuation and rejects an uncapped provider readback. Fixture proof passed. Recharge
-  still needs to confirm the cap on a created pilot and show expiry with
-  no queued charge after the first approved renewal.
+- [x] Complete one paid website pilot. Shopify #5043 charged £2.25 for the
+  bundle plus £2.90 UK shipping, £5.15 total. Recharge confirmed one checkout
+  charge and two £0 shipments queued for 14 December 2026 and 14 January 2027.
+- [x] Record the payment in Firebase. The private production observer verified
+  the exact Shopify order and Recharge charge. An identical retry returned
+  duplicate. [Backend PR #126](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/126)
+- [x] Verify the production payment milestone. One production
+  `offer_payment_confirmed` event arrived, and the Slack destination completed
+  for `#backend-alerts`. [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
+- [x] Deploy Firebase backend v0.3.0 to production with pilot intake and
+  the public offer disabled. The corrected staging deployment for #128
+  and the exact v0.3.0 staging candidate both succeeded. Production #131
+  merged and deployed successfully. The release tag matches the merge
+  commit, only the existing paid-order functions are active, and the
+  production catalogue still reads `status: draft` and `enabled: false`.
+  [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43643929938)
+  · [Release](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.0)
+- [x] Deploy v0.3.1 with private production pilot intake enabled and the
+  public offer disabled. #132 scoped Firebase's retry acknowledgement to
+  the new observer. #133 prepared v0.3.1 and #134 promoted the passing
+  staging candidate. The Eventarc service account has invoker access on
+  the private observer only.
+  [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43646593585)
+- [x] Prove payment deduplication for already-paid #5043 on private
+  production intake. Two signed no-charge replays returned HTTP 200 and
+  created one receipt. Eventarc initially received HTTP 403. A service-only
+  invoker grant to its existing identity let redelivery reach the observer,
+  which logged two duplicate enrollment outcomes. The original payment and
+  outbox delivery timestamps remained unchanged. Firestore counted one
+  enrollment and PostHog counted one production payment milestone.
+  The automatic receipt handles schedule validation separately from payment.
+  [PostHog event](https://eu.posthog.com/project/238446/events/550c2740-70ac-54ee-bbaa-a9ff6573c35f/2026-11-14T20%3A43%3A56.139Z)
+- [x] Verify and retain the original prepaid schedule for #5043. The Recharge
+  read taken on 14 November at 20:33 UTC, before the queued records were
+  updated at 20:41 UTC, matches the linked live records. The original dates
+  are 14 November, 14 December and 14 January at 05:00 UTC. Firebase retained
+  the dates on the existing enrollment. The payment count remained one and
+  the existing PostHog event stayed delivered with one attempt.
+- [x] Verify the production pilot price and hold without creating anything.
+  The live preflight verified the private £0.90 monthly plan, available
+  through the Recharge API and Merchant Portal. The read-only worker
+  returned `prepaid_deliveries_outstanding`. The nominal cutoff is
+  14 February 2027 at 05:00 UTC and can move if fulfilments are delayed.
+  The public offer was disabled at verification.
+- [x] Verify the private #5043 cutoff command in read-only mode against
+  production. The original Recharge source is expired with no renewal queued.
+  The operator held for outstanding deliveries and verified that the public
+  catalogue is still disabled. The helper and local cutoff, price-cap and
+  duplicate-write tests are in [backend PR #138](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/138).
+  The schedule-recovery change merged in
+  [backend PR #137](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/137).
+- [x] Process both £0 prepaid shipments and verify all three Shopify
+  fulfilments. Recharge preserved the original dates and created only the
+  two £0 Shopify follow-ups, #5044 and #5045. Shopify shows #5043–#5045 all
+  fulfilled and the original payment remains the only charge.
+- [x] Run the early rehearsal against live #5043 with all three fulfilments.
+  It returned `quote_ready` at £0.90 merchandise. The public offer remained
+  disabled. #138 merged and deployed to staging. The read-only rehearsal
+  merged in [backend #139](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/139).
+- [x] Merge the manual early switch for the original pilot in
+  [backend #140](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/140)
+  and verify its [protected staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43700469367).
+  The read-only production rehearsal still returns £0.90. The next paid
+  test uses a fresh pilot order. Leave #5043 unscheduled.
+- [x] Enable the production Cloud Scheduler API for the private pilot.
+  The scheduler was empty after enablement. Both existing production
+  payment functions were active and the public catalogue was disabled.
+- [ ] Merge and release the private minute worker in
+  [backend #141](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/141).
+  Verify an idle tick in production before the fresh checkout. Once
+  that order is paid and all three deliveries are fulfilled, verify
+  one automatic £0.90 continuation on the approved test date, one
+  continuation milestone on retries and the actual queued total.
+- [ ] After the approved renewal, verify the pilot subscription expired
+  and Recharge has no second charge queued. Record each paid renewal
+  separately using its Recharge charge. Backend fixtures cover the
+  one-charge expiry and reject an uncapped provider readback.
   [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125)
+  Recharge controls billing and supports monthly cadence for this pilot.
   [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
-- [x] Verify the pilot direct link and check discovery. The pilot opened by
-  direct link and was absent from the storefront search and listings tested.
-  James accepted access for anyone with the link on 14 November 2026.
-- [ ] After owner approval, submit one real pilot order using normal live
-  payment settings. Verify the total, single payment and redemption, correct
-  Recharge source, prepaid schedule, and monitoring events. A normal live
-  renewal can only be observed when it comes due. Track its due date and
-  assign someone to verify it.
+- [ ] Wire automatic production website enrollment and complete alert parity.
+  The milestone route is enabled. Production failure and recovery routes are
+  saved disabled pending an end-to-end Firebase incident feed. Staging's two
+  hourly insight alerts are disabled. Recheck the production health signal
+  before enabling corresponding hourly alerts.
+
+#### Website production readiness compared with staging
+
+| Area | Staging evidence | Production gap |
+| --- | --- | --- |
+| Storefront and checkout | The fixture proved the prepaid price and the regular monthly option. | The unlisted pilot paid successfully through a cart built with the exact selling plan. Verify the normal product widget selects that plan and maps the approved catalogue variants before exposing the public offer. |
+| Payment and lifecycle events | Deployed offer handlers consume signed order, payment, refund and subscription events and retry receipts. | Production v0.3.1 wires the private website pilot payment observer alongside the regular purchase feed. Prove it accepts a fresh checkout without a signed replay. Wire ordinary catalogue enrollment and current refund/cancellation checks with durable retries and exact plan mapping. |
+| Prepaid coverage | The original schedule was retained. The staging worker held for a delayed delivery and created one continuation on retry. | The original pilot dates are retained and the read-only production worker held for outstanding deliveries. Wire the production worker with the coverage gate and live price check for automatic processing. |
+| Renewal | Staging recorded a paid renewal and exercised duplicate-safe receipt handling. | The private operator was verified read-only in production. Live creation at the verified cutoff, observation of the £0.90 renewal and confirmation of the one-charge cap remain open. |
+| Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
+
+A fresh paid pilot is a separate order. Keep both Firebase enrollments and
+verify each order's schedule and continuation independently. If a refund
+is requested, reconcile Shopify's refund and the Recharge contract before
+further processing of that order.
+[Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
+
+#### Verify catalogue mappings and the shared checkout
+
+- [x] Map all 55 eligible variants to their exact Recharge prepaid plans
+  and the five product-wide monthly plans. The disabled production
+  catalogue retains the variant mappings.
+- [ ] Verify each Recharge prepaid plan has the correct Shopify
+  selling-plan link and 25% price when the approved plans are connected.
+  Audit all variants against the catalogue, including their fulfilment
+  keys, UK stock and shipping configuration. Keep incomplete variants
+  outside the rollout.
+- [ ] Prove the shared widget and checkout flow once. Show the offer
+  before sign-in, add one three-delivery bundle on the correct plan,
+  verify 25% off without code entry, and confirm the regular 10% monthly
+  option still selects its existing plan. Use an unpaid preview only
+  where a product has different widget, pricing or shipping behaviour.
+- [ ] Use automated checks across the approved catalogue to verify
+  plan matching, captured-price validation and the 10% continuation
+  quote from the current UK price. Use one paid pilot to verify the
+  full Shopify → Recharge → Firebase → PostHog path. The £1 price and
+  one-renewal cap apply only to the pilot.
+- [ ] Verify the shared worker checks current refund and cancellation
+  state before continuation, ignores unrelated purchases and creates
+  one enrollment and continuation per paid purchase even on retries.
 
 ### 5. Open to customers and monitor
 
