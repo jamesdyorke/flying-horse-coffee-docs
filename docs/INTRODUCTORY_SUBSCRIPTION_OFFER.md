@@ -349,6 +349,13 @@ recorded staging lifecycle results for the pilot decision.
   Check that the price beside Add to Cart agrees with the bundle total and
   only show free shipping where checkout confirms it. Switch to the existing
   **10% monthly** option and verify its wording, price and selling plan.
+- [ ] After the production backend and offer catalogue are verified, link the
+  exact 25% prepaid selling plan to the eligible variants and turn on that
+  option in the existing Recharge widget on the live Shopify theme. Check
+  each eligible product page for the prepaid option and the existing purchase
+  choices. Check a product outside the offer for its existing choices. Open
+  a live checkout for one eligible coffee before placing the production test
+  order and confirm the upfront total, shipping and selected selling plan.
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
   the dedicated production read-only credential. The 14 November re-audit
   passed for five products and 55 variants. Zero of the catalogue prepaid
