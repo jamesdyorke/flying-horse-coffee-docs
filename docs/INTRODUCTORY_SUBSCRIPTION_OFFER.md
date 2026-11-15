@@ -690,6 +690,14 @@ verify each order's schedule and continuation independently.
   offer fixture has stock and a fresh buyer with a one-use, first-payment
   £7.50 discount for that exact subscription variant. Enable the private
   staging continuation mode only for that buyer.
+- [ ] Complete the staged checkout. The fresh buyer signed in, the app showed
+  £22.50 and Firebase accepted checkout preparation on 15 November.
+  The app stopped before opening Shopify checkout. A separate unpaid
+  Storefront cart with the same reservation and plan returned
+  `DISCOUNT_NOT_FOUND` at £30.00. Verify the £7.50 discount is accepted for
+  the intended buyer in Shopify before submitting a test payment. Shopify
+  Payments test mode was verified in the development store. The renewal
+  test starts after the verified test payment.
 - [ ] After verified payment, create one 10%-off monthly subscription using
   the price at purchase and the original three-delivery schedule. Verify
   the first billing date and confirm two retries retain one subscription.
