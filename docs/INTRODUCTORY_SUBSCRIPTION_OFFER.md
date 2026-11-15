@@ -682,6 +682,14 @@ verify each order's schedule and continuation independently.
 
 #### Schedule monthly billing when the prepaid bundle is bought
 
+- [x] Merge [backend #148](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/148)
+  after both required checks pass and verify its
+  [protected staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43713398117).
+  The public production catalogue is still disabled.
+- [x] Prepare the three-day staging checkout. Verify the dedicated legacy
+  offer fixture has stock and a fresh buyer with a one-use, first-payment
+  £7.50 discount for that exact subscription variant. Enable the private
+  staging continuation mode only for that buyer.
 - [ ] After verified payment, create one 10%-off monthly subscription using
   the price at purchase and the original three-delivery schedule. Verify
   the first billing date and confirm two retries retain one subscription.
