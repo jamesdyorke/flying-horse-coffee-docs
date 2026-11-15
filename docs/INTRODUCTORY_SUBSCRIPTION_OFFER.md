@@ -755,7 +755,7 @@ verify each order's schedule and continuation independently.
   Shopify order cancellation and refund routes and the staff alert before
   enabling the public offer. [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190)
 
-#### Release and prepare the fresh £1 production pilot
+#### Verify the normal checkout path and release the backend
 
 - [x] Update the [staff guide](INTRODUCTORY_OFFER_STAFF_GUIDE.md) for
   purchase-time scheduling, late fulfilment and cancellations.
@@ -764,18 +764,45 @@ verify each order's schedule and continuation independently.
   plan `23732190` was linked to Shopify selling plan `832492241276` at 25%
   off, and monthly Recharge plan `23732191` remained private at 10% off.
   The public Firebase catalogue was still disabled.
-- [ ] Complete the protected v0.4.0 release. After
-  [version PR #151](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/151)
-  lands and the exact development deployment passes, open the production
-  promotion and verify the tagged deployment. Keep the public offer disabled.
-- [ ] Enable the purchase-time path for the isolated £1 pilot before a new
-  purchase. The current code verifies new pilot payments, but its pilot
-  continuation approval is tied to historical order #5048. Reuse the shared
-  worker with dedicated scope for the fresh purchase, verified Recharge plan
-  and three original shipments, a disclosed first billing date, and one
-  £0.90 merchandise renewal plus the confirmed shipping amount. Check that
-  retries preserve one subscription and cancellation clears its queued charge.
-  Keep both historical pilot orders outside this setup.
+- [x] Close the earlier [v0.4.0 promotion #152](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/152)
+  while the normal path is being prepared. The version bump merged through
+  [backend #151](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/151).
+- [ ] In [backend #153](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/153),
+  route the test product through the same plan mapping and continuation
+  worker as the launch products. Remove old order-specific automation once
+  its existing orders and charges are accounted for. The read-only check on
+  15 November found no continuation for #5043 and a cancelled continuation
+  with no queued charge for #5048.
+- [ ] Deploy the revised backend to staging and verify one fresh test order
+  matched by its staging product and plans. Verify payment, all three
+  original shipment dates, immediate setup of a single monthly subscription
+  for the original billing date, and unchanged results after receipt replay.
+  Use Shopify test mode.
+- [ ] Prepare a production promotion from the exact staging-verified
+  revision. Keep the public offer disabled. Before the paid test, verify
+  the Unlisted £1 product's exact checkout plan, £2.25 merchandise subtotal,
+  shipping, and £0.90 monthly price and first billing date. Verify the
+  single subscription and its first paid renewal separately. Record the
+  test's billing terms and close it out before any unneeded later charge.
+  [FLY-192](https://linear.app/flyinghorsecoffee/issue/FLY-192)
+
+#### Verify the offer milestones in PostHog
+
+Use the same readable milestone labels for staging and production, with the
+environment visible in staff notifications.
+
+| Staff label | Evidence that triggers it |
+| --- | --- |
+| Initial bundle purchased | Shopify and Recharge agree that the prepaid bundle payment succeeded. |
+| Prepaid delivery fulfilled (1 of 3, 2 of 3, 3 of 3) | Shopify records a successful fulfilment for the exact prepaid delivery. |
+| Monthly subscription set up | Recharge confirms the linked future monthly subscription and first billing date. |
+| Monthly subscription started | Recharge confirms the first successful monthly payment for that subscription. |
+
+The existing redemption event represents use of the introductory offer.
+Shipping progress comes from Shopify fulfilment records. The old production
+test orders delivered the payment milestone, and #5048 also delivered the
+setup milestone. The fresh test still needs to verify the full set in PostHog
+and staff notifications, once each across retries.
 
 #### Verify catalogue mappings and the shared checkout
 

@@ -60,12 +60,13 @@ two prepaid follow-ups.
 | A prepaid order is cancelled or prepaid merchandise is refunded before first monthly billing | Check in Recharge that the linked monthly subscription is cancelled and the queued charge is gone. Escalate to the Recharge operator if it is still queued or has already been paid. |
 | The customer requests a pause or another subscription change | Route it through the usual support process so payment, shipment and subscription records can be checked together. |
 
-The internal pilot uses an approved early test date and a one-renewal cap.
-Customer subscriptions use their ordinary Recharge schedule. The launch
-checklist records the live pilot proof and the remaining checks for the
-public offer.
+The £1 production test uses an Unlisted product. Its release checklist
+tracks whether the ordinary checkout and subscription flow works from
+payment through the first monthly renewal.
 
 Staging order #1025 verified the prepaid checkout and immediate setup of
 one monthly subscription. Its first simulated renewal is due on
-18 November 2026. The renewal and production pilot are tracked in
-[FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190).
+18 November 2026. The staging evidence is tracked in
+[FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190). The test of the
+normal production path is tracked in
+[FLY-192](https://linear.app/flyinghorsecoffee/issue/FLY-192).
