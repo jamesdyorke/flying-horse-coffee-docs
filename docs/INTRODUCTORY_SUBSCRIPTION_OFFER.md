@@ -433,12 +433,12 @@ recorded staging lifecycle results for the pilot decision.
 
 #### Production schedule evidence
 
-- [ ] From the approved pilot, retain the original provider schedule alongside
-  the verified paid enrollment before any reschedule. Compare its exact order
-  IDs and provider dates with the refreshed schedule and Shopify fulfillment
-  evidence. Verify that a delay extends coverage and that the first monthly
-  charge falls after that boundary in Recharge’s configured processing window.
-  Include a month-end and a daylight-saving boundary in the schedule tests.
+- [ ] For the first live purchase, record the original three prepaid shipment
+  dates and the scheduled first monthly payment in Recharge. Confirm the
+  monthly subscription is created after the verified payment and that a late
+  Shopify fulfilment leaves the original first billing date in place. Check
+  provider dates around month-end and daylight-saving changes when reviewing
+  the schedule.
 
 Recharge documents Eastern Time as its default charge processing window,
 including prepaid shipments, and allows stores to change the processing time.
