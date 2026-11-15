@@ -331,9 +331,8 @@ recorded staging lifecycle results for the pilot decision.
   > Pay **[bundle total] today** and save **25%** on your first three coffee
   > deliveries. We’ll send one delivery a month. Your monthly subscription
   > is set up when you buy. Your first monthly payment is **[monthly coffee
-  > price] on [first billing date]**, three months after purchase. That’s
-  > **10% off** the coffee price at purchase. Monthly billing continues
-  > until you cancel.
+  > price] on [first billing date]**, three months after purchase. The
+  > monthly subscription continues at **10% off coffee** until you cancel.
 
   Fill in the selected variant’s prices and show shipping charges separately.
   Show the first billing date before the customer confirms checkout.
@@ -355,6 +354,11 @@ recorded staging lifecycle results for the pilot decision.
   Check that the price beside Add to Cart agrees with the bundle total and
   only show free shipping where checkout confirms it. Switch to the existing
   **10% monthly** option and verify its wording, price and selling plan.
+  The development store's draft theme rendered the dedicated button with
+  £22.50 upfront and £9 monthly after three months on the linked staging
+  test product. Check the cart drawer and unpaid checkout in that theme.
+  The staging Espresso Blend copy still needs its Recharge plans linked
+  to Shopify before it can show the same journey at its own prices.
 - [ ] After the production backend and offer catalogue are verified, link the
   exact 25% prepaid selling plan to the eligible variants and turn on that
   option in the existing Recharge widget on the live Shopify theme. This
