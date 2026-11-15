@@ -810,6 +810,9 @@ On 15 November the existing staging and production notifications were
 updated to show **Initial bundle purchased**, **Introductory offer redeemed**
 and **Monthly subscription set up**. The remaining two labels need verified
 fulfilment and first paid renewal events before they can appear.
+[Backend #154](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/154)
+prepares the first paid renewal event for staging. Verify deployment,
+PostHog delivery and the notification filter before counting it as passed.
 [Staging notification](https://eu.posthog.com/project/238446/pipeline/destinations/01a1a373-78a5-0000-713d-77153f4e3d7b) ·
 [Production notification](https://eu.posthog.com/project/238446/pipeline/destinations/01a1dbca-d226-0000-2131-7b82825bb797) ·
 [FLY-193](https://linear.app/flyinghorsecoffee/issue/FLY-193)
