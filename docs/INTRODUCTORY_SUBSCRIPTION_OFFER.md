@@ -686,18 +686,19 @@ verify each order's schedule and continuation independently.
   after both required checks pass and verify its
   [protected staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43713398117).
   The public production catalogue is still disabled.
-- [x] Prepare the three-day staging checkout. Verify the dedicated legacy
-  offer fixture has stock and a fresh buyer with a one-use, first-payment
-  £7.50 discount for that exact subscription variant. Enable the private
-  staging continuation mode only for that buyer.
-- [ ] Complete the staged checkout. The fresh buyer signed in, the app showed
-  £22.50 and Firebase accepted checkout preparation on 15 November.
-  The app stopped before opening Shopify checkout. A separate unpaid
-  Storefront cart with the same reservation and plan returned
-  `DISCOUNT_NOT_FOUND` at £30.00. Verify the £7.50 discount is accepted for
-  the intended buyer in Shopify before submitting a test payment. Shopify
-  Payments test mode was verified in the development store. The renewal
-  test starts after the verified test payment.
+- [x] Record the original staging checkout attempt. On 15 November, the fresh
+  buyer signed in and Firebase reserved checkout for the legacy £7.50 code.
+  Shopify returned `DISCOUNT_NOT_FOUND` at £30.00. No order was submitted.
+- [ ] Switch the three-day staging test to Recharge's built-in 25% prepaid
+  price. Use the dedicated staging variant and exact Shopify selling plan
+  `693083275612` (Recharge `23732091`). The previous unpaid website preview
+  showed £22.50 before shipping with zero codes, and the regular 10% monthly
+  plan showed £9.00. Check stock and access for the fresh staging buyer.
+- [ ] Wire the exact native prepaid plan into verified payment intake and the
+  three-day continuation test. The deployed test currently expects the legacy
+  reservation and fixed discount evidence. Verify a fresh checkout shows
+  £22.50 without a code and confirm Shopify Payments test mode before submitting
+  the test order.
 - [ ] After verified payment, create one 10%-off monthly subscription using
   the price at purchase and the original three-delivery schedule. Verify
   the first billing date and confirm two retries retain one subscription.
