@@ -148,8 +148,9 @@ step. The wider production offer stays disabled through preparation.
    unpublished production theme preview. Keep the standalone staging page
    available for targeted checks if a new integration changes a proven path.
 5. Prepare the production continuation worker behind disabled offer controls.
-   Verify current pricing, fulfillment and revised coverage, durable payment
-   evidence, cancellation and refund holds, and one continuation on retries.
+   Verify the price at purchase, the original prepaid schedule, durable payment
+   evidence, cancellation and refunds, and one continuation on retries. The
+   purchase-time workflow keeps the first billing date when fulfilment is late.
 6. Prepare production deployment and monitoring. Verify project, store,
    credential scopes, webhooks and permissions. Register and verify the
    production Shopify web sign-in client before enabling checkout. Exercise the ability to
@@ -158,8 +159,8 @@ step. The wider production offer stays disabled through preparation.
 7. Keep the pilot Unlisted and verify the direct-link checkout. Confirm the
    named prepaid plan, total including shipping, and payment capture handoff.
 8. After owner approval, run the controlled paid pilot. Verify one payment,
-   redemption and correct prepaid schedule. Record who will check the
-   normal continuation and renewal when due.
+   three prepaid deliveries, and one future monthly subscription created after
+   payment. Verify the single renewal when due.
 9. After launch approval, open the offer to customers, verify normal purchases
    and monitoring, and use the checkout pause if the launch needs to stop.
 
@@ -731,9 +732,13 @@ verify each order's schedule and continuation independently.
   prepaid and £15.25 monthly before shipping for Wholebean / 350g. Reconcile
   the monthly amount with the earlier £15.26 calculation before using it in
   offer copy or payment verification.
-- [ ] After verified payment, create one 10%-off monthly subscription using
-  the price at purchase and the original three-delivery schedule. Verify
-  the first billing date and confirm two retries retain one subscription.
+- [x] Verify the staging payment and immediate subscription setup on Shopify
+  test order #1025. It had a £22.50 merchandise subtotal and zero codes.
+  Recharge recorded all three prepaid shipments and created one £9 monthly
+  subscription capped at one charge, due 18 November 2026 for the accelerated
+  test.
+- [ ] Confirm two paid-receipt retries retain that subscription and one
+  confirmation. Verify the scheduled test charge settles and is recorded once.
 - [ ] Run the staging purchase-time test once on the normal monthly schedule
   and once using a staging-only first billing date three days after
   purchase. Release the two £0 prepaid shipments on separate days. Verify
@@ -746,6 +751,23 @@ verify each order's schedule and continuation independently.
   shipping in the real website flow and confirmation. Verify the signed
   Shopify order cancellation and refund routes and the staff alert before
   enabling the public offer. [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190)
+
+#### Release and prepare the fresh £1 production pilot
+
+- [x] Update the [staff guide](INTRODUCTORY_OFFER_STAFF_GUIDE.md) for
+  purchase-time scheduling, late fulfilment and cancellations.
+- [ ] Complete the protected v0.4.0 release. After
+  [version PR #151](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/151)
+  lands and the exact development deployment passes, open the production
+  promotion and verify the tagged deployment. Keep the public offer disabled.
+- [ ] Enable the purchase-time path for the isolated £1 pilot before a new
+  purchase. The current code verifies new pilot payments, but its pilot
+  continuation approval is tied to historical order #5048. Reuse the shared
+  worker with dedicated scope for the fresh purchase, verified Recharge plan
+  and three original shipments, a disclosed first billing date, and one
+  £0.90 merchandise renewal plus the confirmed shipping amount. Check that
+  retries preserve one subscription and cancellation clears its queued charge.
+  Keep both historical pilot orders outside this setup.
 
 #### Verify catalogue mappings and the shared checkout
 
