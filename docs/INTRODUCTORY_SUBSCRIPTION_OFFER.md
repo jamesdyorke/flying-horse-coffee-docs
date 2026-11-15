@@ -98,16 +98,15 @@ existing monthly plans and subscriber contracts in place.
   The delayed fixture later passed provider creation and retry readback
   using the private staging test clock.
 
-## Separate production pilot draft
+## Separate production pilot
 
 A separate £1 product was created in production Shopify on 13 November 2026
-for a future controlled pilot. It remains Draft with no sales channels selected.
-On 14 November, Shopify reported Draft and no publication timestamp, and
-both storefront product URLs returned 404. Recharge now has both
+for a controlled pilot. It was initially Draft with no sales channels selected.
+The initial 14 November audit found no publication timestamp and both
+storefront product URLs returned 404. Recharge initially had both
 Merchant Portal-only pilot plans. The read-only audit verified the saved
 25% prepaid and 10% monthly terms, Draft state, no Online Store publication
-and zero Shopify selling-plan groups. Shopify checkout and the complete Shopify
-sales-channel list remain unverified. Backend PR #116 added the repeatable read-only pilot
+and zero Shopify selling-plan groups at that point. Backend PR #116 added the repeatable read-only pilot
 audit. Both required checks passed before merge, and the protected staging
 deployment succeeded for the merge commit. [Pilot audit PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/116)
 
@@ -116,21 +115,20 @@ subscription path, so a draft invoice cannot substitute for the pilot's
 Recharge and website checkout proof.
 [Recharge checkout troubleshooting](https://support.getrecharge.com/hc/en-us/articles/12075818832663-Customer-missing-from-Recharge)
 
-Keep the pilot product unpublished until the checkout restriction and
-production continuation have been verified and the paid pilot is approved.
+The £1 pilot is now Unlisted and available by direct link. James accepted
+link access for the pilot. The wider offer remains disabled.
 
 ## Production launch checklist
 
-Carry forward the completed staging proof. Prepare the Grow checkout rule,
-isolated production pilot and production backend in parallel. Keep the
-production offer disabled and the pilot product Draft with no sales channels.
+Carry forward the completed staging proof. Prepare the isolated production
+pilot and production backend in parallel. Keep the wider production offer
+disabled and the pilot Unlisted.
 
 ### Execution order
 
 Use the checkboxes below to record verified results. If a step depends on
 access, CI, or owner input, record that dependency and take the next available
-step. The production offer stays disabled and the pilot stays unpublished
-through preparation.
+step. The wider production offer stays disabled through preparation.
 
 1. Confirm the fulfillment fix reached staging. The protected deployment
    passed. Preserve the existing £9 subscription and its retry evidence.
@@ -155,9 +153,8 @@ through preparation.
    production Shopify web sign-in client before enabling checkout. Exercise the ability to
    pause new checkouts while servicing existing subscriptions. Check
    failure/recovery correlation and live purchase telemetry.
-7. Review the unpublished pilot and prove the tester restriction before
-   opening access. Keep the pilot read-only if the restriction cannot be
-   enforced. Prepare the owner QA and rollout handoff.
+7. Keep the pilot Unlisted and verify the direct-link checkout. Confirm the
+   named prepaid plan, total including shipping, and payment capture handoff.
 8. After owner approval, run the controlled paid pilot. Verify one payment,
    redemption and correct prepaid schedule. Record who will check the
    normal continuation and renewal when due.
@@ -323,13 +320,27 @@ recorded staging lifecycle results for the pilot decision.
   preparation. Selecting Storefront widget creates a Shopify selling plan
   and can expose it in the live widget. This is a launch step.
   [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
+- [ ] Add the prepaid option to the existing Recharge widget on eligible
+  coffee product pages. Use **Prepay for 3 deliveries — save 25%** as the
+  button label. Put this copy directly above it:
+
+  > Pay upfront for your first three monthly deliveries and save 25%.
+  > You’ll get one delivery a month. After the prepaid period, your
+  > subscription automatically continues monthly at 10% off the then-current
+  > price.
+
+  Show the upfront total for all three deliveries next to the button and
+  show shipping separately. The button selects the prepaid plan for the
+  selected variant. One bundle (cart quantity 1) covers three deliveries.
 - [ ] Verify the existing subscription widget shows the prepaid option to
   signed-out shoppers and passes the chosen plan to Shopify checkout at
   the 25% price. A one-redemption gate is optional if Shopify and Recharge
   cannot enforce it on the current plans.
   [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
-  the dedicated production read-only credential.
+  the dedicated production read-only credential. The 14 November re-audit
+  passed for five products and 55 variants. Zero of the catalogue prepaid
+  plans was linked to a Shopify selling plan.
 - [ ] Prove shipping, fulfillment and treatment of existing subscriber
   contracts. Keep the capsule variant out of checkout while inventory is
   blocked.
@@ -517,9 +528,15 @@ at execution.
 
 [15 November handoff and fresh pilot purchase](INTRODUCTORY_OFFER_RESUME_2026-11-15.md)
 
-- [x] Verify the unlisted £1 pilot via direct link. One bundle covers three
-  prepaid deliveries and uses the linked 25% Recharge plan. The broader offer
-  remains disabled.
+- [x] Prepare the £1 pilot as a Draft with no sales channels, then verify
+  the Unlisted direct link on 14 November 2026. The pilot was absent from the
+  tested storefront search and collection listings. James accepted access
+  for anyone with the link. Moving the single pilot unit from White City
+  to Mare Street Market, which has UK shipping rates, let checkout show
+  the three-delivery plan and £2.25 merchandise subtotal. The preflight
+  ended before payment. Check the named prepaid plan before purchase, since
+  the initial add-to-cart can select the £1 one-off item.
+  [Shopify product availability](https://help.shopify.com/en/manual/products/product-status)
 - [x] Complete one paid website pilot. Shopify #5043 charged £2.25 for the
   bundle plus £2.90 UK shipping, £5.15 total. Recharge confirmed one checkout
   charge and two £0 shipments queued for 14 December 2026 and 14 January 2027.
@@ -559,8 +576,9 @@ at execution.
   the dates on the existing enrollment. The payment count remained one and
   the existing PostHog event stayed delivered with one attempt.
 - [x] Verify the production pilot price and hold without creating anything.
-  The live preflight verified the private £0.90 monthly plan. The read-only
-  worker returned `prepaid_deliveries_outstanding`. The nominal cutoff is
+  The live preflight verified the private £0.90 monthly plan, available
+  through the Recharge API and Merchant Portal. The read-only worker
+  returned `prepaid_deliveries_outstanding`. The nominal cutoff is
   14 February 2027 at 05:00 UTC and can move if fulfilments are delayed.
   The public offer was disabled at verification.
 - [x] Verify the private #5043 cutoff command in read-only mode against
@@ -585,7 +603,12 @@ at execution.
   cap and the queued total including any shipping before billing. No renewal
   was scheduled during preparation.
 - [ ] After the approved renewal, verify the pilot subscription expired
-  and Recharge has no second charge queued.
+  and Recharge has no second charge queued. Record each paid renewal
+  separately using its Recharge charge. Backend fixtures cover the
+  one-charge expiry and reject an uncapped provider readback.
+  [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125)
+  Recharge controls billing and supports monthly cadence for this pilot.
+  [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Wire automatic production website enrollment and complete alert parity.
   The milestone route is enabled. Production failure and recovery routes are
   saved disabled pending an end-to-end Firebase incident feed. Staging's two
