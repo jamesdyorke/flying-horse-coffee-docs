@@ -4,6 +4,8 @@ The first release covers the website and its Firebase backend. iOS is a
 follow-up. Keep existing iOS evidence for that release.
 Implementation guides and detailed test evidence live in the owning repositories.
 
+[Staff guide for warehouse and support](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
+
 ## Offer
 
 Customers can buy three monthly deliveries upfront at 25% off.
@@ -326,12 +328,14 @@ recorded staging lifecycle results for the pilot decision.
 
   > Pay upfront for your first three monthly deliveries and save 25%.
   > You’ll get one delivery a month. After the prepaid period, your
-  > subscription automatically continues monthly at 10% off the then-current
-  > price.
+  > subscription automatically continues monthly. Your starting monthly
+  > coffee price is 10% off the price at purchase.
 
   Show the upfront total for all three deliveries next to the button and
-  show shipping separately. The button selects the prepaid plan for the
-  selected variant. One bundle (cart quantity 1) covers three deliveries.
+  show shipping separately. Show the starting monthly price and first billing
+  date before the customer confirms checkout. The button selects the prepaid
+  plan for the selected variant. One bundle (cart quantity 1) covers three
+  separate monthly deliveries. Give the regular 10% monthly plan its own option.
 - [ ] Verify the existing subscription widget shows the prepaid option to
   signed-out shoppers and passes the chosen plan to Shopify checkout at
   the 25% price. A one-redemption gate is optional if Shopify and Recharge
@@ -484,13 +488,11 @@ production Firestore draft now stores the exact prepaid plan ID for all 55
 variants. Readback confirmed the mapping and the disabled offer state.
 [Backend audit update](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/115)
 
-Production Firebase currently has only the existing Shopify paid-order receiver
-and publisher active. Cloud Scheduler API is disabled. Protected deployment of
-the continuation runtime and its scheduler remains open.
-The current deployment scripts reject staging offer modes in production. Add a
-production-specific runtime registration and verify its default-off controls in
-CI before provisioning its scheduler. A normal production release of the
-current code will not register this worker.
+At the time of the catalogue audit, production Firebase had only the Shopify
+paid-order receiver and publisher active, and the Cloud Scheduler API was
+disabled. The deployment scripts reject staging offer modes in production.
+See the live pilot checklist below for the separate production worker and its
+deployment status.
 
 Backend PR #110 starts production integration with an unregistered quote-only
 preview. Its tests hold until the revised coverage boundary, select the mapped
@@ -604,16 +606,53 @@ at execution.
 - [x] Enable the production Cloud Scheduler API for the private pilot.
   The scheduler was empty after enablement. Both existing production
   payment functions were active and the public catalogue was disabled.
-- [ ] Merge and release the private minute worker in
+- [x] Merge the private minute worker in
   [backend #141](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/141).
-  Verify an idle tick in production before the fresh checkout. Once
-  that order is paid and all three deliveries are fulfilled, verify
-  one automatic £0.90 continuation on the approved test date, one
-  continuation milestone on retries and the actual queued total.
-- [ ] After the approved renewal, verify the pilot subscription expired
-  and Recharge has no second charge queued. Record each paid renewal
-  separately using its Recharge charge. Backend fixtures cover the
-  one-charge expiry and reject an uncapped provider readback.
+  The [exact v0.3.2 staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702164319)
+  passed. The [protected production promotion](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/144)
+  used the same tree and included the production branch ancestry.
+- [x] Deploy [v0.3.2](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.2)
+  to production. The tag matches the production merge commit.
+  [Protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
+- [x] Verify the private scheduler before the fresh checkout. Cloud Scheduler
+  shows the job enabled every minute. A natural tick at 10:14 UTC on
+  15 November returned HTTP 200 and recorded `idle`. Firestore confirmed the
+  public catalogue was disabled and the pilot activation was absent.
+- [x] Verify automatic intake for fresh paid pilot #5048. The £5.15
+  checkout produced one Firebase payment enrollment and the original
+  three-delivery schedule. The first observer attempt failed verification.
+  Its automatic retry succeeded at 10:25 UTC on 15 November and PostHog
+  recorded one production payment milestone. The two £0 follow-ups were
+  still queued, the public offer was disabled, and no renewal was scheduled.
+- [x] Compare existing warehouse fulfilments with the offer worker on
+  production Shopify. All 18 fulfilled subscription orders in the sample
+  matched the single-item fulfilment check. The worker also accepted all
+  three fulfilled orders from the previous pilot, including both prepaid
+  follow-ups. [Staff guide](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
+- [x] Merge and release the shared production queue in
+  [backend #145](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/145).
+  [v0.3.3 deployed to production](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43706992117).
+  The deployed scheduler imported the verified #5048 enrollment and held at
+  11:07 UTC on 15 November with prepaid fulfilments outstanding.
+- [x] Process #5048's two £0 Recharge follow-ups as Shopify #5049 and #5050.
+  All three pilot orders show Fulfilled. Customer notifications were off.
+  At 11:15 UTC the five-minute scheduler reached `quote_ready`. The
+  read-only rehearsal quoted **£0.90 merchandise before shipping**.
+  At that point the billing control and renewal operation were absent.
+  The original Recharge delivery dates were retained.
+- [x] Schedule and verify the one-charge continuation for #5048 on
+  **16 November 2026**. The deployed scheduler was invoked on demand and
+  confirmed Recharge subscription `910499836` at 11:33 UTC on 15 November.
+  Recharge queued charge `1987492199` for **£3.80** (£0.90 merchandise,
+  £2.90 shipping). Two runs of the deployed worker code against live state
+  took the duplicate path. Recharge still showed one subscription and one
+  queued charge, and Firebase retained the same confirmation operation.
+  The PostHog publisher marked its single continuation milestone delivered.
+  The public offer remained disabled. #5043 had no renewal scheduled.
+- [x] Cancel #5048's pilot renewal before billing. Recharge confirmed the
+  subscription was cancelled and removed the queued £3.80 charge.
+  This pilot proved production scheduling and deduplication.
+  The first paid renewal will be verified on the staging test below.
   [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125)
   Recharge controls billing and supports monthly cadence for this pilot.
   [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
@@ -634,10 +673,64 @@ at execution.
 | Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
 
 A fresh paid pilot is a separate order. Keep both Firebase enrollments and
-verify each order's schedule and continuation independently. If a refund
-is requested, reconcile Shopify's refund and the Recharge contract before
-further processing of that order.
+verify each order's schedule and continuation independently.
+
+- [ ] **Refund the production test orders.** On 15 November, Shopify
+  showed **£5.15 paid and £0 refunded** on both #5043 and #5048, including
+  original shipping. Complete each refund in Shopify Admin, then verify
+  the refund and the absence of queued pilot charges. Keep the Firebase
+  records as test evidence.
 [Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
+
+#### Schedule monthly billing when the prepaid bundle is bought
+
+- [x] Merge [backend #148](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/148)
+  after both required checks pass and verify its
+  [protected staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43713398117).
+  The public production catalogue is still disabled.
+- [x] Record the original staging checkout attempt. On 15 November, the fresh
+  buyer signed in and Firebase reserved checkout for the legacy £7.50 code.
+  Shopify returned `DISCOUNT_NOT_FOUND` at £30.00. No order was submitted.
+- [ ] Switch the three-day staging test to Recharge's built-in 25% prepaid
+  price. Use the dedicated staging variant and exact Shopify selling plan
+  `693083275612` (Recharge `23732091`). The previous unpaid website preview
+  showed £22.50 before shipping with zero codes, and the regular 10% monthly
+  plan showed £9.00. Check stock and access for the fresh staging buyer.
+- [x] Merge and deploy [backend #149](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/149).
+  It verifies payment for the exact percentage-priced prepaid plan and uses the
+  existing staging worker for the three-day continuation. Local tests passed
+  for zero-code payment evidence, one £9 continuation on retries and one
+  recorded renewal on replay. Live Recharge reads matched both staging plan
+  definitions. Both required CI checks passed and the
+  [protected staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43718944765)
+  succeeded. The dedicated development product has stock, the buyer has the
+  staging eligibility tag, and the three-day fixture is armed for this buyer.
+  Shopify Storefront returned £22.50 on the prepaid selling plan and £9.00 on
+  the ordinary monthly plan. Checkout requires an authenticated buyer.
+- [x] Investigate the staging Espresso Blend widget showing £11.96 and
+  “Deliver every 1 month”. Shopify Admin confirms that product's attached
+  25% plan bills every month without a cycle cap. The three-day test uses
+  the separate **Staging — public continuation test** product and selling
+  plan `693083275612`. Shopify bills its prepaid purchase once, and Recharge
+  handles the three monthly deliveries. Leave the existing Espresso Blend
+  plan outside the three-day test.
+- [ ] Verify a fresh Shopify checkout shows £22.50 with no code and confirm
+  Shopify Payments test mode before submitting the test order.
+- [ ] After verified payment, create one 10%-off monthly subscription using
+  the price at purchase and the original three-delivery schedule. Verify
+  the first billing date and confirm two retries retain one subscription.
+- [ ] Run the staging purchase-time test once on the normal monthly schedule
+  and once using a staging-only first billing date three days after
+  purchase. Release the two £0 prepaid shipments on separate days. Verify
+  one paid renewal and a single recorded payment.
+- [ ] Verify that late fulfilment leaves the first billing date in place.
+  Verify that a prepaid merchandise refund or order cancellation clears
+  the linked scheduled charge. Check that ordinary monthly subscriptions
+  keep their existing terms.
+- [ ] Show the 10%-off starting merchandise price, first billing date and
+  shipping in the real website flow and confirmation. Verify the signed
+  Shopify order cancellation and refund routes and the staff alert before
+  enabling the public offer. [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190)
 
 #### Verify catalogue mappings and the shared checkout
 
