@@ -342,6 +342,13 @@ recorded staging lifecycle results for the pilot decision.
   the 25% price. A one-redemption gate is optional if Shopify and Recharge
   cannot enforce it on the current plans.
   [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
+- [ ] Preview the selected **25% prepaid** option in the website widget before
+  release. Show one upfront total for three monthly deliveries, the shipping
+  terms, and the starting monthly price at **10% off** after the prepaid
+  period. Remove the generic **Pay every 3 months** label from this offer.
+  Check that the price beside Add to Cart agrees with the bundle total and
+  only show free shipping where checkout confirms it. Switch to the existing
+  **10% monthly** option and verify its wording, price and selling plan.
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
   the dedicated production read-only credential. The 14 November re-audit
   passed for five products and 55 variants. Zero of the catalogue prepaid
