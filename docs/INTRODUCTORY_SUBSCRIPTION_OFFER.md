@@ -756,6 +756,11 @@ verify each order's schedule and continuation independently.
 
 - [x] Update the [staff guide](INTRODUCTORY_OFFER_STAFF_GUIDE.md) for
   purchase-time scheduling, late fulfilment and cancellations.
+- [x] Recheck the production pilot in Shopify and Recharge. On 15 November
+  the £1 variant was Unlisted with three units in Shopify, prepaid Recharge
+  plan `23732190` was linked to Shopify selling plan `832492241276` at 25%
+  off, and monthly Recharge plan `23732191` remained private at 10% off.
+  The public Firebase catalogue was still disabled.
 - [ ] Complete the protected v0.4.0 release. After
   [version PR #151](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/151)
   lands and the exact development deployment passes, open the production
