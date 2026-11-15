@@ -781,7 +781,9 @@ verify each order's schedule and continuation independently.
 - [ ] Prepare a production promotion from the exact staging-verified
   revision. Keep the public offer disabled. Before the paid test, verify
   the Unlisted £1 product's exact checkout plan, £2.25 merchandise subtotal,
-  shipping, and £0.90 monthly price and first billing date. Verify the
+  shipping, and £0.90 monthly price and first billing date. The normal mapping
+  requires the monthly plan's Shopify selling-plan ID as well as its Recharge
+  ID. Verify those links for the Unlisted product before the test. Verify the
   single subscription and its first paid renewal separately. Record the
   test's billing terms and close it out before any unneeded later charge.
   [FLY-192](https://linear.app/flyinghorsecoffee/issue/FLY-192)
@@ -804,6 +806,14 @@ test orders delivered the payment milestone, and #5048 also delivered the
 setup milestone. The fresh test still needs to verify the full set in PostHog
 and staff notifications, once each across retries.
 
+On 15 November the existing staging and production notifications were
+updated to show **Initial bundle purchased**, **Introductory offer redeemed**
+and **Monthly subscription set up**. The remaining two labels need verified
+fulfilment and first paid renewal events before they can appear.
+[Staging notification](https://eu.posthog.com/project/238446/pipeline/destinations/01a1a373-78a5-0000-713d-77153f4e3d7b) ·
+[Production notification](https://eu.posthog.com/project/238446/pipeline/destinations/01a1dbca-d226-0000-2131-7b82825bb797) ·
+[FLY-193](https://linear.app/flyinghorsecoffee/issue/FLY-193)
+
 #### Verify catalogue mappings and the shared checkout
 
 - [x] Map all 55 eligible variants to their exact Recharge prepaid plans
@@ -821,9 +831,9 @@ and staff notifications, once each across retries.
   where a product has different widget, pricing or shipping behaviour.
 - [ ] Use automated checks across the approved catalogue to verify
   plan matching, captured-price validation and the 10% continuation
-  quote from the current UK price. Use one paid pilot to verify the
-  full Shopify → Recharge → Firebase → PostHog path. The £1 price and
-  one-renewal cap apply only to the pilot.
+  quote from the current UK price. Use one paid £1 test purchase to verify
+  the full Shopify → Recharge → Firebase → PostHog path through the same
+  offer configuration. Agree its closeout before the first paid renewal.
 - [ ] Verify the shared worker checks current refund and cancellation
   state before continuation, ignores unrelated purchases and creates
   one enrollment and continuation per paid purchase even on retries.
