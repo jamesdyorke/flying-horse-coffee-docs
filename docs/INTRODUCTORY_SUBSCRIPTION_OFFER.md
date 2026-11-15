@@ -614,7 +614,13 @@ at execution.
   shows the job enabled every minute. A natural tick at 10:14 UTC on
   15 November returned HTTP 200 and recorded `idle`. Firestore confirmed the
   public catalogue was disabled and the pilot activation was absent.
-- [ ] Once the fresh order is paid and all three deliveries are fulfilled,
+- [x] Verify automatic intake for fresh paid pilot #5048. The £5.15
+  checkout produced one Firebase payment enrollment and the original
+  three-delivery schedule. The first observer attempt failed verification.
+  Its automatic retry succeeded at 10:25 UTC on 15 November and PostHog
+  recorded one production payment milestone. The two £0 follow-ups were
+  still queued, the public offer was disabled, and no renewal was scheduled.
+- [ ] Once all three deliveries for #5048 are fulfilled,
   verify one automatic £0.90 continuation on the approved test date, one
   continuation milestone on retries and the actual queued total.
 - [ ] After the approved renewal, verify the pilot subscription expired

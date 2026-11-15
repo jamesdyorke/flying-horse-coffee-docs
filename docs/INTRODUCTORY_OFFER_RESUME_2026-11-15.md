@@ -7,7 +7,7 @@
 
 ## Resume here
 
-> Resume with one fresh prepaid checkout on the existing Unlisted £1 pilot.
+> Resume with fulfilment of fresh paid pilot #5048.
 > Firebase v0.3.2 is deployed and the private minute scheduler has run in
 > production. Keep the public offer disabled. Follow the fresh order from
 > checkout through fulfilment, one automatic £0.90 monthly subscription and
@@ -15,13 +15,16 @@
 > Recharge queues no second renewal. Update FLY-133 and the shared checklist
 > as each step is proved.
 
-**First task.** Verify the current checkout total and buy one prepaid bundle.
-On 15 November the [protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
+**First task.** Use #5048 for the remaining pilot. Shopify and Recharge
+verified the £5.15 checkout. The automatic Firebase intake recovered on its
+first retry and saved the original three-delivery schedule. PostHog recorded
+one production payment milestone. Both £0 follow-ups are still queued.
+
+The [protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
 published [v0.3.2](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.2).
 The private job ran naturally at 10:14 UTC, returned HTTP 200 and logged
 `idle`. The public catalogue was disabled and there was no pilot activation.
-The read-only rehearsal for the original #5043 order quoted £0.90. Leave that
-order unscheduled and use the fresh order for the next proof.
+Leave #5043 unscheduled. The renewal for #5048 is also unscheduled.
 
 ## Status at the end of 14 November
 
@@ -75,20 +78,17 @@ a future charge are separate decisions for James.
   provider evidence and the approved billing date. The pilot's projected
   coverage clock can move the test forward after real fulfilment.
 
-### 2. Make one fresh purchase on the existing pilot
+### 2. Verify the fresh purchase
 
-- [ ] James opens the existing pilot in a fresh checkout, selects the prepaid
-  plan and adds **one bundle**. It covers three deliveries. Verify stock,
-  £2.25 before shipping and the actual UK checkout total. The previous pilot
-  total was £5.15. James submits the order when happy with the total.
-- [ ] Observe the new paid order reach Recharge and Firebase through the
-  ordinary webhook. Record one paid charge, one receipt and enrollment, and
-  one production PostHog payment milestone. Keep #5043's evidence separate.
-  If payment requires a replay to appear, record that as a failure of this
-  automatic intake check.
-- [ ] Retain the three original Recharge schedule dates before processing
-  the prepaid follow-ups. If automatic schedule retention goes to review,
-  preserve the original provider evidence and record any operator recovery.
+- [x] James bought one prepaid bundle on the existing pilot. Shopify #5048
+  shows £2.25 merchandise and £2.90 UK shipping, £5.15 paid.
+- [x] Verify automatic Shopify and Recharge payment intake. The signed paid
+  webhook reached Firebase at 10:25 UTC on 15 November. The first observer
+  attempt failed verification, then the automatic retry confirmed payment.
+  One Firebase enrollment and one production PostHog payment milestone
+  were verified.
+- [x] Retain the original three Recharge delivery dates. The two £0
+  follow-ups were still queued and no renewal was scheduled.
 
 ### 3. Watch the switch in Recharge
 
