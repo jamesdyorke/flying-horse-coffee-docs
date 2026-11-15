@@ -646,11 +646,11 @@ at execution.
   took the duplicate path. Recharge still showed one subscription and one
   queued charge, and Firebase retained the same confirmation operation.
   The PostHog publisher marked its single continuation milestone delivered.
-  The public offer remained disabled. Leave #5043 unscheduled.
-- [ ] After the approved renewal, verify the pilot subscription expired
-  and Recharge has no second charge queued. Record each paid renewal
-  separately using its Recharge charge. Backend fixtures cover the
-  one-charge expiry and reject an uncapped provider readback.
+  The public offer remained disabled. #5043 had no renewal scheduled.
+- [x] Cancel #5048's pilot renewal before billing. Recharge confirmed the
+  subscription was cancelled and removed the queued £3.80 charge.
+  This pilot proved production scheduling and deduplication.
+  The first paid renewal will be verified on the staging test below.
   [One-renewal cap PR](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/125)
   Recharge controls billing and supports monthly cadence for this pilot.
   [Recharge Product Subscription Plans](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
@@ -673,12 +673,30 @@ at execution.
 A fresh paid pilot is a separate order. Keep both Firebase enrollments and
 verify each order's schedule and continuation independently.
 
-- [ ] **Refund the production test orders after the renewal evidence is
-  captured.** Review Shopify #5043 and #5048 and refund any remaining paid
-  balance on each. Include #5048's pilot renewal if it settles. Verify the
-  refunds in Shopify and confirm Recharge has no further pilot charges
-  queued. Keep the Firebase records as test evidence.
+- [ ] **Refund the production test orders.** On 15 November, Shopify
+  showed **£5.15 paid and £0 refunded** on both #5043 and #5048, including
+  original shipping. Complete each refund in Shopify Admin, then verify
+  the refund and the absence of queued pilot charges. Keep the Firebase
+  records as test evidence.
 [Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
+
+#### Schedule monthly billing when the prepaid bundle is bought
+
+- [ ] After verified payment, create one 10%-off monthly subscription using
+  the price at purchase and the original three-delivery schedule. Verify
+  the first billing date and confirm two retries retain one subscription.
+- [ ] Run the staging purchase-time test once on the normal monthly schedule
+  and once using a staging-only first billing date three days after
+  purchase. Release the two £0 prepaid shipments on separate days. Verify
+  one paid renewal and a single recorded payment.
+- [ ] Verify that late fulfilment leaves the first billing date in place.
+  Verify that a prepaid merchandise refund or order cancellation clears
+  the linked scheduled charge. Check that ordinary monthly subscriptions
+  keep their existing terms.
+- [ ] Show the 10%-off starting merchandise price, first billing date and
+  shipping in the real website flow and confirmation. Verify the signed
+  Shopify order cancellation and refund routes and the staff alert before
+  enabling the public offer. [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190)
 
 #### Verify catalogue mappings and the shared checkout
 

@@ -7,10 +7,11 @@
 
 ## Resume here
 
-> Resume from the queued **16 November 2026** renewal for production pilot
-> #5048. Keep the public offer disabled. Verify that the one **£3.80**
-> charge is paid and recorded in Firebase and PostHog, that the pilot
-> subscription expires and that Recharge queues no second charge.
+> Resume with [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190).
+> The production pilot renewal for #5048 was cancelled before billing.
+> Recharge removed the queued £3.80 charge. Both original £5.15 Shopify
+> refunds remain open. Keep the public offer disabled and prove the
+> revised purchase-time scheduling and renewal in staging.
 
 **Current pilot.** Shopify and Recharge verified the £5.15 checkout. Firebase
 confirmed payment on retry and retained the original three-delivery schedule.
@@ -22,9 +23,9 @@ follow-ups became #5049 and #5050. All three orders show Fulfilled. The
 regular scheduler reached `quote_ready` at 11:15 UTC and the read-only
 rehearsal quoted £0.90 before shipping. After approval for 16 November,
 the deployed scheduler was invoked on demand and confirmed subscription
-`910499836` at 11:33 UTC. Charge `1987492199` is queued for £3.80
-including £2.90 shipping. Recharge reports a one-charge cap. Two runs
-of the worker against live state kept the same subscription and charge.
+`910499836` at 11:33 UTC. Charge `1987492199` was queued for £3.80
+including £2.90 shipping. Two runs of the worker against live state kept
+the same subscription and charge. Both were later cancelled before billing.
 
 The [protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
 published [v0.3.2](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.2).
@@ -106,11 +107,11 @@ a future charge are separate decisions for James.
 - [x] Two duplicate worker runs returned the same Firebase confirmation.
   Recharge read-back confirmed one child subscription and one queued charge.
 - [x] Verify the PostHog publisher marked the continuation milestone delivered.
-- [ ] After the approved first renewal, verify one paid charge for the
-  continuation, that the child expired and that Recharge has no second
-  renewal queued. Record the evidence and any gaps in the Firebase and
-  PostHog continuation feed. Leave #5043 unscheduled if the fresh order is
-  the one selected for the paid renewal test.
+- [x] Cancel the production pilot subscription before first billing and
+  verify Recharge removed its queued charge. Leave #5043 unscheduled.
+- [ ] Refund both original production purchases in Shopify.
+- [ ] Prove one paid renewal and no duplicate renewal record with FLY-190's
+  staging-only three-day fixture.
 
 ## What remains before going live
 

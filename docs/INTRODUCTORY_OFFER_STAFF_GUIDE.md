@@ -63,3 +63,18 @@ The internal pilot uses an approved early test date and a one-renewal cap.
 Customer subscriptions use their ordinary Recharge schedule. The launch
 checklist records the live pilot proof and the remaining checks for the
 public offer.
+
+## Planned update before launch
+
+The revised offer sets up the 10%-off monthly subscription when the prepaid
+payment is verified. The first monthly payment is scheduled for the end of the
+original prepaid period. Its starting merchandise price is set at purchase.
+Warehouse staff still dispatch and mark all three prepaid orders **Fulfilled**
+in Shopify. An outstanding fulfilment leaves the scheduled billing date
+in place, so raise missed shipments through the usual dispatch process.
+
+If the prepaid order is cancelled or prepaid merchandise is refunded before
+the first monthly payment, check in Recharge that the linked subscription was
+cancelled and its first charge was removed. Escalate to the Recharge operator
+if it is still queued or appears to have been paid. This revised process is
+awaiting staging verification. [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190)
