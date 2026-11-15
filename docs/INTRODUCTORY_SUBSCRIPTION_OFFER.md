@@ -164,6 +164,20 @@ step. The wider production offer stays disabled through preparation.
 9. After launch approval, open the offer to customers, verify normal purchases
    and monitoring, and use the checkout pause if the launch needs to stop.
 
+### Firestore feature paths
+
+- [ ] Deploy the Rewards and registry compatibility readers through protected
+  staging CI. Verify private-path rules, a historical Rewards operation replay
+  and the registry erasure fence. Verify the public locations query still works.
+- [ ] Verify monitoring delivery by original event UUID across the layout
+  change, including a pending send, a retry and a replay after delivery. Keep
+  legacy monitoring history available while new drill reports use the grouped
+  path.
+- [ ] Record staging proof and the production rollback decision before changing
+  production storage. Keep the wider offer disabled and the production preview
+  unpublished. Use existing records and synthetic fixtures for verification.
+  [Firestore feature rollout](https://linear.app/flyinghorsecoffee/issue/FLY-196)
+
 ### 1. Prove the normal switch in staging
 
 - [x] Verify the app opens Shopify with the exact prepaid plan and automatic
