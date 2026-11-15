@@ -324,8 +324,9 @@ recorded staging lifecycle results for the pilot decision.
   and can expose it in the live widget. This is a launch step.
   [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
 - [ ] Add the prepaid option to the existing Recharge widget on eligible
-  coffee product pages. Use **Prepay for 3 deliveries — save 25%** as the
-  button label. Put this copy directly above it:
+  coffee product pages. Use a dedicated **Buy three up front and get 25% off**
+  button. Keep the ordinary quantity selector for standard purchases. Put
+  this copy directly above the prepaid button:
 
   > Pay **[bundle total] today** and save **25%** on your first three coffee
   > deliveries. We’ll send one delivery a month. Your monthly subscription
