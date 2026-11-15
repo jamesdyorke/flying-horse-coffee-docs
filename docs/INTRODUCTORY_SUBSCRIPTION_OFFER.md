@@ -360,8 +360,8 @@ recorded staging lifecycle results for the pilot decision.
   The development store's draft theme rendered the dedicated button with
   £22.50 upfront and £9 monthly after three months on the linked staging
   test product. Check the cart drawer and unpaid checkout in that theme.
-  The staging Espresso Blend copy still needs its Recharge plans linked
-  to Shopify before it can show the same journey at its own prices.
+  The staging Espresso Blend preview now uses the verified plans for all
+  14 grind and size variants. Its cart and checkout checks remain open.
 - [ ] After the production backend and offer catalogue are verified, link the
   exact 25% prepaid selling plan to the eligible variants and turn on that
   option in the existing Recharge widget on the live Shopify theme. This
@@ -763,21 +763,17 @@ verify each order's schedule and continuation independently.
   with all 14 production grind and size options and matching UK base prices
   (£16.95 for 350g, £35.95 for 1kg). The copy uses the coffee template with
   the grind and size selectors and quantity picker.
-- [x] Create and independently verify both staging Recharge plans for the copy.
-  Prepaid plan `23733565` applies only to Wholebean / 350g
-  (`59922128503132`), ships monthly and expires after one charge covering
-  three deliveries at 25% off. Monthly plan `23733564` applies to all
-  variants at 10% off. Both plans are available through the merchant portal
-  and API. Their Shopify selling-plan links are absent.
-- [ ] In staging Recharge, extend the 25% prepaid plan to the copy's grind
-  and size variants and enable **Storefront widget** for both existing plans.
-  Verify the generated Shopify selling-plan IDs and per-variant coverage
-  before adding the mappings to the staging preview theme. Verify two
-  different grinds and both sizes in the cart, one bundle per test, and compare
-  the full upfront price and 10% monthly coffee price against Shopify and
-  Recharge. Recharge previously previewed £38.14 prepaid and £15.25 monthly
-  before shipping for Wholebean / 350g. Use the provider totals for display
-  and payment verification. Keep the copy in draft until the plans are linked.
+- [x] Link the staging Espresso Blend plans to Shopify and verify that all
+  14 variants each have one exact 25% prepaid plan and share the 10% monthly
+  plan. The staging catalogue maps each Shopify prepaid plan to its verified
+  Recharge counterpart. The staging theme uses those same Shopify mappings.
+- [x] Render the unlisted Espresso Blend copy in the staging preview theme.
+  The Wholebean / 350g product page showed £38.13 upfront and £15.26 for
+  monthly coffee before shipping. Shopify's fixed prepaid price for 1kg is
+  £80.88. The first monthly payment is three months after purchase.
+- [ ] Try two grinds and both sizes in the preview cart, one bundle at a
+  time. Compare the variant, upfront subtotal and monthly price against the
+  product page, then check the terms in unpaid Shopify checkout.
 - [x] Verify the staging payment and immediate subscription setup on Shopify
   test order #1025. It had a £22.50 merchandise subtotal and zero codes.
   Recharge recorded all three prepaid shipments and created one £9 monthly
