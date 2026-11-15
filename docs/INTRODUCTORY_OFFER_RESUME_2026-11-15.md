@@ -7,7 +7,8 @@
 
 ## Resume here
 
-> Resume with fulfilment of fresh paid pilot #5048.
+> Resume with the shared production queue in backend #145. After it deploys,
+> use the existing paid pilot #5048 and verify the queue waits for fulfilment.
 > Firebase v0.3.2 is deployed and the private minute scheduler has run in
 > production. Keep the public offer disabled. Follow the fresh order from
 > checkout through fulfilment, one automatic £0.90 monthly subscription and
@@ -15,10 +16,17 @@
 > Recharge queues no second renewal. Update FLY-133 and the shared checklist
 > as each step is proved.
 
-**First task.** Use #5048 for the remaining pilot. Shopify and Recharge
+**First task.** Release the shared queue and use #5048 for the remaining pilot. Shopify and Recharge
 verified the £5.15 checkout. The automatic Firebase intake recovered on its
 first retry and saved the original three-delivery schedule. PostHog recorded
 one production payment milestone. Both £0 follow-ups are still queued.
+[Backend #145](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/145)
+adds the shared production queue and imports this payment for the pilot.
+The read-only worker held before fulfilment against live #5048. Wait for the
+shared queue release and verify the same hold from the scheduler before
+processing the two £0 follow-ups. Recharge Product Subscription Plans
+use the monthly cadence for this pilot. Bring forward the individual paid
+shipments for testing and retain the original dates.
 
 The [protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
 published [v0.3.2](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.2).
