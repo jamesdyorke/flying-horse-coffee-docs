@@ -8,8 +8,8 @@
 ## Resume here
 
 > Resume the Flying Horse Coffee website offer from the 14 November handoff.
-> Verify #140 and the existing pilot payment intake. Build and verify the
-> private production pilot scheduler with the offer disabled. Keep the pilot
+> Follow backend #141 through protected CI and production release. Verify an
+> idle scheduler tick with the public offer disabled. Keep the pilot
 > on a one-minute cadence. Once we can show it will pick up a fresh purchase,
 > James will buy one bundle on the existing Unlisted £1 pilot. Follow that
 > order from checkout through fulfilment, one automatic £0.90 monthly
@@ -17,12 +17,13 @@
 > subscription and Recharge queues no second renewal. Update FLY-133 and the
 > shared launch checklist as each step is proved.
 
-**First task.** Wire the private production scheduler. The payment intake
-already runs automatically. The production continuation code has an operator
-command and a read-only rehearsal. It still needs a scheduled caller to make
-the switch automatic. A new paid checkout can prove fresh payment intake today.
-To use that same purchase as proof of an automatic switch, verify the scheduler
-before checkout.
+**First task.** Ship the private production scheduler in backend #141. On
+15 November, #140 merged and its protected staging deployment passed. Both
+production payment functions were active, the pilot remained Unlisted and the
+disabled-catalogue rehearsal for #5043 still quoted £0.90. The production
+Cloud Scheduler API was enabled and the job list was empty. Wait for #141's
+protected production release and observe an idle tick before making the fresh
+checkout for the automatic switch test.
 
 ## Status at the end of 14 November
 
@@ -51,7 +52,10 @@ a future charge are separate decisions for James.
   and returned the £0.90 quote after all three fulfilments.
 - [Backend #140](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/140)
   prepares a private early switch for #5043 only. Both required checks passed.
-  It was open at handoff. Check current status before proceeding.
+  It merged and passed protected staging deployment on 15 November.
+- [Backend #141](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/141)
+  adds the private minute worker for the next purchase. Local tests passed.
+  Protected deployment and live proof are pending.
 - [Shared docs #72](https://github.com/jamesdyorke/flying-horse-coffee-docs/pull/72)
   carries this handover and the current launch checklist.
 
@@ -59,9 +63,9 @@ a future charge are separate decisions for James.
 
 ### 1. Get the automatic pilot ready before checkout
 
-- [ ] Verify #140's merge and the deployed production payment observer.
+- [x] Verify #140's merge and the deployed production payment observer.
   Confirm the pilot is Unlisted and the public catalogue is disabled.
-- [ ] Prepare the scheduler to accept a separately verified purchase of the
+- [x] Prepare the scheduler to accept a separately verified purchase of the
   exact pilot variant and plan. Resolve the new order and Recharge source
   after checkout. The operator in #140 is bound to #5043.
 - [ ] Deploy and verify a private, pilot-only scheduled path. Use one-minute

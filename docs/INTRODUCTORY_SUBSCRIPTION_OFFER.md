@@ -596,12 +596,20 @@ at execution.
   It returned `quote_ready` at £0.90 merchandise. The public offer remained
   disabled. #138 merged and deployed to staging. The read-only rehearsal
   merged in [backend #139](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/139).
-- [ ] Review the separately invoked early switch in
+- [x] Merge the manual early switch for the original pilot in
   [backend #140](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/140)
-  and choose an approved early billing date. Only then run the
-  private switch for #5043. Verify one Recharge continuation, the one-charge
-  cap and the queued total including any shipping before billing. No renewal
-  was scheduled during preparation.
+  and verify its [protected staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43700469367).
+  The read-only production rehearsal still returns £0.90. The next paid
+  test uses a fresh pilot order. Leave #5043 unscheduled.
+- [x] Enable the production Cloud Scheduler API for the private pilot.
+  The scheduler was empty after enablement. Both existing production
+  payment functions were active and the public catalogue was disabled.
+- [ ] Merge and release the private minute worker in
+  [backend #141](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/141).
+  Verify an idle tick in production before the fresh checkout. Once
+  that order is paid and all three deliveries are fulfilled, verify
+  one automatic £0.90 continuation on the approved test date, one
+  continuation milestone on retries and the actual queued total.
 - [ ] After the approved renewal, verify the pilot subscription expired
   and Recharge has no second charge queued. Record each paid renewal
   separately using its Recharge charge. Backend fixtures cover the
