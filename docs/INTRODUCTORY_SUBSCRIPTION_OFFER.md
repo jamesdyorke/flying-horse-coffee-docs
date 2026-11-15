@@ -484,13 +484,11 @@ production Firestore draft now stores the exact prepaid plan ID for all 55
 variants. Readback confirmed the mapping and the disabled offer state.
 [Backend audit update](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/115)
 
-Production Firebase currently has only the existing Shopify paid-order receiver
-and publisher active. Cloud Scheduler API is disabled. Protected deployment of
-the continuation runtime and its scheduler remains open.
-The current deployment scripts reject staging offer modes in production. Add a
-production-specific runtime registration and verify its default-off controls in
-CI before provisioning its scheduler. A normal production release of the
-current code will not register this worker.
+At the time of the catalogue audit, production Firebase had only the Shopify
+paid-order receiver and publisher active, and the Cloud Scheduler API was
+disabled. The deployment scripts reject staging offer modes in production.
+See the live pilot checklist below for the separate production worker and its
+deployment status.
 
 Backend PR #110 starts production integration with an unregistered quote-only
 preview. Its tests hold until the revised coverage boundary, select the mapped
@@ -604,11 +602,20 @@ at execution.
 - [x] Enable the production Cloud Scheduler API for the private pilot.
   The scheduler was empty after enablement. Both existing production
   payment functions were active and the public catalogue was disabled.
-- [ ] Merge and release the private minute worker in
+- [x] Merge the private minute worker in
   [backend #141](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/141).
-  Verify an idle tick in production before the fresh checkout. Once
-  that order is paid and all three deliveries are fulfilled, verify
-  one automatic £0.90 continuation on the approved test date, one
+  The [exact v0.3.2 staging deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702164319)
+  passed. The [protected production promotion](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/144)
+  used the same tree and included the production branch ancestry.
+- [x] Deploy [v0.3.2](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.2)
+  to production. The tag matches the production merge commit.
+  [Protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
+- [x] Verify the private scheduler before the fresh checkout. Cloud Scheduler
+  shows the job enabled every minute. A natural tick at 10:14 UTC on
+  15 November returned HTTP 200 and recorded `idle`. Firestore confirmed the
+  public catalogue was disabled and the pilot activation was absent.
+- [ ] Once the fresh order is paid and all three deliveries are fulfilled,
+  verify one automatic £0.90 continuation on the approved test date, one
   continuation milestone on retries and the actual queued total.
 - [ ] After the approved renewal, verify the pilot subscription expired
   and Recharge has no second charge queued. Record each paid renewal
