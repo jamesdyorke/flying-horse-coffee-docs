@@ -431,6 +431,14 @@ recorded staging lifecycle results for the pilot decision.
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
 
+- [x] Deploy backend v0.4.0 with purchase-time scheduling and the Payment
+  Subscriptions cutover. The production receipt trigger and continuation
+  scheduler are active. The public catalogue was verified disabled after
+  deployment. [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43766046605)
+- [ ] Before the first live purchase, record the exact Shopify prepaid plan
+  links in the production catalogue, verify purchase-time scheduling is
+  enabled for the offer, and check the live widget and unpaid checkout.
+
 #### Production schedule evidence
 
 - [ ] For the first live purchase, record the original three prepaid shipment
