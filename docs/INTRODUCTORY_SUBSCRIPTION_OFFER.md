@@ -361,9 +361,11 @@ recorded staging lifecycle results for the pilot decision.
   makes the offer public and purchasable on the eligible product pages.
   Confirm as a signed-out shopper that each eligible page shows the prepaid
   option and its existing purchase choices. Check a product outside the
-  offer for its existing choices. Open a live checkout for one eligible coffee
-  and confirm the upfront total, shipping, selected selling plan and the
-  first monthly payment terms before placing the production test order.
+  offer for its existing choices. Click the prepaid button on an eligible
+  product and check the cart drawer. It should show one line for one
+  three-delivery bundle, the selected grind and size, and the upfront
+  subtotal. Open checkout from the drawer and confirm the selling plan,
+  shipping and first monthly payment terms before paying.
   After payment, verify that Recharge has three prepaid shipments and one
   active monthly subscription with its first charge three months later.
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
