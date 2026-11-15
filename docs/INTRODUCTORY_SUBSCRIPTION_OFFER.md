@@ -737,8 +737,11 @@ verify each order's schedule and continuation independently.
   Recharge recorded all three prepaid shipments and created one £9 monthly
   subscription capped at one charge, due 18 November 2026 for the accelerated
   test.
-- [ ] Confirm two paid-receipt retries retain that subscription and one
-  confirmation. Verify the scheduled test charge settles and is recorded once.
+- [x] Replay the original signed Recharge checkout receipt twice through the
+  private staging worker. Both returned HTTP 204. Firebase retained one paid
+  enrollment and an identical continuation confirmation, and Recharge still
+  had exactly one active £9 replacement (`910604830`) capped at one charge.
+- [ ] Verify the scheduled 18 November test charge settles and is recorded once.
 - [ ] Run the staging purchase-time test once on the normal monthly schedule
   and once using a staging-only first billing date three days after
   purchase. Release the two £0 prepaid shipments on separate days. Verify
