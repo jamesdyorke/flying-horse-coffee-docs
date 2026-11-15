@@ -761,18 +761,23 @@ verify each order's schedule and continuation independently.
   three-delivery bundle, £4.99 standard shipping and £27.49 total.
 - [x] Create the unpublished staging [Espresso Blend copy](https://admin.shopify.com/store/development-flying-horse-coffee/products/15990260466012)
   with all 14 production grind and size options and matching UK base prices
-  (£16.95 for 350g, £35.95 for 1kg).
+  (£16.95 for 350g, £35.95 for 1kg). The copy uses the coffee template with
+  the grind and size selectors and quantity picker.
 - [x] Create and independently verify both staging Recharge plans for the copy.
   Prepaid plan `23733565` applies only to Wholebean / 350g
   (`59922128503132`), ships monthly and expires after one charge covering
   three deliveries at 25% off. Monthly plan `23733564` applies to all
   variants at 10% off. Both plans are available through the merchant portal
   and API. Their Shopify selling-plan links are absent.
-- [ ] Connect the copy's staging selling plans and validate the actual
-  storefront, checkout and continuation amounts. Recharge previews £38.14
-  prepaid and £15.25 monthly before shipping for Wholebean / 350g. Reconcile
-  the monthly amount with the earlier £15.26 calculation before using it in
-  offer copy or payment verification.
+- [ ] In staging Recharge, extend the 25% prepaid plan to the copy's grind
+  and size variants and enable **Storefront widget** for both existing plans.
+  Verify the generated Shopify selling-plan IDs and per-variant coverage
+  before adding the mappings to the staging preview theme. Verify two
+  different grinds and both sizes in the cart, one bundle per test, and compare
+  the full upfront price and 10% monthly coffee price against Shopify and
+  Recharge. Recharge previously previewed £38.14 prepaid and £15.25 monthly
+  before shipping for Wholebean / 350g. Use the provider totals for display
+  and payment verification. Keep the copy in draft until the plans are linked.
 - [x] Verify the staging payment and immediate subscription setup on Shopify
   test order #1025. It had a £22.50 merchandise subtotal and zero codes.
   Recharge recorded all three prepaid shipments and created one £9 monthly
