@@ -691,7 +691,7 @@ verify each order's schedule and continuation independently.
 - [x] Record the original staging checkout attempt. On 15 November, the fresh
   buyer signed in and Firebase reserved checkout for the legacy £7.50 code.
   Shopify returned `DISCOUNT_NOT_FOUND` at £30.00. No order was submitted.
-- [ ] Switch the three-day staging test to Recharge's built-in 25% prepaid
+- [x] Switch the three-day staging test to Recharge's built-in 25% prepaid
   price. Use the dedicated staging variant and exact Shopify selling plan
   `693083275612` (Recharge `23732091`). The previous unpaid website preview
   showed £22.50 before shipping with zero codes, and the regular 10% monthly
@@ -714,8 +714,23 @@ verify each order's schedule and continuation independently.
   plan `693083275612`. Shopify bills its prepaid purchase once, and Recharge
   handles the three monthly deliveries. Leave the existing Espresso Blend
   plan outside the three-day test.
-- [ ] Verify a fresh Shopify checkout shows £22.50 with no code and confirm
-  Shopify Payments test mode before submitting the test order.
+- [x] Verify a fresh Shopify checkout shows £22.50 with no code and confirm
+  Shopify Payments test mode. The signed-in staging buyer's cart showed one
+  three-delivery bundle, £4.99 standard shipping and £27.49 total.
+- [x] Create the unpublished staging [Espresso Blend copy](https://admin.shopify.com/store/development-flying-horse-coffee/products/15990260466012)
+  with all 14 production grind and size options and matching UK base prices
+  (£16.95 for 350g, £35.95 for 1kg).
+- [x] Create and independently verify both staging Recharge plans for the copy.
+  Prepaid plan `23733565` applies only to Wholebean / 350g
+  (`59922128503132`), ships monthly and expires after one charge covering
+  three deliveries at 25% off. Monthly plan `23733564` applies to all
+  variants at 10% off. Both plans are available through the merchant portal
+  and API. Their Shopify selling-plan links are absent.
+- [ ] Connect the copy's staging selling plans and validate the actual
+  storefront, checkout and continuation amounts. Recharge previews £38.14
+  prepaid and £15.25 monthly before shipping for Wholebean / 350g. Reconcile
+  the monthly amount with the earlier £15.26 calculation before using it in
+  offer copy or payment verification.
 - [ ] After verified payment, create one 10%-off monthly subscription using
   the price at purchase and the original three-delivery schedule. Verify
   the first billing date and confirm two retries retain one subscription.
