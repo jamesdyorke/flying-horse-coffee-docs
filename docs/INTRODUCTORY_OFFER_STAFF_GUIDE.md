@@ -35,6 +35,14 @@ fulfilment for the correct order line. **Fulfilled** is enough. A separate
 carrier **Delivered** status, a tracking scan and a confirmation in
 Recharge are unnecessary for the switch.
 
+Recharge schedules all three prepaid shipments at purchase. If an earlier
+Shopify order is still **Unfulfilled**, the next prepaid order can still
+appear on its scheduled date. Check any outstanding order through the usual
+dispatch workflow and record fulfilment once it has shipped. The switch to
+the paid monthly subscription waits until **all three** orders show fulfilled
+and the prepaid period has ended.
+[Recharge prepaid shipment schedule](https://support.getrecharge.com/hc/en-us/articles/360008830433-Changing-the-product-or-swapping-variants-for-an-existing-prepaid-subscription)
+
 A production sample on 15 November 2026 found 18 recent subscription orders
 with the exact successful single-item fulfilment the worker expects. One
 recent subscription order was still unfulfilled. None of the 25 fulfilled
@@ -46,7 +54,7 @@ two prepaid follow-ups.
 
 | What you see | What to check |
 | --- | --- |
-| A monthly shipment order is missing in Shopify | Check the next shipment date and order status in Recharge. Send the original Shopify order number and the missing shipment month to the person who manages Recharge. |
+| A prepaid shipment order is missing in Shopify | Check the next shipment date and order status in Recharge. Send the original Shopify order number and the missing shipment month to the person who manages Recharge. |
 | The parcel was dispatched but Shopify still shows **Unfulfilled** | Check the dispatch record and complete or correct the normal Shopify fulfilment for that order. |
 | All three orders show **Fulfilled**, but the monthly subscription hasn’t appeared | Check whether the prepaid period has ended, including any schedule changes. If it has ended, send the original Shopify order number and the three fulfilment numbers to the person who manages Recharge. They can check for changes, refunds or a record that needs review. |
 | The customer requests a pause, cancellation or refund | Route it through the usual support process so the subscription and payment records can be checked together before the next shipment or charge. |
