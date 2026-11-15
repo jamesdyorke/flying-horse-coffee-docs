@@ -716,6 +716,24 @@ verify each order's schedule and continuation independently.
   plan outside the three-day test.
 - [ ] Verify a fresh Shopify checkout shows £22.50 with no code and confirm
   Shopify Payments test mode before submitting the test order.
+- [x] Prepare a staging copy of the actual catalogue Espresso Blend.
+  [Staging parity — Espresso Blend](https://admin.shopify.com/store/development-flying-horse-coffee/products/15990260466012)
+  is an unpublished draft with the product image and all 14 grind and size
+  options. The base prices match the live catalogue at £16.95 (350g) and
+  £35.95 (1kg). The existing development Espresso Blend and its monthly
+  25% plan were left in place.
+- [ ] Create the plans for the staging copy in Recharge. Start with Wholebean
+  / 350g (staging variant `59922128503132`, live equivalent
+  `35330008711326`), one 25%-off prepaid charge covering three monthly
+  deliveries and the 10%-off monthly plan. The staging API credential could
+  read plans but Recharge returned HTTP 403 on plan creation. Use the staging
+  Recharge merchant portal or existing scoped plan-write access.
+- [ ] Bind the staging copy's exact plan IDs to the staging worker after
+  Recharge creates them. Verify the existing website widget, the prepaid
+  checkout total (expected £38.14 before shipping) and monthly continuation
+  (expected £15.26 before shipping) with Shopify's actual rounding, then
+  run the three-day proof on that copy. Do not buy from the staging copy
+  until those checks pass.
 - [ ] After verified payment, create one 10%-off monthly subscription using
   the price at purchase and the original three-delivery schedule. Verify
   the first billing date and confirm two retries retain one subscription.
