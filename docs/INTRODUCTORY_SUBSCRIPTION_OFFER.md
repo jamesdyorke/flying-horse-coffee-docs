@@ -671,9 +671,13 @@ at execution.
 | Alerts | Firebase publishes operational events and runs a scheduled health monitor. | The private observer delivered the pilot payment milestone. Automatic production failure, recovery and heartbeat feeds remain open. |
 
 A fresh paid pilot is a separate order. Keep both Firebase enrollments and
-verify each order's schedule and continuation independently. If a refund
-is requested, reconcile Shopify's refund and the Recharge contract before
-further processing of that order.
+verify each order's schedule and continuation independently.
+
+- [ ] **Refund the production test orders after the renewal evidence is
+  captured.** Review Shopify #5043 and #5048 and refund any remaining paid
+  balance on each. Include #5048's pilot renewal if it settles. Verify the
+  refunds in Shopify and confirm Recharge has no further pilot charges
+  queued. Keep the Firebase records as test evidence.
 [Recharge refund guide](https://support.getrecharge.com/hc/en-us/articles/1500000489002-Issuing-a-refund-through-the-Shopify-Checkout-Integration)
 
 #### Verify catalogue mappings and the shared checkout
