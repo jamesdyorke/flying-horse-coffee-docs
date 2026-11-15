@@ -29,6 +29,22 @@ first monthly payment ordinarily falls on the 15th of the fourth month.
 Check the recorded date in Recharge. A late shipment leaves that date in
 place.
 
+## What staff see in Shopify and Recharge
+
+- **Shopify, first order.** The line shows one bundle, and the merchandise
+  subtotal covers all three deliveries at 25% off. For coffee that normally
+  costs £10 per delivery, that's **£22.50 upfront** (£7.50 × 3), with shipping
+  shown separately. Pack **one delivery** from this order.
+- **Shopify, second and third orders.** Each appears as a separate **£0 order**
+  when Recharge processes that month's shipment. The customer has already
+  paid for it. Pack one delivery from each order and mark it **Fulfilled**
+  after dispatch, as usual.
+- **Recharge.** Look under the customer's upcoming orders to see the two
+  queued **£0 prepaid shipments** before they appear in Shopify. The separate
+  active monthly subscription shows the first billing date and the 10%-off
+  monthly coffee price. For the £10 coffee example, that's **£9 plus shipping**.
+  Recharge creates the first paid monthly order when that charge processes.
+
 ## What the warehouse needs to do
 
 Use the usual Shopify dispatch workflow. The system reads a successful
