@@ -327,14 +327,19 @@ recorded staging lifecycle results for the pilot decision.
   coffee product pages. Use **Prepay for 3 deliveries — save 25%** as the
   button label. Put this copy directly above it:
 
-  > Pay upfront for your first three monthly deliveries and save 25%.
-  > You’ll get one delivery a month. After the prepaid period, your
-  > subscription automatically continues monthly. Your starting monthly
-  > coffee price is 10% off the price at purchase.
+  > Pay **[bundle total] today** and save **25%** on your first three coffee
+  > deliveries. We’ll send one delivery a month. Your monthly subscription
+  > is set up when you buy. Your first monthly payment is **[monthly coffee
+  > price] on [first billing date]**, three months after purchase. That’s
+  > **10% off** the coffee price at purchase. Monthly billing continues
+  > until you cancel.
 
-  Show the upfront total for all three deliveries next to the button and
-  show shipping separately. Show the starting monthly price and first billing
-  date before the customer confirms checkout. The button selects the prepaid
+  Fill in the selected variant’s prices and show shipping charges separately.
+  Show the first billing date before the customer confirms checkout.
+  In the purchase confirmation, show the three prepaid shipment dates and
+  the first monthly billing date, for example 15 November, 15 December and
+  15 January for the prepaid shipments, with monthly billing from
+  15 February. The second and third shipments carry no new coffee payment. The button selects the prepaid
   plan for the selected variant. One bundle (cart quantity 1) covers three
   separate monthly deliveries. Give the regular 10% monthly plan its own option.
 - [ ] Verify the existing subscription widget shows the prepaid option to
@@ -351,11 +356,15 @@ recorded staging lifecycle results for the pilot decision.
   **10% monthly** option and verify its wording, price and selling plan.
 - [ ] After the production backend and offer catalogue are verified, link the
   exact 25% prepaid selling plan to the eligible variants and turn on that
-  option in the existing Recharge widget on the live Shopify theme. Check
-  each eligible product page for the prepaid option and the existing purchase
-  choices. Check a product outside the offer for its existing choices. Open
-  a live checkout for one eligible coffee before placing the production test
-  order and confirm the upfront total, shipping and selected selling plan.
+  option in the existing Recharge widget on the live Shopify theme. This
+  makes the offer public and purchasable on the eligible product pages.
+  Confirm as a signed-out shopper that each eligible page shows the prepaid
+  option and its existing purchase choices. Check a product outside the
+  offer for its existing choices. Open a live checkout for one eligible coffee
+  and confirm the upfront total, shipping, selected selling plan and the
+  first monthly payment terms before placing the production test order.
+  After payment, verify that Recharge has three prepaid shipments and one
+  active monthly subscription with its first charge three months later.
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
   the dedicated production read-only credential. The 14 November re-audit
   passed for five products and 55 variants. Zero of the catalogue prepaid
