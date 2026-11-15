@@ -694,11 +694,14 @@ verify each order's schedule and continuation independently.
   `693083275612` (Recharge `23732091`). The previous unpaid website preview
   showed £22.50 before shipping with zero codes, and the regular 10% monthly
   plan showed £9.00. Check stock and access for the fresh staging buyer.
-- [ ] Wire the exact native prepaid plan into verified payment intake and the
-  three-day continuation test. The deployed test currently expects the legacy
-  reservation and fixed discount evidence. Verify a fresh checkout shows
-  £22.50 without a code and confirm Shopify Payments test mode before submitting
-  the test order.
+- [ ] Merge and deploy [backend #149](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/pull/149).
+  It verifies payment for the exact percentage-priced prepaid plan and uses the
+  existing staging worker for the three-day continuation. Local tests passed
+  for zero-code payment evidence, one £9 continuation on retries and one
+  recorded renewal on replay. Live Recharge reads matched both staging plan
+  definitions.
+- [ ] Verify a fresh Shopify checkout shows £22.50 with no code and confirm
+  Shopify Payments test mode before submitting the test order.
 - [ ] After verified payment, create one 10%-off monthly subscription using
   the price at purchase and the original three-delivery schedule. Verify
   the first billing date and confirm two retries retain one subscription.
