@@ -328,12 +328,14 @@ recorded staging lifecycle results for the pilot decision.
 
   > Pay upfront for your first three monthly deliveries and save 25%.
   > You’ll get one delivery a month. After the prepaid period, your
-  > subscription automatically continues monthly at 10% off the then-current
-  > price.
+  > subscription automatically continues monthly. Your starting monthly
+  > coffee price is 10% off the price at purchase.
 
   Show the upfront total for all three deliveries next to the button and
-  show shipping separately. The button selects the prepaid plan for the
-  selected variant. One bundle (cart quantity 1) covers three deliveries.
+  show shipping separately. Show the starting monthly price and first billing
+  date before the customer confirms checkout. The button selects the prepaid
+  plan for the selected variant. One bundle (cart quantity 1) covers three
+  separate monthly deliveries. Give the regular 10% monthly plan its own option.
 - [ ] Verify the existing subscription widget shows the prepaid option to
   signed-out shoppers and passes the chosen plan to Shopify checkout at
   the 25% price. A one-redemption gate is optional if Shopify and Recharge
@@ -705,6 +707,13 @@ verify each order's schedule and continuation independently.
   staging eligibility tag, and the three-day fixture is armed for this buyer.
   Shopify Storefront returned £22.50 on the prepaid selling plan and £9.00 on
   the ordinary monthly plan. Checkout requires an authenticated buyer.
+- [x] Investigate the staging Espresso Blend widget showing £11.96 and
+  “Deliver every 1 month”. Shopify Admin confirms that product's attached
+  25% plan bills every month without a cycle cap. The three-day test uses
+  the separate **Staging — public continuation test** product and selling
+  plan `693083275612`. Shopify bills its prepaid purchase once, and Recharge
+  handles the three monthly deliveries. Leave the existing Espresso Blend
+  plan outside the three-day test.
 - [ ] Verify a fresh Shopify checkout shows £22.50 with no code and confirm
   Shopify Payments test mode before submitting the test order.
 - [ ] After verified payment, create one 10%-off monthly subscription using
