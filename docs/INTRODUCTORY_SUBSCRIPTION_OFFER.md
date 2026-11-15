@@ -636,11 +636,17 @@ at execution.
   All three pilot orders show Fulfilled. Customer notifications were off.
   At 11:15 UTC the five-minute scheduler reached `quote_ready`. The
   read-only rehearsal quoted **£0.90 merchandise before shipping**.
-  The public offer was disabled and the billing control and renewal
-  operation were absent. The original Recharge delivery dates were retained.
-- [ ] Verify one automatic £0.90 continuation on the approved pilot billing
-  date, one continuation milestone on retries and the actual queued total.
-  Leave #5043 unscheduled.
+  At that point the billing control and renewal operation were absent.
+  The original Recharge delivery dates were retained.
+- [x] Schedule and verify the one-charge continuation for #5048 on
+  **16 November 2026**. The deployed scheduler was invoked on demand and
+  confirmed Recharge subscription `910499836` at 11:33 UTC on 15 November.
+  Recharge queued charge `1987492199` for **£3.80** (£0.90 merchandise,
+  £2.90 shipping). Two runs of the deployed worker code against live state
+  took the duplicate path. Recharge still showed one subscription and one
+  queued charge, and Firebase retained the same confirmation operation.
+  The PostHog publisher marked its single continuation milestone delivered.
+  The public offer remained disabled. Leave #5043 unscheduled.
 - [ ] After the approved renewal, verify the pilot subscription expired
   and Recharge has no second charge queued. Record each paid renewal
   separately using its Recharge charge. Backend fixtures cover the

@@ -7,11 +7,10 @@
 
 ## Resume here
 
-> Resume from the production `quote_ready` state for paid pilot #5048.
-> Keep the public offer disabled. After James approves a billing date,
-> verify one automatic £0.90 monthly continuation, a single confirmation
-> on retries and the actual queued total including shipping. After the
-> approved renewal, confirm Recharge queues no second charge.
+> Resume from the queued **16 November 2026** renewal for production pilot
+> #5048. Keep the public offer disabled. Verify that the one **£3.80**
+> charge is paid and recorded in Firebase and PostHog, that the pilot
+> subscription expires and that Recharge queues no second charge.
 
 **Current pilot.** Shopify and Recharge verified the £5.15 checkout. Firebase
 confirmed payment on retry and retained the original three-delivery schedule.
@@ -21,14 +20,17 @@ released the shared queue from backend #145. A manual invocation of the
 deployed scheduler held at 11:07 UTC with outstanding fulfilments. The £0
 follow-ups became #5049 and #5050. All three orders show Fulfilled. The
 regular scheduler reached `quote_ready` at 11:15 UTC and the read-only
-rehearsal quoted £0.90 before shipping. The pilot has no billing control or
-renewal operation.
+rehearsal quoted £0.90 before shipping. After approval for 16 November,
+the deployed scheduler was invoked on demand and confirmed subscription
+`910499836` at 11:33 UTC. Charge `1987492199` is queued for £3.80
+including £2.90 shipping. Recharge reports a one-charge cap. Two runs
+of the worker against live state kept the same subscription and charge.
 
 The [protected production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43702651385)
 published [v0.3.2](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/releases/tag/v0.3.2).
 The private job ran naturally at 10:14 UTC, returned HTTP 200 and logged
 `idle`. The public catalogue was disabled and there was no pilot activation.
-Leave #5043 unscheduled. The renewal for #5048 is also unscheduled.
+Leave #5043 unscheduled.
 
 ## Status at the end of 14 November
 
@@ -91,24 +93,19 @@ a future charge are separate decisions for James.
   attempt failed verification, then the automatic retry confirmed payment.
   One Firebase enrollment and one production PostHog payment milestone
   were verified.
-- [x] Retain the original three Recharge delivery dates. The two £0
-  follow-ups were still queued and no renewal was scheduled.
+- [x] Retain the original three Recharge delivery dates from payment intake.
 
 ### 3. Watch the switch in Recharge
 
 - [x] Verify the new order holds while its deliveries are outstanding.
   Process its two verified £0 follow-ups and confirm all three Shopify
   orders show Fulfilled. Verify the read-only rehearsal quotes £0.90.
-- [ ] Once James approves the test's billing date, let the private scheduled
-  worker pick up the fresh order. Show James the prepaid source and the
-  one new monthly subscription in Recharge. Verify the first billing date,
-  £0.90 merchandise, actual total including any shipping and one-charge cap.
-  If the operator command is used instead, record that run as an operator test
-  and leave the automatic switch check open.
-- [ ] Observe the next scheduled check or reconcile the same operation.
-  Verify the child subscription is reused and the continuation confirmation
-  remains single. If the provider response is uncertain, reconcile the
-  existing operation before any further action on that purchase.
+- [x] The deployed scheduler, invoked on demand, created one capped
+  continuation. Recharge confirmed the 16 November billing date and
+  £3.80 total including shipping.
+- [x] Two duplicate worker runs returned the same Firebase confirmation.
+  Recharge read-back confirmed one child subscription and one queued charge.
+- [x] Verify the PostHog publisher marked the continuation milestone delivered.
 - [ ] After the approved first renewal, verify one paid charge for the
   continuation, that the child expired and that Recharge has no second
   renewal queued. Record the evidence and any gaps in the Firebase and
