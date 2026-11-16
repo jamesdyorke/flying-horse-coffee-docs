@@ -8,36 +8,54 @@ Implementation guides and detailed test evidence live in the owning repositories
 
 ## Production activation — 16 November 2026
 
-This dated update supersedes the older disabled-catalogue statements below for
-the initial launch variant. Existing products stayed published throughout.
+This dated update supersedes the older disabled-catalogue statements below.
+James requested the complete offer range after the initial single-variant
+activation. Existing products stayed published throughout.
 
 - [x] Deploy backend v1.0.0 and verify its production workflow succeeded.
 - [x] Publish the approved offer theme, retaining the previous live theme as
-  rollback. Verify the first offer outside preview and before customer sign-in.
-- [x] Enable the exact prepaid and monthly mapping for **Espresso Blend,
-  Wholebean / 350g**, with purchase-time continuation active before assigning
-  the prepaid plan to the variant. Shopify confirmed that the prepared prepaid
-  group had no products or variants attached before the final assignment.
-- [x] Verify **£38.13 upfront**, three monthly deliveries at 25% off, and the
-  ordinary **£15.26 monthly** option. Verify the 1kg option does not expose an
-  unmapped prepaid offer. Other offer variants remain outside this initial
-  rollout; ordinary purchase options remain available.
-- [x] Verify the actual Recharge cart drawer and one unpaid Shopify checkout
-  contain the purchase-time setup and recurring terms. The customer-facing
-  terms travel with the cart line; the email marker is private. The saved
-  activation template supports both private and legacy markers, and its
-  ordinary-purchase preview renders.
+  rollback. Verify the offers outside preview and before customer sign-in.
+- [x] Activate and verify all **55 exact variant mappings across five products**,
+  with purchase-time continuation enabled. Synchronize the generated Shopify
+  plan IDs into Firebase before publishing the complete widget mapping.
+  Ordinary monthly plans and existing subscriptions remain unchanged.
+- [x] Follow the live website's Subscriptions navigation and click through all
+  available grind/size combinations: Espresso Blend 14, Espresso Single Origin
+  14, Filter Single Origin 12, Caffeine Free 14, and capsules 1. Save a screenshot
+  and page snapshot for every option; verify upfront and monthly pricing.
+- [x] Preserve the capsule stock restriction. Its offer widget is visible, but
+  prepaid and monthly buttons are disabled and labelled Sold out. Capsules
+  cannot be purchased until stock permits it. Espresso Blend Plunger / 350g
+  retains its existing continue-selling policy; no inventory policy was changed.
+- [x] Verify the actual Recharge cart drawer and the initial unpaid checkout
+  contain purchase-time setup and recurring terms. The customer-facing terms
+  travel with the cart line; the email marker is private. The saved activation
+  template supports both private and legacy markers, and its ordinary-purchase
+  preview renders.
+- [x] Check production order timestamps: no orders occurred during the plan
+  expansion and mapping window.
 - [ ] Verify the address-dependent shipping quote and final checkout total.
   The drawer's free-shipping banner is not shipping evidence.
 - [ ] James completes the real payment. Then verify the delivered email,
   Shopify order, Recharge prepaid source and original shipment dates, Firebase
   enrollment and exactly one correctly scheduled monthly continuation, plus
   production PostHog and staff notifications.
-- [ ] Expand the prepaid mapping to the remaining eligible variants after
-  verifying each exact plan and stock. Clearing Recharge variant assignments
-  retires generated child plan records; do not reuse the old Espresso child
-  IDs from historical catalogue evidence. Their inactive Firebase mappings
-  were cleared during this preparation.
+
+| Product | Options verified | Upfront, 350g / 1kg | Monthly, 350g / 1kg |
+| --- | --- | --- | --- |
+| Espresso Blend | 14 | £38.13 / £80.88 | £15.26 / £32.36 |
+| Espresso Single Origin | 14 | £42.63 / £85.38 | £17.06 / £34.16 |
+| Filter Single Origin | 12 | £42.63 / £85.38 | £17.06 / £34.16 |
+| Caffeine Free | 14 | £44.88 / £89.88 | £17.96 / £35.96 |
+| All Day Brewing Capsules | 1, sold out | £13.47 | £5.39 |
+
+Prices are Shopify's displayed GBP amounts before shipping. Monthly billing
+starts three months after purchase and continues until cancellation. Screenshots
+verify the storefront display, not a completed payment or future renewal.
+
+Clearing Recharge variant assignments retires generated child plan records.
+The retired Espresso records were replaced with freshly verified mappings;
+do not reuse the old child IDs from historical catalogue evidence.
 
 For rollback, stop new prepaid sales without unpublishing the products. Preserve
 the active catalogue and worker for any paid purchases. The previous theme alone
