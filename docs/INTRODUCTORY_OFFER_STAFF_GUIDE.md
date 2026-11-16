@@ -29,11 +29,38 @@ first monthly payment ordinarily falls on the 15th of the fourth month.
 Check the recorded date in Recharge. A late shipment leaves that date in
 place.
 
+## What staff and customers see
+
+| When | Shopify Orders | Recharge |
+| --- | --- | --- |
+| First checkout | One **Paid** order for one bundle. The coffee subtotal covers all three deliveries at 25% off. Shipping is shown separately. Pack **one delivery**. | One prepaid payment and the three-shipment schedule. The next two prepaid shipments are queued at **£0**. Once the payment and schedule are verified, a separate **Active** monthly subscription shows the first billing date and monthly coffee price. |
+| Second and third prepaid shipments | A separate **£0** order appears each time Recharge processes the shipment. Pack one delivery from each order and mark it **Fulfilled** after dispatch. | The corresponding shipment moves out of the upcoming queue and links to its Shopify order. An **Expired** label on the prepaid billing plan can appear after its one upfront payment. Check the shipment queue for what is still due. |
+| First monthly payment | A new paid monthly order appears when payment succeeds. It covers one delivery. | The active monthly subscription records the charge and shows the next monthly billing date. If payment fails, check the charge status and follow the normal Recharge payment support process. |
+
+For coffee normally priced at £10, Shopify shows **£22.50** for the prepaid
+bundle before shipping. The separate subscription starts at **£9 per month**
+for coffee, with shipping shown separately. A purchased bundle and its
+monthly subscription are linked but each has its own record.
+
+The customer sees the bundle price, shipping and monthly terms before
+paying. They receive the Shopify order confirmation. Any Recharge activation
+email for the bundle should explain the single upfront payment and the
+separate monthly subscription. Check a real confirmation at launch so staff
+know exactly what customers receive. For any question about the next charge,
+use the billing date on the active monthly subscription.
+
+PostHog purchase, subscription setup and prepaid shipment alerts can carry
+the original Shopify order number and a shared bundle reference. A shipment
+alert means Recharge processed that shipment into Shopify. Use **Fulfilled**
+in Shopify to confirm dispatch. Use the Recharge charge and matching Shopify
+order to verify the first monthly payment while production first-payment
+alerting is being verified.
+
 ## What the warehouse needs to do
 
-Use the usual Shopify dispatch workflow. The system reads a successful
-fulfilment for the correct order line. Mark the order **Fulfilled** through
-the usual Shopify dispatch workflow.
+Pick, pack and dispatch each Shopify order as usual. Mark the order
+**Fulfilled** after dispatch. Staff can use Shopify fulfilment as their
+dispatch record without a carrier-delivered update.
 
 Recharge schedules all three prepaid shipments at purchase. If an earlier
 Shopify order is still **Unfulfilled**, the next prepaid order can still
@@ -60,13 +87,23 @@ two prepaid follow-ups.
 | A prepaid order is cancelled or prepaid merchandise is refunded before first monthly billing | Check in Recharge that the linked monthly subscription is cancelled and the queued charge is gone. Escalate to the Recharge operator if it is still queued or has already been paid. |
 | The customer requests a pause or another subscription change | Route it through the usual support process so payment, shipment and subscription records can be checked together. |
 
-The £1 production test uses an Unlisted product. Its release checklist
-tracks whether the ordinary checkout and subscription flow works from
-payment through the first monthly renewal.
+## First live order
 
-Staging order #1025 verified the prepaid checkout and immediate setup of
-one monthly subscription. Its first simulated renewal is due on
-18 November 2026. The staging evidence is tracked in
-[FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190). The test of the
-normal production path is tracked in
+James will enable the offer and place one order on an eligible coffee.
+Before payment, check the correct grind and size, one three-delivery bundle,
+the 25%-off subtotal, shipping, and the first monthly payment terms.
+
+After payment, match Shopify’s original order to Recharge. Confirm the one
+prepaid payment, the two upcoming £0 shipments, and exactly one active
+10%-off subscription with its first payment three months after purchase.
+Check the customer email and the purchase and subscription setup alerts.
+Capture the original order number for staff follow-up. During a supervised
+test, processing a £0 shipment early is a manual test step. On ordinary
+orders Recharge processes those shipments automatically on the scheduled
+dates. Check that the first monthly billing date stays in place.
+
+Staging order #1027 verified the three prepaid orders and a manually
+processed first monthly payment reaching Firebase. Scheduled first-payment
+alerting and the first public production purchase still need verification.
+See [FLY-190](https://linear.app/flyinghorsecoffee/issue/FLY-190) and
 [FLY-192](https://linear.app/flyinghorsecoffee/issue/FLY-192).
