@@ -365,6 +365,15 @@ recorded staging lifecycle results for the pilot decision.
   blocked.
 - [x] Store the exact prepaid plan ID per variant in the disabled production
   Firestore catalogue and verify it with the updated read-only Recharge audit.
+- [x] Prepare `paymentSubscriptions/offers` in production with a verified
+  copy of the disabled catalogue and a cutoff for old test payments.
+- [ ] Deploy the production Firestore cutover through protected CI with
+  the public offer disabled. Verify new offer writes go to Payment Subscriptions
+  and old payment receipts cannot create another subscription.
+- [ ] After verifying the old Shopify test orders and Recharge schedules,
+  remove the obsolete production offer collections and audit the result.
+  Preserve the nested catalogue and cutoff, and shared monitoring and account
+  records. [Production Firestore cutover](https://linear.app/flyinghorsecoffee/issue/FLY-194)
 - [x] Verify the unregistered production Shopify reader can fetch the
   current UK price on one variant from each catalogue product. Backend
   PR #102 merged. Provider-linked fulfillment verification remains open.
