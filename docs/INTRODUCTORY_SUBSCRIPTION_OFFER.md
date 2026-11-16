@@ -6,6 +6,45 @@ Implementation guides and detailed test evidence live in the owning repositories
 
 [Staff guide for warehouse and support](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
 
+## Production activation — 16 November 2026
+
+This dated update supersedes the older disabled-catalogue statements below for
+the initial launch variant. Existing products stayed published throughout.
+
+- [x] Deploy backend v1.0.0 and verify its production workflow succeeded.
+- [x] Publish the approved offer theme, retaining the previous live theme as
+  rollback. Verify the first offer outside preview and before customer sign-in.
+- [x] Enable the exact prepaid and monthly mapping for **Espresso Blend,
+  Wholebean / 350g**, with purchase-time continuation active before assigning
+  the prepaid plan to the variant. Shopify confirmed that the prepared prepaid
+  group had no products or variants attached before the final assignment.
+- [x] Verify **£38.13 upfront**, three monthly deliveries at 25% off, and the
+  ordinary **£15.26 monthly** option. Verify the 1kg option does not expose an
+  unmapped prepaid offer. Other offer variants remain outside this initial
+  rollout; ordinary purchase options remain available.
+- [x] Verify the actual Recharge cart drawer and one unpaid Shopify checkout
+  contain the purchase-time setup and recurring terms. The customer-facing
+  terms travel with the cart line; the email marker is private. The saved
+  activation template supports both private and legacy markers, and its
+  ordinary-purchase preview renders.
+- [ ] Verify the address-dependent shipping quote and final checkout total.
+  The drawer's free-shipping banner is not shipping evidence.
+- [ ] James completes the real payment. Then verify the delivered email,
+  Shopify order, Recharge prepaid source and original shipment dates, Firebase
+  enrollment and exactly one correctly scheduled monthly continuation, plus
+  production PostHog and staff notifications.
+- [ ] Expand the prepaid mapping to the remaining eligible variants after
+  verifying each exact plan and stock. Clearing Recharge variant assignments
+  retires generated child plan records; do not reuse the old Espresso child
+  IDs from historical catalogue evidence. Their inactive Firebase mappings
+  were cleared during this preparation.
+
+For rollback, stop new prepaid sales without unpublishing the products. Preserve
+the active catalogue and worker for any paid purchases. The previous theme alone
+is not a sales pause: Recharge plan visibility also controls purchase options.
+Operational evidence and remaining QA are tracked in
+[FLY-198](https://linear.app/flyinghorsecoffee/issue/FLY-198).
+
 ## Offer
 
 Customers can buy three monthly deliveries upfront at 25% off.
