@@ -337,18 +337,26 @@ recorded staging lifecycle results for the pilot decision.
   preparation. Selecting Storefront widget creates a Shopify selling plan
   and can expose it in the live widget. This is a launch step.
   [Recharge plan channels](https://support.getrecharge.com/hc/en-us/articles/33352577070999-How-to-create-a-Product-Subscription-Plan)
-- [ ] Add the prepaid option to the existing Recharge widget on eligible
-  coffee product pages. Use **Prepay for 3 deliveries — save 25%** as the
-  button label. Put this copy directly above it:
+- [ ] Put the beige prepaid offer panel directly below Add to Cart on
+  eligible coffee product pages. Keep grind, size and the regular quantity
+  picker in their existing positions. In the panel, use the dedicated
+  **Buy three up front and get 25% off** button and this offer copy:
 
-  > Pay upfront for your first three monthly deliveries and save 25%.
-  > You’ll get one delivery a month. After the prepaid period, your
-  > subscription automatically continues monthly. Your starting monthly
-  > coffee price is 10% off the price at purchase.
+  > **Save 25% on your first three deliveries**
+  >
+  > Pay **[bundle total] upfront** for three deliveries, one each month.
+  > After the three-month prepaid period, your offer automatically
+  > continues as a monthly subscription with **10% off coffee**. Your
+  > first monthly coffee payment is **[monthly coffee price]**, three months
+  > after purchase. Monthly billing continues until you cancel. Shipping is
+  > shown at checkout.
 
-  Show the upfront total for all three deliveries next to the button and
-  show shipping separately. Show the starting monthly price and first billing
-  date before the customer confirms checkout. The button selects the prepaid
+  Fill in the selected variant’s prices and show shipping charges separately.
+  Show the first billing date before the customer confirms checkout.
+  In the purchase confirmation, show the three prepaid shipment dates and
+  the first monthly billing date, for example 15 November, 15 December and
+  15 January for the prepaid shipments, with monthly billing from
+  15 February. The second and third shipments carry no new coffee payment. The button selects the prepaid
   plan for the selected variant. One bundle (cart quantity 1) covers three
   separate monthly deliveries. Give the regular 10% monthly plan its own option.
 - [ ] Verify the existing subscription widget shows the prepaid option to
@@ -356,6 +364,31 @@ recorded staging lifecycle results for the pilot decision.
   the 25% price. A one-redemption gate is optional if Shopify and Recharge
   cannot enforce it on the current plans.
   [Website checkout](https://linear.app/flyinghorsecoffee/issue/FLY-135)
+- [ ] Preview the selected **25% prepaid** option in the website widget before
+  release. Show one upfront total for three monthly deliveries, the shipping
+  terms, and the starting monthly price at **10% off** after the prepaid
+  period. Remove the generic **Pay every 3 months** label from this offer.
+  Check that the price beside Add to Cart agrees with the bundle total and
+  only show free shipping where checkout confirms it. Switch to the existing
+  **10% monthly** option and verify its wording, price and selling plan.
+  The development store's draft theme rendered the dedicated button with
+  £22.50 upfront and £9 monthly after three months on the linked staging
+  test product. Check the cart drawer and unpaid checkout in that theme.
+  The staging Espresso Blend preview now uses the verified plans for all
+  14 grind and size variants. Its cart and checkout checks remain open.
+- [ ] After the production backend and offer catalogue are verified, link the
+  exact 25% prepaid selling plan to the eligible variants and turn on that
+  option in the existing Recharge widget on the live Shopify theme. This
+  makes the offer public and purchasable on the eligible product pages.
+  Confirm as a signed-out shopper that each eligible page shows the prepaid
+  option and its existing purchase choices. Check a product outside the
+  offer for its existing choices. Click the prepaid button on an eligible
+  product and check the cart drawer. It should show one line for one
+  three-delivery bundle, the selected grind and size, and the upfront
+  subtotal. Open checkout from the drawer and confirm the selling plan,
+  shipping and first monthly payment terms before paying.
+  After payment, verify that Recharge has three prepaid shipments and one
+  active monthly subscription with its first charge three months later.
 - [x] Verify the Recharge plans, terms and coverage for all 55 variants with
   the dedicated production read-only credential. The 14 November re-audit
   passed for five products and 55 variants. Zero of the catalogue prepaid
@@ -430,14 +463,22 @@ recorded staging lifecycle results for the pilot decision.
   the worker continues to honour paid prepaid orders and existing
   subscriptions. Record who owns rollout, monitoring and recovery.
 
+- [x] Deploy backend v0.4.0 with purchase-time scheduling and the Payment
+  Subscriptions cutover. The production receipt trigger and continuation
+  scheduler are active. The public catalogue was verified disabled after
+  deployment. [Production deployment](https://github.com/jamesdyorke/flying-horse-coffee-firebase-backend/actions/runs/43766046605)
+- [ ] Before the first live purchase, record the exact Shopify prepaid plan
+  links in the production catalogue, verify purchase-time scheduling is
+  enabled for the offer, and check the live widget and unpaid checkout.
+
 #### Production schedule evidence
 
-- [ ] From the approved pilot, retain the original provider schedule alongside
-  the verified paid enrollment before any reschedule. Compare its exact order
-  IDs and provider dates with the refreshed schedule and Shopify fulfillment
-  evidence. Verify that a delay extends coverage and that the first monthly
-  charge falls after that boundary in Recharge’s configured processing window.
-  Include a month-end and a daylight-saving boundary in the schedule tests.
+- [ ] For the first live purchase, record the original three prepaid shipment
+  dates and the scheduled first monthly payment in Recharge. Confirm the
+  monthly subscription is created after the verified payment and that a late
+  Shopify fulfilment leaves the original first billing date in place. Check
+  provider dates around month-end and daylight-saving changes when reviewing
+  the schedule.
 
 Recharge documents Eastern Time as its default charge processing window,
 including prepaid shipments, and allows stores to change the processing time.
@@ -743,18 +784,19 @@ verify each order's schedule and continuation independently.
   three-delivery bundle, £4.99 standard shipping and £27.49 total.
 - [x] Create the unpublished staging [Espresso Blend copy](https://admin.shopify.com/store/development-flying-horse-coffee/products/15990260466012)
   with all 14 production grind and size options and matching UK base prices
-  (£16.95 for 350g, £35.95 for 1kg).
-- [x] Create and independently verify both staging Recharge plans for the copy.
-  Prepaid plan `23733565` applies only to Wholebean / 350g
-  (`59922128503132`), ships monthly and expires after one charge covering
-  three deliveries at 25% off. Monthly plan `23733564` applies to all
-  variants at 10% off. Both plans are available through the merchant portal
-  and API. Their Shopify selling-plan links are absent.
-- [ ] Connect the copy's staging selling plans and validate the actual
-  storefront, checkout and continuation amounts. Recharge previews £38.14
-  prepaid and £15.25 monthly before shipping for Wholebean / 350g. Reconcile
-  the monthly amount with the earlier £15.26 calculation before using it in
-  offer copy or payment verification.
+  (£16.95 for 350g, £35.95 for 1kg). The copy uses the coffee template with
+  the grind and size selectors and quantity picker.
+- [x] Link the staging Espresso Blend plans to Shopify and verify that all
+  14 variants each have one exact 25% prepaid plan and share the 10% monthly
+  plan. The staging catalogue maps each Shopify prepaid plan to its verified
+  Recharge counterpart. The staging theme uses those same Shopify mappings.
+- [x] Render the unlisted Espresso Blend copy in the staging preview theme.
+  The Wholebean / 350g product page showed £38.13 upfront and £15.26 for
+  monthly coffee before shipping. Shopify's fixed prepaid price for 1kg is
+  £80.88. The first monthly payment is three months after purchase.
+- [ ] Try two grinds and both sizes in the preview cart, one bundle at a
+  time. Compare the variant, upfront subtotal and monthly price against the
+  product page, then check the terms in unpaid Shopify checkout.
 - [x] Verify the staging payment and immediate subscription setup on Shopify
   test order #1025. It had a £22.50 merchandise subtotal and zero codes.
   Recharge recorded all three prepaid shipments and created one £9 monthly
