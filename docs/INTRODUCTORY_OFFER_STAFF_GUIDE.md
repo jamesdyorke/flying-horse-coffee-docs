@@ -56,6 +56,85 @@ in Shopify to confirm dispatch. Use the Recharge charge and matching Shopify
 order to verify the first monthly payment while production first-payment
 alerting is being verified.
 
+## Finding the right screen in Recharge
+
+Start at **Customers → Orders** in the Recharge sidebar. The tabs separate
+already-processed orders, future payments and already-paid shipments.
+
+![Recharge Orders tabs: Processed, Upcoming, Upcoming prepaid orders and Gift orders](images/intro-offer/orders-tabs.png)
+
+| Screen | What belongs here | What to check |
+| --- | --- | --- |
+| **Orders → Processed** | The initial checkout and each shipment or paid renewal after processing. | Open the record and follow its Shopify order link. Processing is not dispatch: check **Fulfilled** in Shopify separately. |
+| **Orders → Upcoming prepaid orders** | Remaining deliveries covered by the upfront payment. | Shipment date, **Queued**, **Prepaid**, delivery number, grind, size and quantity. |
+| **Orders → Upcoming** | Future charges that have not been paid, including the monthly continuation after the three-delivery offer. | First charge date, coffee amount, shipping, total and payment status. |
+| **Customers → Subscriptions** | The subscription records and their schedules. | Select the customer's monthly subscription and check its next order date, monthly frequency and price. An expired prepaid billing record does not mean its remaining paid shipments have been dispatched. |
+
+The monthly subscription is created after the original payment is verified;
+it is visible before its first payment is due. Its future charge belongs in
+**Upcoming**, not **Upcoming prepaid orders**. Staff do not need to create a
+new subscription at the end of month three.
+
+### Example: already-paid deliveries
+
+These cropped screenshots were taken in staging on 17 November 2026. They
+illustrate the screen layout, not production prices or a live customer's
+account. Customer, address and payment details are excluded.
+
+This queued example contains **two Wholebean 350g units** for delivery two.
+**2 × £0.00** means both units are already paid for. Pack the listed quantity
+for this delivery, not all three months at once.
+
+![Queued prepaid shipment showing its date, Prepaid 2 of 3 and two Wholebean units at zero pounds](images/intro-offer/queued-prepaid.png)
+
+A basket with two different variants instead shows **two separate lines**:
+one Stovetop and one Wholebean. Here both are marked **Prepaid 2 of 3**, each
+at £0. The delivery counter is separate from the quantity purchased.
+
+![Two prepaid product lines: one Stovetop and one Wholebean, both delivery two of three](images/intro-offer/prepaid-products.png)
+
+Normally Recharge processes each queued prepaid shipment automatically on
+its scheduled date and creates its Shopify order. Fulfilling the previous
+Shopify order does not trigger the next shipment.
+
+To bring an agreed prepaid shipment forward, the Recharge operator opens
+**Orders → Upcoming prepaid orders**, finds the customer, then opens the
+specific queued shipment. Check the delivery number, date, variants and
+quantities before choosing **Process now** at the top. **Reschedule** is the
+separate control for changing its date. Do not use **Add product** to trigger
+an existing shipment.
+
+![Process now and Reschedule controls on a queued prepaid shipment](images/intro-offer/process-controls.png)
+
+After processing, find it under **Processed**, follow the Shopify order link,
+and pick, pack and fulfil that order normally. If the outcome is unclear,
+check both systems before trying again. Bringing a prepaid shipment forward
+does not itself bring forward the separate monthly billing date.
+
+### Example: monthly payments after the prepaid period
+
+For the example purchased on 16 November, the monthly continuation's first
+charge is scheduled for **16 February**. The upcoming charge shows one
+Stovetop and one Wholebean at **£15.26 each**, rather than £0 prepaid lines.
+In this staging example, £30.52 coffee plus £4.99 shipping totals £35.51.
+Always read the actual charge total; example prices are not a price list.
+
+![Future monthly order dated 16 February, with Stovetop and Wholebean at 15 pounds 26 each](images/intro-offer/monthly-products.png)
+
+The subscription detail shows its **next order**, **1 month** frequency and
+unit price. Its upcoming order may show the total for a shared charge that
+includes another subscription at the same address; compare all charge lines
+before interpreting that total as the price of one product.
+
+![Monthly subscription with next order date, monthly frequency and upcoming order](images/intro-offer/monthly-subscription.png)
+
+On the scheduled billing date, Recharge attempts payment and, when it
+succeeds, creates the paid Shopify order. **Process now** on this paid
+monthly charge would attempt a payment early; it is different from processing
+an already-paid £0 prepaid shipment. Warehouse staff should leave monthly
+billing changes to the Recharge operator following the agreed customer
+support process.
+
 ## What the warehouse needs to do
 
 Pick, pack and dispatch each Shopify order as usual. Mark the order
