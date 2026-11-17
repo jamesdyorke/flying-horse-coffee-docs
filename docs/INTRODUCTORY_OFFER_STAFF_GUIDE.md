@@ -56,6 +56,29 @@ in Shopify to confirm dispatch. Use the Recharge charge and matching Shopify
 order to verify the first monthly payment while production first-payment
 alerting is being verified.
 
+## Customer-facing example: product and basket
+
+James supplied these storefront screenshots on 17 November 2026. They show
+an example £38.13 prepaid bundle and a starting monthly coffee price of
+£15.26, with shipping shown at checkout. Use actual checkout and charge
+amounts for each customer; these examples are not a current price list.
+
+![Product page showing the three-delivery prepaid offer and future monthly terms](images/intro-offer/customer-product.png)
+
+Check the **basket line**, including grind, size and quantity, before paying.
+In this example the basket contains **Wholebean / 350g**, while the product
+page behind the drawer highlights Stovetop. The basket and final order
+identify what was purchased; the background selection is not proof of the
+basket variant.
+
+![Cart showing Wholebean 350g, the prepaid total and monthly subscription terms](images/intro-offer/customer-cart.png)
+
+For a purchase on 17 November, the usual remaining prepaid dates are
+17 December and 17 January, with the first monthly payment on 17 February.
+The original checkout appears in **Processed**, the remaining already-paid
+shipments in **Upcoming prepaid orders**, and the later unpaid charge in
+**Upcoming**. Check the recorded dates on each customer's records.
+
 ## Finding the right screen in Recharge
 
 Start at **Customers → Orders** in the Recharge sidebar. The tabs separate
