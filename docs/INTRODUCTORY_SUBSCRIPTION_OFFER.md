@@ -6,6 +6,63 @@ Implementation guides and detailed test evidence live in the owning repositories
 
 [Staff guide for warehouse and support](INTRODUCTORY_OFFER_STAFF_GUIDE.md)
 
+## Production activation — 16 November 2026
+
+This dated update supersedes the older disabled-catalogue statements below.
+James requested the complete offer range after the initial single-variant
+activation. Existing products stayed published throughout.
+
+- [x] Deploy backend v1.0.0 and verify its production workflow succeeded.
+- [x] Publish the approved offer theme, retaining the previous live theme as
+  rollback. Verify the offers outside preview and before customer sign-in.
+- [x] Activate and verify all **55 exact variant mappings across five products**,
+  with purchase-time continuation enabled. Synchronize the generated Shopify
+  plan IDs into Firebase before publishing the complete widget mapping.
+  Ordinary monthly plans and existing subscriptions remain unchanged.
+- [x] Follow the live website's Subscriptions navigation and click through all
+  available grind/size combinations: Espresso Blend 14, Espresso Single Origin
+  14, Filter Single Origin 12, Caffeine Free 14, and capsules 1. Save a screenshot
+  and page snapshot for every option; verify upfront and monthly pricing.
+- [x] Preserve the capsule stock restriction. Its offer widget is visible, but
+  prepaid and monthly buttons are disabled and labelled Sold out. Capsules
+  cannot be purchased until stock permits it. Espresso Blend Plunger / 350g
+  retains its existing continue-selling policy; no inventory policy was changed.
+- [x] Verify the actual Recharge cart drawer and the initial unpaid checkout
+  contain purchase-time setup and recurring terms. The customer-facing terms
+  travel with the cart line; the email marker is private. The saved activation
+  template supports both private and legacy markers, and its ordinary-purchase
+  preview renders.
+- [x] Check production order timestamps: no orders occurred during the plan
+  expansion and mapping window.
+- [ ] Verify the address-dependent shipping quote and final checkout total.
+  The drawer's free-shipping banner is not shipping evidence.
+- [ ] James completes the real payment. Then verify the delivered email,
+  Shopify order, Recharge prepaid source and original shipment dates, Firebase
+  enrollment and exactly one correctly scheduled monthly continuation, plus
+  production PostHog and staff notifications.
+
+| Product | Options verified | Upfront, 350g / 1kg | Monthly, 350g / 1kg |
+| --- | --- | --- | --- |
+| Espresso Blend | 14 | £38.13 / £80.88 | £15.26 / £32.36 |
+| Espresso Single Origin | 14 | £42.63 / £85.38 | £17.06 / £34.16 |
+| Filter Single Origin | 12 | £42.63 / £85.38 | £17.06 / £34.16 |
+| Caffeine Free | 14 | £44.88 / £89.88 | £17.96 / £35.96 |
+| All Day Brewing Capsules | 1, sold out | £13.47 | £5.39 |
+
+Prices are Shopify's displayed GBP amounts before shipping. Monthly billing
+starts three months after purchase and continues until cancellation. Screenshots
+verify the storefront display, not a completed payment or future renewal.
+
+Clearing Recharge variant assignments retires generated child plan records.
+The retired Espresso records were replaced with freshly verified mappings;
+do not reuse the old child IDs from historical catalogue evidence.
+
+For rollback, stop new prepaid sales without unpublishing the products. Preserve
+the active catalogue and worker for any paid purchases. The previous theme alone
+is not a sales pause: Recharge plan visibility also controls purchase options.
+Operational evidence and remaining QA are tracked in
+[FLY-198](https://linear.app/flyinghorsecoffee/issue/FLY-198).
+
 ## Offer
 
 Customers can buy three monthly deliveries upfront at 25% off.
