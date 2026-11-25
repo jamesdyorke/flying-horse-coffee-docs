@@ -84,7 +84,7 @@ shipments in **Upcoming prepaid orders**, and the later unpaid charge in
 Start at **Customers → Orders** in the Recharge sidebar. The tabs separate
 already-processed orders, future payments and already-paid shipments.
 
-![Recharge Orders tabs: Processed, Upcoming, Upcoming prepaid orders and Gift orders](images/intro-offer/orders-tabs.png)
+![Recharge Orders tabs: Processed, Upcoming, Upcoming prepaid orders and Gift orders](images/intro-offer/orders-tabs.jpg)
 
 | Screen | What belongs here | What to check |
 | --- | --- | --- |
@@ -108,13 +108,13 @@ This queued example contains **two Wholebean 350g units** for delivery two.
 **2 × £0.00** means both units are already paid for. Pack the listed quantity
 for this delivery, not all three months at once.
 
-![Queued prepaid shipment showing its date, Prepaid 2 of 3 and two Wholebean units at zero pounds](images/intro-offer/queued-prepaid.png)
+![Queued prepaid shipment showing its date, Prepaid 2 of 3 and two Wholebean units at zero pounds](images/intro-offer/queued-prepaid.jpg)
 
 A basket with two different variants instead shows **two separate lines**:
 one Stovetop and one Wholebean. Here both are marked **Prepaid 2 of 3**, each
 at £0. The delivery counter is separate from the quantity purchased.
 
-![Two prepaid product lines: one Stovetop and one Wholebean, both delivery two of three](images/intro-offer/prepaid-products.png)
+![Two prepaid product lines: one Stovetop and one Wholebean, both delivery two of three](images/intro-offer/prepaid-products.jpg)
 
 Normally Recharge processes each queued prepaid shipment automatically on
 its scheduled date and creates its Shopify order. Fulfilling the previous
@@ -127,7 +127,7 @@ quantities before choosing **Process now** at the top. **Reschedule** is the
 separate control for changing its date. Do not use **Add product** to trigger
 an existing shipment.
 
-![Process now and Reschedule controls on a queued prepaid shipment](images/intro-offer/process-controls.png)
+![Process now and Reschedule controls on a queued prepaid shipment](images/intro-offer/process-controls.jpg)
 
 After processing, find it under **Processed**, follow the Shopify order link,
 and pick, pack and fulfil that order normally. If the outcome is unclear,
@@ -142,14 +142,14 @@ Stovetop and one Wholebean at **£15.26 each**, rather than £0 prepaid lines.
 In this staging example, £30.52 coffee plus £4.99 shipping totals £35.51.
 Always read the actual charge total; example prices are not a price list.
 
-![Future monthly order dated 16 February, with Stovetop and Wholebean at 15 pounds 26 each](images/intro-offer/monthly-products.png)
+![Future monthly order dated 16 February, with Stovetop and Wholebean at 15 pounds 26 each](images/intro-offer/monthly-products.jpg)
 
 The subscription detail shows its **next order**, **1 month** frequency and
 unit price. Its upcoming order may show the total for a shared charge that
 includes another subscription at the same address; compare all charge lines
 before interpreting that total as the price of one product.
 
-![Monthly subscription with next order date, monthly frequency and upcoming order](images/intro-offer/monthly-subscription.png)
+![Monthly subscription with next order date, monthly frequency and upcoming order](images/intro-offer/monthly-subscription.jpg)
 
 On the scheduled billing date, Recharge attempts payment and, when it
 succeeds, creates the paid Shopify order. **Process now** on this paid
